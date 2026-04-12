@@ -230,12 +230,24 @@ document.getElementById("back-blog").onclick = () => ir("panel-cartao");
 var textos = [];
 function carregarTextos() {
   let carregados = 0;
+  // Limpamos o array para evitar duplicatas em recarregamentos
+  textos = []; 
+
   ARQUIVOS.forEach(nome => {
     fetch(nome).then(r => r.text()).then(txt => {
       textos.push(parse(txt));
       carregados++;
-      if(carregados === ARQUIVOS.length) render("todos");
-    }).catch(() => carregados++);
+
+      // Só renderiza quando todos os arquivos forem processados
+      if(carregados === ARQUIVOS.length) {
+        // ORDENAÇÃO CRONOLÓGICA (Mais recente primeiro)
+        textos.sort((a, b) => new Date(b.data) - new Date(a.data));
+        render("todos");
+      }
+    }).catch(err => {
+      console.error("Erro ao carregar:", nome);
+      carregados++;
+    });
   });
 }
 
