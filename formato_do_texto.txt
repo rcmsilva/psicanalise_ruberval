@@ -5,7 +5,7 @@ abr 2026 (mes e ano) essa linha é visível
 aqui resumo
 nessa linha (6) começa o texto e cada linha em branco é um parágrafo
 
-editar a linha (198 do index, variável ARQUIVOS) para inserir novo texto
+editar a linha 202 do index, variável ARQUIVOS para inserir novo texto
 // Antes:
 var ARQUIVOS = ["texto_1a.txt", "texto_2.txt", "texto_3.txt"];
 
