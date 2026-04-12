@@ -1,0 +1,19 @@
+Título do Seu Novo Texto
+categoria-aqui (clínica, teoria, ensaio)
+2026-04-12 (data DD-MM-AA) para ordenar
+12 abr 2026 (mes e ano)
+resumo Este é o resumo que convida o leitor. Deve ser breve e direto, ocupando apenas esta quinta linha do arquivo.
+
+editar a linha (194 do index) para inserir novo texto
+// Antes:
+var ARQUIVOS = ["texto_1a.txt", "texto_2.txt", "texto_3.txt"];
+
+// Depois:
+var ARQUIVOS = ["texto_1a.txt", "texto_2.txt", "texto_3.txt", "texto_4.txt"];
+
+
+Aqui começa o conteúdo real do seu texto. 
+
+Este é o segundo parágrafo. Note que deixei uma linha em branco acima dele. O código usará esse espaço para criar a separação visual no site.
+
+Você pode escrever o quanto quiser a partir daqui.
