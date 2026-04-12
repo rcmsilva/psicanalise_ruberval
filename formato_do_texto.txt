@@ -4,7 +4,7 @@ categoria-aqui (clínica, teoria, ensaio)
 12 abr 2026 (mes e ano)
 resumo Este é o resumo que convida o leitor. Deve ser breve e direto, ocupando apenas esta quinta linha do arquivo.
 
-editar a linha (194 do index) para inserir novo texto
+editar a linha (198 do index, variável ARQUIVOS) para inserir novo texto
 // Antes:
 var ARQUIVOS = ["texto_1a.txt", "texto_2.txt", "texto_3.txt"];
 
