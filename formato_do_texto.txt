@@ -1,20 +1,26 @@
-Título do Texto
-TAG - categoria-aqui (clínica, teoria, ensaio)
-2026-04-12 (formato DD-MM-AA) para ordenar - fica invisível, ordenação interna
-abr 2026 (mes e ano) essa linha é visível 
-aqui resumo
-nessa linha (6) começa o texto e cada linha em branco é um parágrafo
+ESTRUTURA OBRIGATÓRIA DO ARQUIVO DE TEXTO (.txt)
+Cada arquivo deve seguir rigorosamente esta ordem de linhas:
 
-editar a linha 202 do index, variável ARQUIVOS para inserir novo texto
-// Antes:
+Linha 1: Título do Texto
+Linha 2: Categoria (Use apenas: clínica, teoria ou ensaio)
+Linha 3: Data de Ordenação (Formato: AAAA-MM-DD - Essencial para a ordem)
+Linha 4: Data de Exibição (Como aparecerá no site, ex: "Abril 2026" ou "12/04")
+Linha 5: Resumo (Um parágrafo curto que aparece antes do botão "ler")
+Linha 6 em diante: O corpo do texto completo. 
+
+DICA DE FORMATAÇÃO:
+- Para criar parágrafos no corpo do texto, pule uma linha (deixe uma linha em branco).
+- Evite aspas curvas (“ ”) copiadas do Word; prefira aspas retas (" ").
+
+---
+COMO ADICIONAR NOVOS TEXTOS NO SITE:
+
+1. Procure no código HTML a linha que começa com: var ARQUIVOS = [...] (linha 202)
+2. Ela está localizada logo no início da tag <script>, aproximadamente na linha 190.
+3. Adicione o nome do seu novo arquivo entre aspas e separado por vírgula.
+
+Exemplo atual:
 var ARQUIVOS = ["texto_1a.txt", "texto_2.txt", "texto_3.txt"];
 
-// Depois:
+Se você criar o "texto_4.txt", mude para:
 var ARQUIVOS = ["texto_1a.txt", "texto_2.txt", "texto_3.txt", "texto_4.txt"];
-
-
-Aqui começa o conteúdo real do seu texto. 
-
-Este é o segundo parágrafo. Note que deixei uma linha em branco acima dele. O código usará esse espaço para criar a separação visual no site.
-
-Você pode escrever o quanto quiser a partir daqui.
