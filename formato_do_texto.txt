@@ -1,8 +1,9 @@
-Título do Seu Novo Texto
-categoria-aqui (clínica, teoria, ensaio)
-2026-04-12 (data DD-MM-AA) para ordenar
-12 abr 2026 (mes e ano)
-resumo Este é o resumo que convida o leitor. Deve ser breve e direto, ocupando apenas esta quinta linha do arquivo.
+Título do Texto
+TAG - categoria-aqui (clínica, teoria, ensaio)
+2026-04-12 (formato DD-MM-AA) para ordenar - fica invisível, ordenação interna
+abr 2026 (mes e ano) essa linha é visível 
+aqui resumo
+nessa linha (6) começa o texto e cada linha em branco é um parágrafo
 
 editar a linha (198 do index, variável ARQUIVOS) para inserir novo texto
 // Antes:
