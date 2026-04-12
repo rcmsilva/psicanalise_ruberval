@@ -31,7 +31,6 @@
       --line:  #d0ccc4;
       --mono:  'IBM Plex Mono', monospace;
       --serif: 'IBM Plex Serif', serif;
-      --slide: 0.42s cubic-bezier(0.65, 0, 0.35, 1);
     }
 
     html, body {
@@ -44,21 +43,31 @@
       -webkit-font-smoothing: antialiased;
     }
 
-    .stage { position: relative; width: 100%; height: 100vh; overflow: hidden; }
+    /* ── Stage ── */
+    .stage {
+      position: relative;
+      width: 100%;
+      height: 100vh;
+      overflow: hidden;
+    }
 
+    /* ── Panels — posicionados por transform ── */
     .panel {
       position: absolute;
-      inset: 0;
+      top: 0; left: 0;
+      width: 100%;
+      height: 100%;
       overflow-y: auto;
       overflow-x: hidden;
       background: var(--bg);
-      transition: transform var(--slide);
-      will-change: transform;
+      -webkit-transition: -webkit-transform 0.4s cubic-bezier(0.65,0,0.35,1);
+      transition: transform 0.4s cubic-bezier(0.65,0,0.35,1);
+      -webkit-overflow-scrolling: touch;
     }
 
-    .panel.is-active  { transform: translateX(0); }
-    .panel.is-behind  { transform: translateX(-100%); }
-    .panel.is-ahead   { transform: translateX(100%); }
+    #panel-cartao  { -webkit-transform: translateX(0);     transform: translateX(0); }
+    #panel-agendar { -webkit-transform: translateX(100%);  transform: translateX(100%); }
+    #panel-blog    { -webkit-transform: translateX(100%);  transform: translateX(100%); }
 
     .panel-inner {
       max-width: 480px;
@@ -66,17 +75,28 @@
       padding: 3.5rem 2rem 5rem;
     }
 
+    @-webkit-keyframes fadeUp {
+      from { opacity: 0; -webkit-transform: translateY(10px); }
+      to   { opacity: 1; -webkit-transform: translateY(0); }
+    }
+
     @keyframes fadeUp {
       from { opacity: 0; transform: translateY(10px); }
       to   { opacity: 1; transform: translateY(0); }
     }
 
-    .panel.is-active .panel-inner { animation: fadeUp 0.5s ease forwards; }
+    .panel-inner {
+      -webkit-animation: fadeUp 0.5s ease forwards;
+      animation: fadeUp 0.5s ease forwards;
+    }
 
+    /* ── Back ── */
     .back-btn {
+      display: -webkit-inline-flex;
       display: inline-flex;
+      -webkit-align-items: center;
       align-items: center;
-      gap: 0.5rem;
+      gap: 0.4rem;
       background: none;
       border: none;
       font-family: var(--mono);
@@ -87,12 +107,14 @@
       cursor: pointer;
       padding: 0;
       margin-bottom: 3rem;
+      -webkit-transition: color 0.2s;
       transition: color 0.2s;
     }
 
     .back-btn:hover { color: var(--text); }
-    .back-btn::before { content: "‹"; font-size: 0.9rem; line-height: 1; }
+    .back-btn::before { content: "‹"; font-size: 0.9rem; }
 
+    /* ── Typography ── */
     .sigil { font-size: 1rem; color: var(--muted); letter-spacing: 0.15em; margin-bottom: 2.8rem; user-select: none; }
 
     h1 { font-size: clamp(1.35rem, 4vw, 1.7rem); font-weight: 400; letter-spacing: 0.04em; color: var(--text); margin-bottom: 0.45rem; }
@@ -101,57 +123,95 @@
 
     .divider { width: 2rem; height: 1px; background: var(--line); margin-bottom: 3rem; }
 
-    .contact { display: flex; flex-direction: column; gap: 1.2rem; margin-bottom: 3rem; }
-    .contact-item { display: flex; align-items: baseline; gap: 1.2rem; }
-    .contact-label { font-size: 0.62rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--muted); min-width: 4.8rem; flex-shrink: 0; }
+    /* ── Contact ── */
+    .contact { display: -webkit-flex; display: flex; -webkit-flex-direction: column; flex-direction: column; gap: 1.2rem; margin-bottom: 3rem; }
+    .contact-item { display: -webkit-flex; display: flex; -webkit-align-items: baseline; align-items: baseline; gap: 1.2rem; }
+    .contact-label { font-size: 0.62rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--muted); min-width: 4.8rem; -webkit-flex-shrink: 0; flex-shrink: 0; }
     .contact-value { font-size: 0.88rem; color: var(--text); letter-spacing: 0.03em; }
-    a.contact-value { color: var(--text); text-decoration: none; transition: color 0.2s; }
-    a.contact-value:hover { color: var(--muted); }
+    a.contact-value { color: var(--text); text-decoration: none; }
 
-    .wa-block { display: flex; flex-direction: column; gap: 0.9rem; margin-bottom: 3rem; }
+    /* ── WhatsApp ── */
+    .wa-block { display: -webkit-flex; display: flex; -webkit-flex-direction: column; flex-direction: column; gap: 0.9rem; margin-bottom: 3rem; }
     .wa-label { font-size: 0.62rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--muted); }
-    .wa-row { display: flex; align-items: center; gap: 1.4rem; }
-    .qr-wrap { display: inline-block; padding: 8px; background: var(--text); border-radius: 2px; flex-shrink: 0; transition: opacity 0.2s; }
-    .qr-wrap:hover { opacity: 0.8; }
+    .wa-row { display: -webkit-flex; display: flex; -webkit-align-items: center; align-items: center; gap: 1.4rem; }
+    .qr-wrap { display: inline-block; padding: 8px; background: var(--text); border-radius: 2px; -webkit-flex-shrink: 0; flex-shrink: 0; }
     .qr-wrap canvas, .qr-wrap img { display: block; }
-    .wa-chat-block { display: flex; flex-direction: column; gap: 0.7rem; }
+    .wa-chat-block { display: -webkit-flex; display: flex; -webkit-flex-direction: column; flex-direction: column; gap: 0.7rem; }
 
-    .btn { display: inline-flex; align-items: center; gap: 0.55rem; font-family: var(--mono); font-weight: 400; letter-spacing: 0.1em; text-transform: uppercase; text-decoration: none; border: none; cursor: pointer; transition: background 0.2s, color 0.2s, border-color 0.2s; border-radius: 2px; }
+    /* ── Buttons ── */
+    .btn {
+      display: -webkit-inline-flex;
+      display: inline-flex;
+      -webkit-align-items: center;
+      align-items: center;
+      gap: 0.55rem;
+      font-family: var(--mono);
+      font-weight: 400;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      text-decoration: none;
+      border: none;
+      cursor: pointer;
+      border-radius: 2px;
+      -webkit-transition: background 0.2s, color 0.2s;
+      transition: background 0.2s, color 0.2s;
+    }
+
     .btn-solid { font-size: 0.72rem; color: var(--bg); background: var(--text); padding: 0.6rem 1rem; white-space: nowrap; }
     .btn-solid:hover { background: var(--muted); }
     .btn-outline { font-size: 0.72rem; color: var(--text); background: transparent; border: 1px solid var(--line); padding: 0.6rem 1rem; white-space: nowrap; }
     .btn-outline:hover { border-color: var(--muted); color: var(--muted); }
-    .btn svg { width: 13px; height: 13px; fill: currentColor; flex-shrink: 0; }
+    .btn svg { width: 13px; height: 13px; fill: currentColor; -webkit-flex-shrink: 0; flex-shrink: 0; }
     .btn-hint { font-size: 0.58rem; letter-spacing: 0.12em; color: var(--muted); }
 
-    .nav-buttons { display: grid; grid-template-columns: 1fr 1fr; gap: 0.8rem; }
-    .nav-btn { font-family: var(--mono); font-size: 0.7rem; font-weight: 400; letter-spacing: 0.18em; text-transform: uppercase; border: 1px solid var(--text); background: transparent; color: var(--text); padding: 0.9rem 1rem; cursor: pointer; border-radius: 2px; transition: background 0.2s, color 0.2s; }
-    .nav-btn:hover, .nav-btn.primary { background: var(--text); color: var(--bg); }
+    /* ── Nav buttons ── */
+    .nav-buttons { display: -webkit-flex; display: flex; gap: 0.8rem; }
+    .nav-btn {
+      -webkit-flex: 1;
+      flex: 1;
+      font-family: var(--mono);
+      font-size: 0.7rem;
+      font-weight: 400;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      border: 1px solid var(--text);
+      background: transparent;
+      color: var(--text);
+      padding: 0.9rem 1rem;
+      cursor: pointer;
+      border-radius: 2px;
+      -webkit-transition: background 0.2s, color 0.2s;
+      transition: background 0.2s, color 0.2s;
+    }
 
+    .nav-btn.primary { background: var(--text); color: var(--bg); }
+    .nav-btn:hover { background: var(--text); color: var(--bg); }
+
+    /* ── Agendar ── */
     .agenda-section { margin-bottom: 2.8rem; }
     .agenda-section-title { font-size: 0.62rem; letter-spacing: 0.22em; text-transform: uppercase; color: var(--muted); margin-bottom: 1rem; display: block; }
     .msg-bubble { background: var(--line); border-left: 2px solid var(--muted); padding: 1rem 1.2rem; border-radius: 0 2px 2px 0; font-size: 0.82rem; line-height: 1.65; color: var(--text); margin-bottom: 1.2rem; }
     .agenda-sep { width: 100%; height: 1px; background: var(--line); margin: 2.5rem 0; }
 
+    /* ── Blog ── */
     .blog-title { font-size: 0.62rem; letter-spacing: 0.22em; text-transform: uppercase; color: var(--muted); margin-bottom: 1.2rem; }
-    .tag-filters { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-bottom: 2.5rem; }
-    .tag-btn { font-family: var(--mono); font-size: 0.6rem; letter-spacing: 0.18em; text-transform: uppercase; background: none; border: 1px solid var(--line); color: var(--muted); padding: 0.25rem 0.7rem; border-radius: 1px; cursor: pointer; transition: background 0.15s, color 0.15s, border-color 0.15s; }
-    .tag-btn:hover { border-color: var(--muted); color: var(--text); }
+    .tag-filters { display: -webkit-flex; display: flex; -webkit-flex-wrap: wrap; flex-wrap: wrap; gap: 0.5rem; margin-bottom: 2.5rem; }
+    .tag-btn { font-family: var(--mono); font-size: 0.6rem; letter-spacing: 0.18em; text-transform: uppercase; background: none; border: 1px solid var(--line); color: var(--muted); padding: 0.25rem 0.7rem; border-radius: 1px; cursor: pointer; }
     .tag-btn.active { background: var(--text); border-color: var(--text); color: var(--bg); }
 
     .loading { font-size: 0.68rem; letter-spacing: 0.14em; color: var(--muted); padding: 2rem 0; }
 
+    /* ── Texto ── */
     .texto-item { border-top: 1px solid var(--line); padding: 2rem 0; }
-    .texto-meta { display: flex; align-items: baseline; gap: 1rem; margin-bottom: 0.8rem; }
+    .texto-meta { display: -webkit-flex; display: flex; -webkit-align-items: baseline; align-items: baseline; gap: 1rem; margin-bottom: 0.8rem; }
     .texto-data { font-size: 0.6rem; letter-spacing: 0.16em; color: var(--muted); }
     .texto-cat { font-size: 0.58rem; letter-spacing: 0.18em; text-transform: uppercase; color: var(--muted); border: 1px solid var(--line); padding: 0.12rem 0.45rem; border-radius: 1px; }
     .texto-titulo { font-family: var(--serif); font-size: 1.05rem; font-weight: 400; color: var(--text); margin-bottom: 0.8rem; line-height: 1.4; }
     .texto-resumo { font-family: var(--serif); font-size: 0.86rem; font-weight: 300; color: var(--muted); line-height: 1.75; margin-bottom: 1rem; }
 
-    .toggle-btn { background: none; border: none; font-family: var(--mono); font-size: 0.6rem; letter-spacing: 0.18em; text-transform: uppercase; color: var(--muted); cursor: pointer; padding: 0; display: flex; align-items: center; gap: 0.4rem; transition: color 0.2s; }
-    .toggle-btn:hover { color: var(--text); }
-    .toggle-arrow { display: inline-block; transition: transform 0.3s; }
-    .toggle-btn.open .toggle-arrow { transform: rotate(90deg); }
+    .toggle-btn { background: none; border: none; font-family: var(--mono); font-size: 0.6rem; letter-spacing: 0.18em; text-transform: uppercase; color: var(--muted); cursor: pointer; padding: 0; display: -webkit-flex; display: flex; -webkit-align-items: center; align-items: center; gap: 0.4rem; }
+    .toggle-arrow { display: inline-block; -webkit-transition: -webkit-transform 0.3s; transition: transform 0.3s; }
+    .toggle-btn.open .toggle-arrow { -webkit-transform: rotate(90deg); transform: rotate(90deg); }
 
     .texto-body { display: none; margin-top: 1.6rem; padding-top: 1.6rem; border-top: 1px solid var(--line); }
     .texto-body.visible { display: block; }
@@ -160,26 +220,23 @@
 
     /* ── Comentário ── */
     .comment-section { margin-top: 2rem; padding-top: 1.8rem; border-top: 1px solid var(--line); }
-    .comment-toggle { background: none; border: 1px solid var(--line); font-family: var(--mono); font-size: 0.62rem; letter-spacing: 0.18em; text-transform: uppercase; color: var(--muted); cursor: pointer; padding: 0.5rem 0.9rem; border-radius: 2px; transition: border-color 0.2s, color 0.2s; }
-    .comment-toggle:hover { border-color: var(--text); color: var(--text); }
-    .comment-form { display: none; margin-top: 1.4rem; flex-direction: column; gap: 1rem; }
-    .comment-form.visible { display: flex; }
-    .form-field { display: flex; flex-direction: column; gap: 0.4rem; }
+    .comment-toggle { background: none; border: 1px solid var(--line); font-family: var(--mono); font-size: 0.62rem; letter-spacing: 0.18em; text-transform: uppercase; color: var(--muted); cursor: pointer; padding: 0.5rem 0.9rem; border-radius: 2px; }
+    .comment-form { display: none; margin-top: 1.4rem; -webkit-flex-direction: column; flex-direction: column; gap: 1rem; }
+    .comment-form.visible { display: -webkit-flex; display: flex; }
+    .form-field { display: -webkit-flex; display: flex; -webkit-flex-direction: column; flex-direction: column; gap: 0.4rem; }
     .form-label { font-size: 0.6rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--muted); }
-    .form-input, .form-textarea { font-family: var(--mono); font-size: 0.82rem; font-weight: 300; color: var(--text); background: transparent; border: 1px solid var(--line); border-radius: 2px; padding: 0.65rem 0.8rem; outline: none; transition: border-color 0.2s; width: 100%; }
-    .form-input:focus, .form-textarea:focus { border-color: var(--muted); }
+    .form-input, .form-textarea { font-family: var(--mono); font-size: 0.82rem; font-weight: 300; color: var(--text); background: transparent; border: 1px solid var(--line); border-radius: 2px; padding: 0.65rem 0.8rem; outline: none; width: 100%; -webkit-appearance: none; appearance: none; }
     .form-textarea { resize: none; height: 90px; line-height: 1.6; }
     .char-counter { font-size: 0.58rem; letter-spacing: 0.12em; color: var(--muted); text-align: right; }
     .char-counter.over { color: #c0392b; }
-    .form-submit { font-family: var(--mono); font-size: 0.68rem; letter-spacing: 0.16em; text-transform: uppercase; color: var(--bg); background: var(--text); border: none; padding: 0.7rem 1.2rem; border-radius: 2px; cursor: pointer; transition: background 0.2s; align-self: flex-start; }
-    .form-submit:hover { background: var(--muted); }
+    .form-submit { font-family: var(--mono); font-size: 0.68rem; letter-spacing: 0.16em; text-transform: uppercase; color: var(--bg); background: var(--text); border: none; padding: 0.7rem 1.2rem; border-radius: 2px; cursor: pointer; -webkit-align-self: flex-start; align-self: flex-start; }
     .form-submit:disabled { background: var(--line); cursor: not-allowed; }
-    .form-status { font-size: 0.68rem; letter-spacing: 0.1em; color: var(--muted); display: none; }
+    .form-status { font-size: 0.68rem; letter-spacing: 0.1em; color: var(--muted); display: none; margin-top: 0.5rem; }
     .form-status.visible { display: block; }
 
-    .no-results { font-size: 0.72rem; color: var(--muted); letter-spacing: 0.1em; padding: 2rem 0; border-top: 1px solid var(--line); }
+    .no-results { font-size: 0.72rem; color: var(--muted); padding: 2rem 0; border-top: 1px solid var(--line); }
 
-    .panel-footer { font-size: 0.58rem; letter-spacing: 0.16em; color: var(--line); text-transform: uppercase; margin-top: 3rem; user-select: none; }
+    .panel-footer { font-size: 0.58rem; letter-spacing: 0.16em; color: var(--line); text-transform: uppercase; margin-top: 3rem; }
     .wa-svg { width: 13px; height: 13px; fill: currentColor; flex-shrink: 0; }
   </style>
 
@@ -190,7 +247,7 @@
 
   <!-- PANEL 1 — CARTÃO -->
 
-  <div class="panel is-active" id="panel-cartao">
+  <div class="panel" id="panel-cartao">
     <div class="panel-inner">
       <div class="sigil">$ ̶</div>
       <h1>Ruberval Silva</h1>
@@ -226,8 +283,8 @@
         </div>
       </div>
       <div class="nav-buttons">
-        <button class="nav-btn primary" onclick="slideTo('panel-agendar','panel-cartao')">Agendar</button>
-        <button class="nav-btn" onclick="slideTo('panel-blog','panel-cartao')">Blog</button>
+        <button class="nav-btn primary" id="btn-agendar">Agendar</button>
+        <button class="nav-btn" id="btn-blog">Blog</button>
       </div>
       <div class="panel-footer" style="margin-top:2.5rem;">Florianópolis · SC · Brasil</div>
     </div>
@@ -235,9 +292,9 @@
 
   <!-- PANEL 2 — AGENDAR -->
 
-  <div class="panel is-ahead" id="panel-agendar">
+  <div class="panel" id="panel-agendar">
     <div class="panel-inner">
-      <button class="back-btn" onclick="slideBack('panel-cartao','panel-agendar')">voltar</button>
+      <button class="back-btn" id="back-agendar">voltar</button>
       <div class="sigil">$ ̶</div>
       <h1>Agendar</h1>
       <p class="role">Horário de atendimento</p>
@@ -280,9 +337,9 @@
 
   <!-- PANEL 3 — BLOG -->
 
-  <div class="panel is-ahead" id="panel-blog">
+  <div class="panel" id="panel-blog">
     <div class="panel-inner">
-      <button class="back-btn" onclick="slideBack('panel-cartao','panel-blog')">voltar</button>
+      <button class="back-btn" id="back-blog">voltar</button>
       <div class="sigil">$ ̶</div>
       <h1>Textos</h1>
       <p class="role">Psicanálise · clínica · teoria</p>
@@ -299,38 +356,56 @@
     </div>
   </div>
 
-</div>
+</div><!-- .stage -->
 
 <script>
-  const WA     = "https://wa.me/5548988717486";
-  const WA_MSG = WA + "?text=" + encodeURIComponent("Gostaria de marcar um horário de atendimento, qual sua disponibilidade?");
+  /* ── QR Codes ── */
+  var WA     = "https://wa.me/5548988717486";
+  var WA_MSG = WA + "?text=" + encodeURIComponent("Gostaria de marcar um horário de atendimento, qual sua disponibilidade?");
 
   function makeQR(id, url, size) {
-    new QRCode(document.getElementById(id), { text: url, width: size, height: size, colorDark: "#f0ece4", colorLight: "#0a0a0a", correctLevel: QRCode.CorrectLevel.M });
+    new QRCode(document.getElementById(id), {
+      text: url, width: size, height: size,
+      colorDark: "#f0ece4", colorLight: "#0a0a0a",
+      correctLevel: QRCode.CorrectLevel.M
+    });
   }
 
   makeQR("qr-cartao",  WA,     90);
   makeQR("qr-agendar", WA_MSG, 90);
   makeQR("qr-livre",   WA,     90);
 
-  function slideTo(targetId, fromId) {
-    document.getElementById(fromId).classList.replace("is-active", "is-behind");
-    const t = document.getElementById(targetId);
-    t.classList.remove("is-ahead", "is-behind");
-    t.classList.add("is-active");
-    t.scrollTop = 0;
+  /* ── Slide engine — sem classList.replace ── */
+  var panels = {
+    cartao:  document.getElementById("panel-cartao"),
+    agendar: document.getElementById("panel-agendar"),
+    blog:    document.getElementById("panel-blog")
+  };
+
+  function setTranslate(el, x) {
+    el.style.webkitTransform = "translateX(" + x + "%)";
+    el.style.transform       = "translateX(" + x + "%)";
   }
 
-  function slideBack(targetId, fromId) {
-    document.getElementById(fromId).classList.replace("is-active", "is-ahead");
-    const t = document.getElementById(targetId);
-    t.classList.remove("is-behind", "is-ahead");
-    t.classList.add("is-active");
-    t.scrollTop = 0;
+  function goTo(target) {
+    Object.keys(panels).forEach(function(key) {
+      setTranslate(panels[key], key === target ? 0 : 100);
+      panels[key].scrollTop = 0;
+    });
   }
 
+  function goBack() {
+    goTo("cartao");
+  }
+
+  document.getElementById("btn-agendar").addEventListener("click", function() { goTo("agendar"); });
+  document.getElementById("btn-blog").addEventListener("click",    function() { goTo("blog"); });
+  document.getElementById("back-agendar").addEventListener("click", goBack);
+  document.getElementById("back-blog").addEventListener("click",    goBack);
+
+  /* ── Parse .txt ── */
   function parseTexto(raw) {
-    const L = raw.split("\n");
+    var L = raw.split("\n");
     return {
       titulo:    (L[0] || "").trim(),
       categoria: (L[1] || "").trim().toLowerCase(),
@@ -341,160 +416,223 @@
     };
   }
 
-  function toggleComentario(formId, toggleId) {
-    const form   = document.getElementById(formId);
-    const toggle = document.getElementById(toggleId);
-    const isOpen = form.classList.contains("visible");
-    form.classList.toggle("visible", !isOpen);
-    toggle.textContent = isOpen ? "comente esse texto" : "fechar";
+  /* ── Comentário ── */
+  function toggleComentario(formId, btnId) {
+    var form = document.getElementById(formId);
+    var btn  = document.getElementById(btnId);
+    var open = form.style.display === "flex" || form.classList.contains("visible");
+    if (open) {
+      form.style.display = "none";
+      form.classList.remove("visible");
+      btn.textContent = "comente esse texto";
+    } else {
+      form.style.display = "flex";
+      form.classList.add("visible");
+      btn.textContent = "fechar";
+    }
   }
 
   function atualizarContador(areaId, countId, max) {
-    const len = document.getElementById(areaId).value.length;
-    const el  = document.getElementById(countId);
-    el.textContent = `${len} / ${max}`;
-    el.classList.toggle("over", len >= max);
+    var len = document.getElementById(areaId).value.length;
+    var el  = document.getElementById(countId);
+    el.textContent = len + " / " + max;
+    if (len >= max) { el.classList.add("over"); } else { el.classList.remove("over"); }
   }
 
-  async function enviarComentario(e, formId, statusId, submitId) {
-    e.preventDefault();
-    const form     = document.getElementById(formId);
-    const status   = document.getElementById(statusId);
-    const submit   = document.getElementById(submitId);
-    const contato  = form.querySelector('[name="contato"]').value.trim();
-    const msg      = form.querySelector('[name="comentario"]').value.trim();
-    const titulo   = form.querySelector('[name="texto"]').value;
+  function enviarComentario(formId, statusId, submitId) {
+    var form    = document.getElementById(formId);
+    var status  = document.getElementById(statusId);
+    var submit  = document.getElementById(submitId);
+    var contato = form.querySelector("[name='contato']").value.trim();
+    var msg     = form.querySelector("[name='comentario']").value.trim();
+    var titulo  = form.querySelector("[name='texto']").value;
     if (!contato || !msg) return;
 
     submit.disabled    = true;
     submit.textContent = "enviando…";
+    status.style.display = "none";
     status.classList.remove("visible");
 
-    try {
-      const res = await fetch(`https://formspree.io/f/${FORMSPREE_ID}`, {
-        method:  "POST",
-        headers: { "Content-Type": "application/json", "Accept": "application/json" },
-        body: JSON.stringify({ contato, comentario: msg, texto: titulo })
-      });
-      if (res.ok) {
+    var xhr = new XMLHttpRequest();
+    xhr.open("POST", "https://formspree.io/f/" + FORMSPREE_ID, true);
+    xhr.setRequestHeader("Content-Type", "application/json");
+    xhr.setRequestHeader("Accept", "application/json");
+    xhr.onload = function() {
+      if (xhr.status === 200) {
         status.textContent = "comentário enviado.";
+        status.style.display = "block";
         status.classList.add("visible");
-        form.querySelector('[name="contato"]').value    = "";
-        form.querySelector('[name="comentario"]').value = "";
+        form.querySelector("[name='contato']").value    = "";
+        form.querySelector("[name='comentario']").value = "";
         submit.textContent = "enviado";
-      } else { throw new Error(); }
-    } catch {
+      } else {
+        status.textContent = "erro ao enviar. tente novamente.";
+        status.style.display = "block";
+        submit.disabled    = false;
+        submit.textContent = "enviar";
+      }
+    };
+    xhr.onerror = function() {
       status.textContent = "erro ao enviar. tente novamente.";
-      status.classList.add("visible");
+      status.style.display = "block";
       submit.disabled    = false;
       submit.textContent = "enviar";
-    }
+    };
+    xhr.send(JSON.stringify({ contato: contato, comentario: msg, texto: titulo }));
   }
 
   function criarForm(titulo, uid) {
-    const MAX = 216;
-    return `
-      <div class="comment-section">
-        <button class="comment-toggle" id="ftoggle-${uid}"
-                onclick="toggleComentario('form-${uid}','ftoggle-${uid}')">
-          comente esse texto
-        </button>
-        <div class="comment-form" id="form-${uid}">
-          <div class="form-field">
-            <label class="form-label">seu contato</label>
-            <input class="form-input" name="contato" type="text" placeholder="nome, e-mail ou telefone" required />
-          </div>
-          <input type="hidden" name="texto" value="${titulo}" />
-          <div class="form-field">
-            <label class="form-label">comentário</label>
-            <textarea class="form-textarea" name="comentario" maxlength="${MAX}"
-              placeholder="escreva aqui…"
-              oninput="atualizarContador('area-${uid}','count-${uid}',${MAX})"
-              id="area-${uid}" required></textarea>
+    var MAX = 216;
+    return '<div class="comment-section">' +
+      '<button class="comment-toggle" id="ftoggle-' + uid + '" ' +
+              'onclick="toggleComentario(\'form-' + uid + '\',\'ftoggle-' + uid + '\')">' +
+        'comente esse texto' +
+      '</button>' +
+      '<div class="comment-form" id="form-' + uid + '" style="display:none">' +
+        '<div class="form-field">' +
+          '<label class="form-label">seu contato</label>' +
+          '<input class="form-input" name="contato" type="text" placeholder="nome, e-mail ou telefone" />' +
+        '</div>' +
+        '<input type="hidden" name="texto" value="' + titulo + '" />' +
+        '<div class="form-field">' +
+          '<label class="form-label">comentário</label>' +
+          '<textarea class="form-textarea" name="comentario" id="area-' + uid + '" maxlength="' + MAX + '" ' +
+            'placeholder="escreva aqui…" ' +
+            'oninput="atualizarContador(\'area-' + uid + '\',\'count-' + uid + '\',' + MAX + ')"></textarea>' +
 
 ```
-        <span class="char-counter" id="count-${uid}">0 / ${MAX}</span>
-      </div>
-      <button class="form-submit" id="submit-${uid}"
-              onclick="enviarComentario(event,'form-${uid}','status-${uid}','submit-${uid}')">
-        enviar
-      </button>
-      <span class="form-status" id="status-${uid}"></span>
-    </div>
-  </div>`;
+      '<span class="char-counter" id="count-' + uid + '">0 / ' + MAX + '</span>' +
+    '</div>' +
+    '<button class="form-submit" id="submit-' + uid + '" ' +
+            'onclick="enviarComentario(\'form-' + uid + '\',\'status-' + uid + '\',\'submit-' + uid + '\')">' +
+      'enviar' +
+    '</button>' +
+    '<span class="form-status" id="status-' + uid + '" style="display:none"></span>' +
+  '</div>' +
+'</div>';
 ```
 
 }
 
-let TEXTOS_CARREGADOS = [];
-let activeTag = “todos”;
+/* ── Carregar textos ── */
+var TEXTOS_CARREGADOS = [];
+var activeTag = “todos”;
 
-async function carregarTextos() {
-const resultados = await Promise.allSettled(
-ARQUIVOS.map(nome =>
-fetch(nome).then(r => { if (!r.ok) throw new Error(); return r.text(); }).then(parseTexto)
-)
-);
-TEXTOS_CARREGADOS = resultados
-.filter(r => r.status === “fulfilled”)
-.map(r => r.value)
-.filter(t => t.titulo)
-.sort((a, b) => b.data.localeCompare(a.data));
-renderTextos(“todos”);
+function carregarTextos() {
+var pendentes = ARQUIVOS.length;
+var resultados = [];
+
+```
+ARQUIVOS.forEach(function(nome, idx) {
+  var xhr = new XMLHttpRequest();
+  xhr.open("GET", nome, true);
+  xhr.onload = function() {
+    if (xhr.status === 200) {
+      var t = parseTexto(xhr.responseText);
+      if (t.titulo) resultados.push(t);
+    }
+    pendentes--;
+    if (pendentes === 0) {
+      TEXTOS_CARREGADOS = resultados.sort(function(a, b) {
+        return b.data.localeCompare(a.data);
+      });
+      renderTextos("todos");
+    }
+  };
+  xhr.onerror = function() {
+    pendentes--;
+    if (pendentes === 0) {
+      TEXTOS_CARREGADOS = resultados.sort(function(a, b) {
+        return b.data.localeCompare(a.data);
+      });
+      renderTextos("todos");
+    }
+  };
+  xhr.send();
+});
+```
+
 }
 
 function renderTextos(tag) {
-const lista    = document.getElementById(“lista-textos”);
-const filtered = tag === “todos” ? TEXTOS_CARREGADOS : TEXTOS_CARREGADOS.filter(t => t.categoria === tag);
-lista.innerHTML = “”;
-if (!filtered.length) { lista.innerHTML = ‘<div class="no-results">nenhum texto nesta categoria.</div>’; return; }
+var lista    = document.getElementById(“lista-textos”);
+var filtered = tag === “todos”
+? TEXTOS_CARREGADOS
+: TEXTOS_CARREGADOS.filter(function(t) { return t.categoria === tag; });
 
 ```
-filtered.forEach((t, i) => {
-  const uid = `${tag}-${i}`;
-  const ps  = t.corpo.split(/\n\n+/).map(p => p.replace(/\n/g," ").trim()).filter(Boolean).map(p=>`<p>${p}</p>`).join("");
-  const art = document.createElement("article");
+lista.innerHTML = "";
+
+if (!filtered.length) {
+  lista.innerHTML = '<div class="no-results">nenhum texto nesta categoria.</div>';
+  return;
+}
+
+filtered.forEach(function(t, i) {
+  var uid = tag + "-" + i;
+  var ps  = t.corpo.split(/\n\n+/)
+    .map(function(p) { return p.replace(/\n/g, " ").trim(); })
+    .filter(function(p) { return p.length > 0; })
+    .map(function(p)    { return "<p>" + p + "</p>"; })
+    .join("");
+
+  var art = document.createElement("article");
   art.className = "texto-item";
-  art.innerHTML = `
-    <div class="texto-meta">
-      <span class="texto-data">${t.dataLabel}</span>
-      <span class="texto-cat">${t.categoria}</span>
-    </div>
-    <h2 class="texto-titulo">${t.titulo}</h2>
-    <p class="texto-resumo">${t.resumo}</p>
-    <button class="toggle-btn" data-uid="${uid}">
-      <span class="toggle-arrow">›</span>
-      <span class="toggle-label">ler</span>
-    </button>
-    <div class="texto-body" id="body-${uid}">${ps}${criarForm(t.titulo, uid)}</div>
-  `;
+  art.innerHTML =
+    '<div class="texto-meta">' +
+      '<span class="texto-data">' + t.dataLabel + '</span>' +
+      '<span class="texto-cat">'  + t.categoria + '</span>' +
+    '</div>' +
+    '<h2 class="texto-titulo">'  + t.titulo  + '</h2>' +
+    '<p class="texto-resumo">'   + t.resumo  + '</p>' +
+    '<button class="toggle-btn" data-uid="' + uid + '">' +
+      '<span class="toggle-arrow">›</span>' +
+      '<span class="toggle-label">ler</span>' +
+    '</button>' +
+    '<div class="texto-body" id="body-' + uid + '">' + ps + criarForm(t.titulo, uid) + '</div>';
+
   lista.appendChild(art);
 });
 ```
 
 }
 
-document.getElementById(“tag-filters”).addEventListener(“click”, e => {
-const btn = e.target.closest(”.tag-btn”);
+/* ── Tag filter ── */
+document.getElementById(“tag-filters”).addEventListener(“click”, function(e) {
+var btn = e.target;
+while (btn && !btn.classList.contains(“tag-btn”)) btn = btn.parentNode;
 if (!btn) return;
-document.querySelectorAll(”.tag-btn”).forEach(b => b.classList.remove(“active”));
+var btns = document.querySelectorAll(”.tag-btn”);
+for (var i = 0; i < btns.length; i++) btns[i].classList.remove(“active”);
 btn.classList.add(“active”);
-activeTag = btn.dataset.tag;
+activeTag = btn.getAttribute(“data-tag”);
 renderTextos(activeTag);
 });
 
-document.getElementById(“lista-textos”).addEventListener(“click”, e => {
-const btn = e.target.closest(”.toggle-btn”);
+/* ── Toggle expand ── */
+document.getElementById(“lista-textos”).addEventListener(“click”, function(e) {
+var btn = e.target;
+while (btn && !btn.classList.contains(“toggle-btn”)) btn = btn.parentNode;
 if (!btn) return;
-const uid    = btn.dataset.uid;
-const body   = document.getElementById(`body-${uid}`);
-const label  = btn.querySelector(”.toggle-label”);
-const isOpen = body.classList.contains(“visible”);
-body.classList.toggle(“visible”, !isOpen);
-btn.classList.toggle(“open”, !isOpen);
-label.textContent = isOpen ? “ler” : “fechar”;
+var uid    = btn.getAttribute(“data-uid”);
+var body   = document.getElementById(“body-” + uid);
+var label  = btn.querySelector(”.toggle-label”);
+var arrow  = btn.querySelector(”.toggle-arrow”);
+var isOpen = body.classList.contains(“visible”);
+if (isOpen) {
+body.classList.remove(“visible”);
+body.style.display = “none”;
+btn.classList.remove(“open”);
+label.textContent = “ler”;
+} else {
+body.classList.add(“visible”);
+body.style.display = “block”;
+btn.classList.add(“open”);
+label.textContent = “fechar”;
+}
 });
 
+/* ── Init ── */
 carregarTextos();
 </script>
 
