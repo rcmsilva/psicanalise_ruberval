@@ -1,5 +1,4 @@
 <!DOCTYPE html>
-
 <html lang="pt-BR">
 <head>
   <meta charset="UTF-8" />
@@ -64,10 +63,8 @@
       text-transform: uppercase; text-decoration: none; border-radius: 2px;
       transition: background 0.2s, color 0.2s; cursor: pointer;
     }
-    .solid   { font-size: 0.72rem; color: var(--bg); background: var(--text); border: none; padding: 0.6rem 1rem; }
+    .solid { font-size: 0.72rem; color: var(--bg); background: var(--text); border: none; padding: 0.6rem 1rem; }
     .outline { font-size: 0.72rem; color: var(--text); background: transparent; border: 1px solid var(--line); padding: 0.6rem 1rem; }
-    .solid:hover   { background: var(--muted); }
-    .outline:hover { border-color: var(--muted); color: var(--muted); }
     .hint { font-size: 0.58rem; letter-spacing: 0.12em; color: var(--muted); }
     .nav-row { display: flex; gap: 0.8rem; }
     .nav-btn {
@@ -76,80 +73,41 @@
       color: var(--text); padding: 0.9rem 1rem; cursor: pointer; transition: 0.2s;
     }
     .nav-btn.prim { background: var(--text); color: var(--bg); }
-    /* BUG FIX: font-family explícita nos botões de ação */
-    .back-btn {
-      background: none; border: none; font-family: var(--mono);
-      font-size: 0.62rem; letter-spacing: 0.2em; text-transform: uppercase;
-      color: var(--muted); cursor: pointer; margin-bottom: 3rem; display: block;
-    }
+    .back-btn { background: none; border: none; font-family: var(--mono); font-size: 0.62rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--muted); cursor: pointer; margin-bottom: 3rem; display: block; }
     .ag-bloco { margin-bottom: 2.8rem; }
     .ag-titulo { font-size: 0.62rem; letter-spacing: 0.22em; text-transform: uppercase; color: var(--muted); display: block; margin-bottom: 1rem; }
     .msg-box { background: var(--line); border-left: 2px solid var(--muted); padding: 1rem 1.2rem; font-size: 0.82rem; line-height: 1.65; margin-bottom: 1.2rem; }
     .sep { height: 1px; background: var(--line); margin: 2.5rem 0; }
     .ftitulo { font-size: 0.62rem; letter-spacing: 0.22em; text-transform: uppercase; color: var(--muted); margin-bottom: 1.2rem; }
     .tags { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-bottom: 2.5rem; }
-    .tag {
-      font-family: var(--mono); font-size: 0.6rem; letter-spacing: 0.18em;
-      text-transform: uppercase; background: none; border: 1px solid var(--line);
-      color: var(--muted); padding: 0.25rem 0.7rem; cursor: pointer; border-radius: 1px;
-    }
+    .tag { font-family: var(--mono); font-size: 0.6rem; letter-spacing: 0.18em; text-transform: uppercase; background: none; border: 1px solid var(--line); color: var(--muted); padding: 0.25rem 0.7rem; cursor: pointer; border-radius: 1px; }
     .tag.on { background: var(--text); border-color: var(--text); color: var(--bg); }
-    .loading { font-size: 0.68rem; color: var(--muted); padding: 2rem 0; }
     .texto { border-top: 1px solid var(--line); padding: 2rem 0; }
     .tmeta { display: flex; align-items: baseline; gap: 1rem; margin-bottom: 0.8rem; }
     .tdata { font-size: 0.6rem; letter-spacing: 0.16em; color: var(--muted); }
-    .tcat  { font-size: 0.58rem; letter-spacing: 0.18em; text-transform: uppercase; color: var(--muted); border: 1px solid var(--line); padding: 0.12rem 0.45rem; border-radius: 1px; }
+    .tcat { font-size: 0.58rem; letter-spacing: 0.18em; text-transform: uppercase; color: var(--muted); border: 1px solid var(--line); padding: 0.12rem 0.45rem; border-radius: 1px; }
     .ttitulo { font-family: var(--serif); font-size: 1.05rem; font-weight: 400; margin-bottom: 0.8rem; line-height: 1.4; }
     .tresumo { font-family: var(--serif); font-size: 0.86rem; font-weight: 300; color: var(--muted); line-height: 1.75; margin-bottom: 1rem; }
-    .ler-btn {
-      background: none; border: none; font-family: var(--mono);
-      font-size: 0.6rem; letter-spacing: 0.18em; text-transform: uppercase;
-      color: var(--muted); cursor: pointer; display: flex; align-items: center; gap: 0.4rem;
-      padding: 0;
-    }
+    .ler-btn { background: none; border: none; font-family: var(--mono); font-size: 0.6rem; letter-spacing: 0.18em; text-transform: uppercase; color: var(--muted); cursor: pointer; display: flex; align-items: center; gap: 0.4rem; padding: 0; }
     .arr { display: inline-block; transition: transform 0.3s; }
     .tcorpo { display: none; margin-top: 1.6rem; padding-top: 1.6rem; border-top: 1px solid var(--line); }
-    .tcorpo p { font-family: var(--serif); font-size: 0.93rem; font-weight: 300; line-height: 1.85; margin-bottom: 1.3rem; }
-    .tcorpo p:last-child { margin-bottom: 0; }
-    /* ── Comentário ── */
+    .tcorpo p { font-family: var(--serif); font-size: 0.93rem; line-height: 1.85; margin-bottom: 1.3rem; }
     .csec { margin-top: 2rem; padding-top: 1.8rem; border-top: 1px solid var(--line); }
-    /* BUG FIX: font-family explícita */
-    .cbtn {
-      background: none; border: 1px solid var(--line); font-family: var(--mono);
-      font-size: 0.62rem; letter-spacing: 0.18em; text-transform: uppercase;
-      color: var(--muted); cursor: pointer; padding: 0.5rem 0.9rem; border-radius: 2px;
-    }
+    .cbtn { background: none; border: 1px solid var(--line); font-family: var(--mono); font-size: 0.62rem; text-transform: uppercase; color: var(--muted); cursor: pointer; padding: 0.5rem 0.9rem; border-radius: 2px; }
     .cform { display: none; flex-direction: column; gap: 1rem; margin-top: 1.4rem; }
     .cform.aberto { display: flex; }
-    .flbl { font-size: 0.6rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--muted); display: block; margin-bottom: 0.4rem; }
-    .finp, .ftxt {
-      font-family: var(--mono); font-size: 0.82rem; background: transparent;
-      border: 1px solid var(--line); padding: 0.65rem 0.8rem; width: 100%;
-      outline: none; color: var(--text); -webkit-appearance: none; border-radius: 2px;
-    }
-    .ftxt { resize: none; height: 90px; line-height: 1.6; }
+    .finp, .ftxt { font-family: var(--mono); font-size: 0.82rem; background: transparent; border: 1px solid var(--line); padding: 0.65rem 0.8rem; width: 100%; outline: none; color: var(--text); border-radius: 2px; }
+    .ftxt { resize: none; height: 90px; }
     .fct { font-size: 0.58rem; color: var(--muted); text-align: right; margin-top: 0.3rem; }
-    .fct.over { color: #c0392b; }
-    /* BUG FIX: font-family explícita */
-    .fenv {
-      font-family: var(--mono); font-size: 0.68rem; letter-spacing: 0.16em;
-      text-transform: uppercase; color: var(--bg); background: var(--text);
-      border: none; padding: 0.7rem 1.2rem; cursor: pointer; align-self: flex-start;
-      border-radius: 2px;
-    }
-    .fenv:disabled { background: var(--line); cursor: not-allowed; }
+    .fenv { font-family: var(--mono); font-size: 0.68rem; text-transform: uppercase; color: var(--bg); background: var(--text); border: none; padding: 0.7rem 1.2rem; cursor: pointer; align-self: flex-start; border-radius: 2px; }
     .fmsg { font-size: 0.68rem; color: var(--muted); display: none; margin-top: 0.5rem; }
     .pfooter { font-size: 0.58rem; letter-spacing: 0.16em; color: var(--line); text-transform: uppercase; margin-top: 3rem; }
-    .wsv { width: 13px; height: 13px; fill: currentColor; flex-shrink: 0; }
+    .wsv { width: 13px; height: 13px; fill: currentColor; }
   </style>
-
 </head>
 <body>
 
 <div class="stage">
-
-  <!-- CARTÃO -->
-
   <div class="panel" id="panel-cartao">
     <div class="panel-inner">
       <div class="sigil">$ ̶</div>
@@ -164,9 +122,7 @@
       <div class="wa-block">
         <span class="wa-lbl">WhatsApp</span>
         <div class="wa-row">
-          <a href="https://wa.me/5548988717486" target="_blank" rel="noopener">
-            <div class="qr-box"><div id="qr1"></div></div>
-          </a>
+          <a href="https://wa.me/5548988717486" target="_blank" rel="noopener"><div class="qr-box"><div id="qr1"></div></div></a>
           <div class="wa-col">
             <a class="btn solid" href="https://wa.me/5548988717486" target="_blank" rel="noopener">
               <svg class="wsv" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
@@ -180,16 +136,13 @@
         <button class="nav-btn prim" id="nav-age">Agendar</button>
         <button class="nav-btn" id="nav-blog">Blog</button>
       </div>
-      <div class="pfooter" style="margin-top:2.5rem">Florianópolis · SC · Brasil</div>
+      <div class="pfooter">Florianópolis · SC · Brasil</div>
     </div>
   </div>
-
-  <!-- AGENDAR -->
 
   <div class="panel" id="panel-agendar">
     <div class="panel-inner">
       <button class="back-btn" id="back-age">‹ voltar</button>
-      <div class="sigil">$ ̶</div>
       <h1>Agendar</h1>
       <p class="role">Horário de atendimento</p>
       <div class="divider"></div>
@@ -197,16 +150,9 @@
         <span class="ag-titulo">mensagem pronta</span>
         <div class="msg-box">Gostaria de marcar um horário de atendimento, qual sua disponibilidade?</div>
         <div class="wa-row">
-          <!-- BUG FIX: QR clicável com href correto -->
-          <a id="link-age" href="#" target="_blank" rel="noopener">
-            <div class="qr-box"><div id="qr2"></div></div>
-          </a>
+          <a id="link-age" href="#" target="_blank" rel="noopener"><div class="qr-box"><div id="qr2"></div></div></a>
           <div class="wa-col">
-            <a class="btn solid" id="btn-age" href="#" target="_blank" rel="noopener">
-              <svg class="wsv" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
-              enviar mensagem
-            </a>
-            <span class="hint">escaneie ou toque</span>
+            <a class="btn solid" id="btn-age" href="#" target="_blank" rel="noopener">enviar mensagem</a>
           </div>
         </div>
       </div>
@@ -214,29 +160,18 @@
       <div class="ag-bloco">
         <span class="ag-titulo">conversa livre</span>
         <div class="wa-row">
-          <a href="https://wa.me/5548988717486" target="_blank" rel="noopener">
-            <div class="qr-box"><div id="qr3"></div></div>
-          </a>
+          <a href="https://wa.me/5548988717486" target="_blank" rel="noopener"><div class="qr-box"><div id="qr3"></div></div></a>
           <div class="wa-col">
-            <!-- BUG FIX: target="_blank" adicionado -->
-            <a class="btn outline" href="https://wa.me/5548988717486" target="_blank" rel="noopener">
-              <svg class="wsv" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
-              abrir chat
-            </a>
-            <span class="hint">escaneie ou toque</span>
+            <a class="btn outline" href="https://wa.me/5548988717486" target="_blank" rel="noopener">abrir chat</a>
           </div>
         </div>
       </div>
-      <div class="pfooter">Ruberval Silva · Psicanalista</div>
     </div>
   </div>
-
-  <!-- BLOG -->
 
   <div class="panel" id="panel-blog">
     <div class="panel-inner">
       <button class="back-btn" id="back-blog">‹ voltar</button>
-      <div class="sigil">$ ̶</div>
       <h1>Textos</h1>
       <p class="role">Psicanálise · clínica · teoria</p>
       <div class="divider"></div>
@@ -247,217 +182,150 @@
         <button class="tag" data-tag="teoria">teoria</button>
         <button class="tag" data-tag="ensaio">ensaio</button>
       </div>
-      <div id="lista"><div class="loading">carregando textos…</div></div>
-      <div class="pfooter">Ruberval Silva · Psicanalista</div>
+      <div id="lista"><div style="font-size:0.68rem;color:var(--muted);padding:2rem 0;">carregando textos…</div></div>
     </div>
   </div>
-
-</div><!-- .stage -->
+</div>
 
 <script>
-var WA          = "https://wa.me/5548988717486";
-var WA_AGE      = WA + "?text=" + encodeURIComponent("Gostaria de marcar um horário de atendimento, qual sua disponibilidade?");
+var WA = "https://wa.me/5548988717486";
+var WA_AGE = WA + "?text=" + encodeURIComponent("Gostaria de marcar um horário de atendimento, qual sua disponibilidade?");
 var FORMSPREE_ID = "mwvaeogg";
-var ARQUIVOS    = ["texto_1a.txt", "texto_2.txt", "texto_3.txt"];
-var MAX_CHARS   = 216;
+var ARQUIVOS = ["texto_1a.txt", "texto_2.txt", "texto_3.txt"];
+var MAX_CHARS = 216;
 
-/* ── QR Codes ── */
 window.addEventListener("load", function() {
-  new QRCode(document.getElementById("qr1"), { text: WA,     width:80, height:80, colorDark:"#f0ece4", colorLight:"#0a0a0a", correctLevel: QRCode.CorrectLevel.M });
-  new QRCode(document.getElementById("qr2"), { text: WA_AGE, width:80, height:80, colorDark:"#f0ece4", colorLight:"#0a0a0a", correctLevel: QRCode.CorrectLevel.M });
-  new QRCode(document.getElementById("qr3"), { text: WA,     width:80, height:80, colorDark:"#f0ece4", colorLight:"#0a0a0a", correctLevel: QRCode.CorrectLevel.M });
-  document.getElementById("btn-age").href  = WA_AGE;
+  new QRCode(document.getElementById("qr1"), { text: WA, width: 80, height: 80, colorDark: "#f0ece4", colorLight: "#0a0a0a", correctLevel: QRCode.CorrectLevel.M });
+  new QRCode(document.getElementById("qr2"), { text: WA_AGE, width: 80, height: 80, colorDark: "#f0ece4", colorLight: "#0a0a0a", correctLevel: QRCode.CorrectLevel.M });
+  new QRCode(document.getElementById("qr3"), { text: WA, width: 80, height: 80, colorDark: "#f0ece4", colorLight: "#0a0a0a", correctLevel: QRCode.CorrectLevel.M });
+  document.getElementById("btn-age").href = WA_AGE;
   document.getElementById("link-age").href = WA_AGE;
   carregarTextos();
 });
 
-/* ── Navegação ── */
 function ir(id) {
-  document.querySelectorAll(".panel").forEach(function(p) {
-    p.style.transform = "translateX(100%)";
-  });
-  var alvo = document.getElementById(id);
+  document.querySelectorAll(".panel").forEach(p => p.style.transform = "translateX(100%)");
+  const alvo = document.getElementById(id);
   alvo.style.transform = "translateX(0)";
   alvo.scrollTop = 0;
 }
 
-document.getElementById("nav-age").onclick   = function() { ir("panel-agendar"); };
-document.getElementById("nav-blog").onclick  = function() { ir("panel-blog"); };
-document.getElementById("back-age").onclick  = function() { ir("panel-cartao"); };
-document.getElementById("back-blog").onclick = function() { ir("panel-cartao"); };
+document.getElementById("nav-age").onclick = () => ir("panel-agendar");
+document.getElementById("nav-blog").onclick = () => ir("panel-blog");
+document.getElementById("back-age").onclick = () => ir("panel-cartao");
+document.getElementById("back-blog").onclick = () => ir("panel-cartao");
 
-/* ── Carregar textos ── */
 var textos = [];
-
 function carregarTextos() {
   textos = [];
-  var carregados = 0;
-  ARQUIVOS.forEach(function(nome) {
-    fetch(nome)
-      .then(function(r) { return r.text(); })
-      .then(function(txt) {
-        var t = parse(txt);
-        if (t.titulo) textos.push(t);
-        carregados++;
-        if (carregados === ARQUIVOS.length) {
-          // BUG FIX: ordenação compatível com iOS Safari
-          textos.sort(function(a, b) { return b.data.localeCompare(a.data); });
-          render("todos");
-        }
-      })
-      .catch(function() {
-        carregados++;
-        if (carregados === ARQUIVOS.length) {
-          textos.sort(function(a, b) { return b.data.localeCompare(a.data); });
-          render("todos");
-        }
-      });
+  let carregados = 0;
+  ARQUIVOS.forEach(nome => {
+    fetch(nome).then(r => r.text()).then(txt => {
+      let t = parse(txt);
+      if(t.titulo) textos.push(t);
+      carregados++;
+      if(carregados === ARQUIVOS.length) {
+        textos.sort((a, b) => b.data.localeCompare(a.data));
+        render("todos");
+      }
+    }).catch(() => {
+      carregados++;
+      if(carregados === ARQUIVOS.length) render("todos");
+    });
   });
 }
 
 function parse(raw) {
-  var L = raw.split("\n");
+  let L = raw.split("\n");
   return {
-    titulo:    (L[0] || "").trim(),
+    titulo: (L[0] || "").trim(),
     categoria: (L[1] || "").trim().toLowerCase(),
-    data:      (L[2] || "").trim(),
+    data: (L[2] || "").trim(),
     dataLabel: (L[3] || "").trim(),
-    resumo:    (L[4] || "").trim(),
-    corpo:     L.slice(5).join("\n").trim()
+    resumo: (L[4] || "").trim(),
+    corpo: L.slice(5).join("\n").trim()
   };
 }
 
-/* ── Render ── */
 function render(tag) {
-  var lista = document.getElementById("lista");
-  var filt  = tag === "todos"
-    ? textos
-    : textos.filter(function(t) { return t.categoria === tag; });
-
-  if (!filt.length) {
-    lista.innerHTML = '<div style="font-size:0.72rem;color:var(--muted);padding:2rem 0;border-top:1px solid var(--line)">nenhum texto nesta categoria.</div>';
+  const lista = document.getElementById("lista");
+  const filt = tag === "todos" ? textos : textos.filter(t => t.categoria === tag);
+  if(!filt.length) {
+    lista.innerHTML = '<div style="font-size:0.7rem;color:var(--muted);padding:2rem 0;border-top:1px solid var(--line)">Nenhum texto encontrado.</div>';
     return;
   }
-
-  lista.innerHTML = filt.map(function(t, i) {
-    var ps = t.corpo.split(/\n\n+/)
-      .map(function(p) { return p.replace(/\n/g, " ").trim(); })
-      .filter(function(p) { return p.length > 0; })
-      .map(function(p) { return "<p>" + p + "</p>"; })
-      .join("");
-
-    return '<article class="texto">' +
-      '<div class="tmeta"><span class="tdata">' + t.dataLabel + '</span><span class="tcat">' + t.categoria + '</span></div>' +
-      '<h2 class="ttitulo">' + t.titulo + '</h2>' +
-      '<p class="tresumo">' + t.resumo + '</p>' +
-      '<button class="ler-btn" id="lbtn-' + i + '" onclick="lerToggle(' + i + ')">' +
-        '<span class="arr" id="arr-' + i + '">›</span>' +
-        '<span id="llbl-' + i + '"> ler</span>' +
-      '</button>' +
-      '<div class="tcorpo" id="corpo-' + i + '">' +
-        ps +
-        '<div class="csec">' +
-          '<button class="cbtn" id="cbtn-' + i + '" onclick="toggleForm(' + i + ')">comentar</button>' +
-          '<div class="cform" id="cform-' + i + '">' +
-            '<div><label class="flbl">seu contato</label>' +
-            '<input class="finp" id="cont-' + i + '" type="text" placeholder="nome, e-mail ou telefone" /></div>' +
-            '<div><label class="flbl">comentário</label>' +
-            '<textarea class="ftxt" id="msg-' + i + '" maxlength="' + MAX_CHARS + '" ' +
-              'placeholder="escreva aqui…" ' +
-              'oninput="contarChars(' + i + ')"></textarea>' +
-
-```
-        '<div class="fct" id="fct-' + i + '">0 / ' + MAX_CHARS + '</div></div>' +
-        '<button class="fenv" id="fenv-' + i + '" onclick="enviar(' + i + ', \'' + t.titulo.replace(/'/g, "\\'") + '\')">enviar</button>' +
-        '<div class="fmsg" id="resp-' + i + '"></div>' +
-      '</div>' +
-    '</div>' +
-  '</div>' +
-'</article>';
-```
-
-}).join(””);
+  lista.innerHTML = filt.map((t, i) => `
+    <article class="texto">
+      <div class="tmeta"><span class="tdata">${t.dataLabel}</span><span class="tcat">${t.categoria}</span></div>
+      <h2 class="ttitulo">${t.titulo}</h2>
+      <p class="tresumo">${t.resumo}</p>
+      <button class="ler-btn" onclick="lerToggle(${i})"><span class="arr" id="arr-${i}">›</span> <span id="lbl-${i}">ler</span></button>
+      <div class="tcorpo" id="corpo-${i}">
+        ${t.corpo.split("\n\n").map(p => `<p>${p.replace(/\n/g, " ")}</p>`).join("")}
+        <div class="csec">
+          <button class="cbtn" id="cbtn-${i}" onclick="toggleForm(${i})">comentar</button>
+          <div class="cform" id="cform-${i}">
+            <input class="finp" id="cont-${i}" placeholder="e-mail para contato" />
+            <textarea class="ftxt" id="msg-${i}" maxlength="${MAX_CHARS}" placeholder="escreva aqui…" oninput="contar(${i})"></textarea>
+            <div class="fct" id="fct-${i}">0 / ${MAX_CHARS}</div>
+            <button class="fenv" id="fenv-${i}" onclick="enviar(${i}, '${t.titulo.replace(/'/g, "\\'")}')">enviar</button>
+            <div class="fmsg" id="resp-${i}"></div>
+          </div>
+        </div>
+      </div>
+    </article>
+  `).join("");
 }
 
-/* ── BUG FIX: lerToggle com seta e label corretos ── */
 function lerToggle(i) {
-var corpo = document.getElementById(“corpo-” + i);
-var arr   = document.getElementById(“arr-”   + i);
-var lbl   = document.getElementById(“llbl-”  + i);
-var btn   = document.getElementById(“lbtn-”  + i);
-var aberto = corpo.style.display === “block”;
-corpo.style.display      = aberto ? “none” : “block”;
-arr.style.transform      = aberto ? “” : “rotate(90deg)”;
-lbl.textContent          = aberto ? “ ler” : “ fechar”;
-btn.style.color          = aberto ? “” : “var(–text)”;
+  const c = document.getElementById(`corpo-${i}`);
+  const a = document.getElementById(`arr-${i}`);
+  const l = document.getElementById(`lbl-${i}`);
+  const aberto = c.style.display === "block";
+  c.style.display = aberto ? "none" : "block";
+  a.style.transform = aberto ? "" : "rotate(90deg)";
+  l.textContent = aberto ? "ler" : "fechar";
 }
 
 function toggleForm(i) {
-var form = document.getElementById(“cform-” + i);
-var btn  = document.getElementById(“cbtn-”  + i);
-var aberto = form.classList.contains(“aberto”);
-form.classList.toggle(“aberto”);
-btn.textContent = aberto ? “comentar” : “fechar”;
+  const f = document.getElementById(`cform-${i}`);
+  const b = document.getElementById(`cbtn-${i}`);
+  f.classList.toggle("aberto");
+  b.textContent = f.classList.contains("aberto") ? "fechar" : "comentar";
 }
 
-/* ── Contador de caracteres ── */
-function contarChars(i) {
-var len = document.getElementById(“msg-” + i).value.length;
-var el  = document.getElementById(“fct-” + i);
-el.textContent = len + “ / “ + MAX_CHARS;
-if (len >= MAX_CHARS) el.classList.add(“over”);
-else el.classList.remove(“over”);
+function contar(i) {
+  const n = document.getElementById(`msg-${i}`).value.length;
+  document.getElementById(`fct-${i}`).textContent = `${n} / ${MAX_CHARS}`;
 }
 
-/* ── Enviar comentário ── */
-function enviar(i, titulo) {
-var contato = document.getElementById(“cont-” + i).value.trim();
-var msg     = document.getElementById(“msg-”  + i).value.trim();
-var resp    = document.getElementById(“resp-” + i);
-var envBtn  = document.getElementById(“fenv-” + i);
-if (!contato || !msg) return;
-
-envBtn.disabled    = true;
-envBtn.textContent = “enviando…”;
-resp.style.display = “none”;
-
-fetch(“https://formspree.io/f/” + FORMSPREE_ID, {
-method:  “POST”,
-headers: { “Content-Type”: “application/json”, “Accept”: “application/json” },
-body: JSON.stringify({ contato: contato, mensagem: msg, texto: titulo })
-})
-.then(function(r) {
-if (r.ok) {
-resp.textContent   = “Enviado com sucesso.”;
-resp.style.display = “block”;
-document.getElementById(“cont-” + i).value = “”;
-document.getElementById(“msg-”  + i).value = “”;
-document.getElementById(“fct-”  + i).textContent = “0 / “ + MAX_CHARS;
-envBtn.textContent = “enviado”;
-setTimeout(function() { resp.style.display = “none”; }, 3000);
-} else {
-resp.textContent   = “Erro ao enviar. Tente novamente.”;
-resp.style.display = “block”;
-envBtn.disabled    = false;
-envBtn.textContent = “enviar”;
-}
-})
-.catch(function() {
-resp.textContent   = “Erro de conexão.”;
-resp.style.display = “block”;
-envBtn.disabled    = false;
-envBtn.textContent = “enviar”;
-});
+function enviar(i, tit) {
+  const c = document.getElementById(`cont-${i}`);
+  const m = document.getElementById(`msg-${i}`);
+  const r = document.getElementById(`resp-${i}`);
+  const b = document.getElementById(`fenv-${i}`);
+  if(!c.value || !m.value) return;
+  b.disabled = true; b.textContent = "enviando...";
+  fetch(`https://formspree.io/f/${FORMSPREE_ID}`, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ contato: c.value, mensagem: m.value, texto: tit })
+  }).then(res => {
+    if(res.ok) {
+      r.textContent = "Enviado com sucesso."; r.style.display = "block";
+      c.value = ""; m.value = ""; contar(i);
+      b.textContent = "enviado";
+      setTimeout(() => { r.style.display = "none"; b.disabled = false; b.textContent = "enviar"; }, 3000);
+    }
+  });
 }
 
-/* ── Tags ── */
-document.getElementById(“tags”).addEventListener(“click”, function(e) {
-if (!e.target.getAttribute(“data-tag”)) return;
-document.querySelectorAll(”.tag”).forEach(function(t) { t.classList.remove(“on”); });
-e.target.classList.add(“on”);
-render(e.target.getAttribute(“data-tag”));
-});
+document.getElementById("tags").onclick = (e) => {
+  if(!e.target.dataset.tag) return;
+  document.querySelectorAll(".tag").forEach(t => t.classList.remove("on"));
+  e.target.classList.add("on");
+  render(e.target.dataset.tag);
+};
 </script>
-
 </body>
 </html>
