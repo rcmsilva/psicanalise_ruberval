@@ -5,21 +5,10 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Ruberval Silva — Psicanalista</title>
-  <meta name="description" content="Ruberval Silva, psicanalista. Florianópolis, SC." />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@300;400&family=IBM+Plex+Serif:ital,wght@0,300;0,400;1,300;1,400&display=swap" rel="stylesheet" />
   <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
-
-  <script>
-  const FORMSPREE_ID = "mwvaeogg";
-
-  const ARQUIVOS = [
-    "texto_1a.txt",
-    "texto_2.txt",
-    "texto_3.txt"
-  ];
-  </script>
 
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
@@ -51,23 +40,22 @@
       overflow: hidden;
     }
 
-    /* ── Panels — posicionados por transform ── */
+    /* ── Panels ── */
     .panel {
       position: absolute;
       top: 0; left: 0;
       width: 100%;
       height: 100%;
-      overflow-y: auto;
-      overflow-x: hidden;
       background: var(--bg);
-      -webkit-transition: -webkit-transform 0.4s cubic-bezier(0.65,0,0.35,1);
-      transition: transform 0.4s cubic-bezier(0.65,0,0.35,1);
+      overflow-y: auto;
       -webkit-overflow-scrolling: touch;
+      -webkit-transition: -webkit-transform 0.38s cubic-bezier(0.65,0,0.35,1);
+      transition: transform 0.38s cubic-bezier(0.65,0,0.35,1);
     }
 
-    #panel-cartao  { -webkit-transform: translateX(0);     transform: translateX(0); }
-    #panel-agendar { -webkit-transform: translateX(100%);  transform: translateX(100%); }
-    #panel-blog    { -webkit-transform: translateX(100%);  transform: translateX(100%); }
+    #panel-cartao  { -webkit-transform: translateX(0);    transform: translateX(0); }
+    #panel-agendar { -webkit-transform: translateX(100%); transform: translateX(100%); }
+    #panel-blog    { -webkit-transform: translateX(100%); transform: translateX(100%); }
 
     .panel-inner {
       max-width: 480px;
@@ -75,46 +63,7 @@
       padding: 3.5rem 2rem 5rem;
     }
 
-    @-webkit-keyframes fadeUp {
-      from { opacity: 0; -webkit-transform: translateY(10px); }
-      to   { opacity: 1; -webkit-transform: translateY(0); }
-    }
-
-    @keyframes fadeUp {
-      from { opacity: 0; transform: translateY(10px); }
-      to   { opacity: 1; transform: translateY(0); }
-    }
-
-    .panel-inner {
-      -webkit-animation: fadeUp 0.5s ease forwards;
-      animation: fadeUp 0.5s ease forwards;
-    }
-
-    /* ── Back ── */
-    .back-btn {
-      display: -webkit-inline-flex;
-      display: inline-flex;
-      -webkit-align-items: center;
-      align-items: center;
-      gap: 0.4rem;
-      background: none;
-      border: none;
-      font-family: var(--mono);
-      font-size: 0.62rem;
-      letter-spacing: 0.2em;
-      text-transform: uppercase;
-      color: var(--muted);
-      cursor: pointer;
-      padding: 0;
-      margin-bottom: 3rem;
-      -webkit-transition: color 0.2s;
-      transition: color 0.2s;
-    }
-
-    .back-btn:hover { color: var(--text); }
-    .back-btn::before { content: "‹"; font-size: 0.9rem; }
-
-    /* ── Typography ── */
+    /* ── Base ── */
     .sigil { font-size: 1rem; color: var(--muted); letter-spacing: 0.15em; margin-bottom: 2.8rem; user-select: none; }
 
     h1 { font-size: clamp(1.35rem, 4vw, 1.7rem); font-weight: 400; letter-spacing: 0.04em; color: var(--text); margin-bottom: 0.45rem; }
@@ -124,50 +73,46 @@
     .divider { width: 2rem; height: 1px; background: var(--line); margin-bottom: 3rem; }
 
     /* ── Contact ── */
-    .contact { display: -webkit-flex; display: flex; -webkit-flex-direction: column; flex-direction: column; gap: 1.2rem; margin-bottom: 3rem; }
-    .contact-item { display: -webkit-flex; display: flex; -webkit-align-items: baseline; align-items: baseline; gap: 1.2rem; }
-    .contact-label { font-size: 0.62rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--muted); min-width: 4.8rem; -webkit-flex-shrink: 0; flex-shrink: 0; }
-    .contact-value { font-size: 0.88rem; color: var(--text); letter-spacing: 0.03em; }
-    a.contact-value { color: var(--text); text-decoration: none; }
+    .contact { display: flex; flex-direction: column; gap: 1.2rem; margin-bottom: 3rem; }
+    .ci { display: flex; align-items: baseline; gap: 1.2rem; }
+    .cl { font-size: 0.62rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--muted); min-width: 4.8rem; flex-shrink: 0; }
+    .cv { font-size: 0.88rem; color: var(--text); }
+    a.cv { text-decoration: none; color: var(--text); }
 
-    /* ── WhatsApp ── */
-    .wa-block { display: -webkit-flex; display: flex; -webkit-flex-direction: column; flex-direction: column; gap: 0.9rem; margin-bottom: 3rem; }
-    .wa-label { font-size: 0.62rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--muted); }
-    .wa-row { display: -webkit-flex; display: flex; -webkit-align-items: center; align-items: center; gap: 1.4rem; }
-    .qr-wrap { display: inline-block; padding: 8px; background: var(--text); border-radius: 2px; -webkit-flex-shrink: 0; flex-shrink: 0; }
-    .qr-wrap canvas, .qr-wrap img { display: block; }
-    .wa-chat-block { display: -webkit-flex; display: flex; -webkit-flex-direction: column; flex-direction: column; gap: 0.7rem; }
+    /* ── WA block ── */
+    .wa-block { display: flex; flex-direction: column; gap: 0.9rem; margin-bottom: 3rem; }
+    .wa-lbl { font-size: 0.62rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--muted); }
+    .wa-row { display: flex; align-items: center; gap: 1.4rem; }
+    .qr-box { display: inline-block; padding: 8px; background: var(--text); border-radius: 2px; flex-shrink: 0; }
+    .qr-box canvas, .qr-box img { display: block; }
+    .wa-col { display: flex; flex-direction: column; gap: 0.7rem; }
 
     /* ── Buttons ── */
     .btn {
-      display: -webkit-inline-flex;
       display: inline-flex;
-      -webkit-align-items: center;
       align-items: center;
-      gap: 0.55rem;
+      gap: 0.5rem;
       font-family: var(--mono);
       font-weight: 400;
       letter-spacing: 0.1em;
       text-transform: uppercase;
       text-decoration: none;
-      border: none;
       cursor: pointer;
       border-radius: 2px;
       -webkit-transition: background 0.2s, color 0.2s;
       transition: background 0.2s, color 0.2s;
     }
 
-    .btn-solid { font-size: 0.72rem; color: var(--bg); background: var(--text); padding: 0.6rem 1rem; white-space: nowrap; }
-    .btn-solid:hover { background: var(--muted); }
-    .btn-outline { font-size: 0.72rem; color: var(--text); background: transparent; border: 1px solid var(--line); padding: 0.6rem 1rem; white-space: nowrap; }
-    .btn-outline:hover { border-color: var(--muted); color: var(--muted); }
-    .btn svg { width: 13px; height: 13px; fill: currentColor; -webkit-flex-shrink: 0; flex-shrink: 0; }
-    .btn-hint { font-size: 0.58rem; letter-spacing: 0.12em; color: var(--muted); }
+    .solid   { font-size: 0.72rem; color: var(--bg); background: var(--text); border: none; padding: 0.6rem 1rem; white-space: nowrap; }
+    .outline { font-size: 0.72rem; color: var(--text); background: transparent; border: 1px solid var(--line); padding: 0.6rem 1rem; white-space: nowrap; }
+    .hint    { font-size: 0.58rem; letter-spacing: 0.12em; color: var(--muted); }
+    .solid:hover   { background: var(--muted); }
+    .outline:hover { border-color: var(--muted); color: var(--muted); }
 
-    /* ── Nav buttons ── */
-    .nav-buttons { display: -webkit-flex; display: flex; gap: 0.8rem; }
+    /* ── Nav buttons (cartão) ── */
+    .nav-row { display: flex; gap: 0.8rem; }
+
     .nav-btn {
-      -webkit-flex: 1;
       flex: 1;
       font-family: var(--mono);
       font-size: 0.7rem;
@@ -184,68 +129,76 @@
       transition: background 0.2s, color 0.2s;
     }
 
-    .nav-btn.primary { background: var(--text); color: var(--bg); }
-    .nav-btn:hover { background: var(--text); color: var(--bg); }
+    .nav-btn.prim { background: var(--text); color: var(--bg); }
+
+    /* ── Back button ── */
+    .back-btn {
+      display: block;
+      background: none;
+      border: none;
+      font-family: var(--mono);
+      font-size: 0.62rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--muted);
+      cursor: pointer;
+      padding: 0;
+      margin-bottom: 3rem;
+      text-align: left;
+    }
 
     /* ── Agendar ── */
-    .agenda-section { margin-bottom: 2.8rem; }
-    .agenda-section-title { font-size: 0.62rem; letter-spacing: 0.22em; text-transform: uppercase; color: var(--muted); margin-bottom: 1rem; display: block; }
-    .msg-bubble { background: var(--line); border-left: 2px solid var(--muted); padding: 1rem 1.2rem; border-radius: 0 2px 2px 0; font-size: 0.82rem; line-height: 1.65; color: var(--text); margin-bottom: 1.2rem; }
-    .agenda-sep { width: 100%; height: 1px; background: var(--line); margin: 2.5rem 0; }
+    .ag-bloco { margin-bottom: 2.8rem; }
+    .ag-titulo { font-size: 0.62rem; letter-spacing: 0.22em; text-transform: uppercase; color: var(--muted); display: block; margin-bottom: 1rem; }
+    .msg-box { background: var(--line); border-left: 2px solid var(--muted); padding: 1rem 1.2rem; border-radius: 0 2px 2px 0; font-size: 0.82rem; line-height: 1.65; color: var(--text); margin-bottom: 1.2rem; }
+    .sep { height: 1px; background: var(--line); margin: 2.5rem 0; }
 
     /* ── Blog ── */
-    .blog-title { font-size: 0.62rem; letter-spacing: 0.22em; text-transform: uppercase; color: var(--muted); margin-bottom: 1.2rem; }
-    .tag-filters { display: -webkit-flex; display: flex; -webkit-flex-wrap: wrap; flex-wrap: wrap; gap: 0.5rem; margin-bottom: 2.5rem; }
-    .tag-btn { font-family: var(--mono); font-size: 0.6rem; letter-spacing: 0.18em; text-transform: uppercase; background: none; border: 1px solid var(--line); color: var(--muted); padding: 0.25rem 0.7rem; border-radius: 1px; cursor: pointer; }
-    .tag-btn.active { background: var(--text); border-color: var(--text); color: var(--bg); }
-
-    .loading { font-size: 0.68rem; letter-spacing: 0.14em; color: var(--muted); padding: 2rem 0; }
+    .ftitulo { font-size: 0.62rem; letter-spacing: 0.22em; text-transform: uppercase; color: var(--muted); margin-bottom: 1.2rem; }
+    .tags { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-bottom: 2.5rem; }
+    .tag { font-family: var(--mono); font-size: 0.6rem; letter-spacing: 0.18em; text-transform: uppercase; background: none; border: 1px solid var(--line); color: var(--muted); padding: 0.25rem 0.7rem; border-radius: 1px; cursor: pointer; }
+    .tag.on { background: var(--text); border-color: var(--text); color: var(--bg); }
+    .loading { font-size: 0.68rem; color: var(--muted); padding: 2rem 0; }
 
     /* ── Texto ── */
-    .texto-item { border-top: 1px solid var(--line); padding: 2rem 0; }
-    .texto-meta { display: -webkit-flex; display: flex; -webkit-align-items: baseline; align-items: baseline; gap: 1rem; margin-bottom: 0.8rem; }
-    .texto-data { font-size: 0.6rem; letter-spacing: 0.16em; color: var(--muted); }
-    .texto-cat { font-size: 0.58rem; letter-spacing: 0.18em; text-transform: uppercase; color: var(--muted); border: 1px solid var(--line); padding: 0.12rem 0.45rem; border-radius: 1px; }
-    .texto-titulo { font-family: var(--serif); font-size: 1.05rem; font-weight: 400; color: var(--text); margin-bottom: 0.8rem; line-height: 1.4; }
-    .texto-resumo { font-family: var(--serif); font-size: 0.86rem; font-weight: 300; color: var(--muted); line-height: 1.75; margin-bottom: 1rem; }
-
-    .toggle-btn { background: none; border: none; font-family: var(--mono); font-size: 0.6rem; letter-spacing: 0.18em; text-transform: uppercase; color: var(--muted); cursor: pointer; padding: 0; display: -webkit-flex; display: flex; -webkit-align-items: center; align-items: center; gap: 0.4rem; }
-    .toggle-arrow { display: inline-block; -webkit-transition: -webkit-transform 0.3s; transition: transform 0.3s; }
-    .toggle-btn.open .toggle-arrow { -webkit-transform: rotate(90deg); transform: rotate(90deg); }
-
-    .texto-body { display: none; margin-top: 1.6rem; padding-top: 1.6rem; border-top: 1px solid var(--line); }
-    .texto-body.visible { display: block; }
-    .texto-body p { font-family: var(--serif); font-size: 0.93rem; font-weight: 300; line-height: 1.85; color: var(--text); margin-bottom: 1.3rem; }
-    .texto-body p:last-child { margin-bottom: 0; }
+    .texto { border-top: 1px solid var(--line); padding: 2rem 0; }
+    .tmeta { display: flex; align-items: baseline; gap: 1rem; margin-bottom: 0.8rem; }
+    .tdata { font-size: 0.6rem; letter-spacing: 0.16em; color: var(--muted); }
+    .tcat  { font-size: 0.58rem; letter-spacing: 0.18em; text-transform: uppercase; color: var(--muted); border: 1px solid var(--line); padding: 0.12rem 0.45rem; border-radius: 1px; }
+    .ttitulo { font-family: var(--serif); font-size: 1.05rem; font-weight: 400; color: var(--text); margin-bottom: 0.8rem; line-height: 1.4; }
+    .tresumo { font-family: var(--serif); font-size: 0.86rem; font-weight: 300; color: var(--muted); line-height: 1.75; margin-bottom: 1rem; }
+    .ler-btn { background: none; border: none; font-family: var(--mono); font-size: 0.6rem; letter-spacing: 0.18em; text-transform: uppercase; color: var(--muted); cursor: pointer; padding: 0; display: flex; align-items: center; gap: 0.4rem; }
+    .arr { display: inline-block; -webkit-transition: -webkit-transform 0.3s; transition: transform 0.3s; }
+    .ler-btn.open .arr { -webkit-transform: rotate(90deg); transform: rotate(90deg); }
+    .tcorpo { display: none; margin-top: 1.6rem; padding-top: 1.6rem; border-top: 1px solid var(--line); }
+    .tcorpo p { font-family: var(--serif); font-size: 0.93rem; font-weight: 300; line-height: 1.85; color: var(--text); margin-bottom: 1.3rem; }
+    .tcorpo p:last-child { margin-bottom: 0; }
 
     /* ── Comentário ── */
-    .comment-section { margin-top: 2rem; padding-top: 1.8rem; border-top: 1px solid var(--line); }
-    .comment-toggle { background: none; border: 1px solid var(--line); font-family: var(--mono); font-size: 0.62rem; letter-spacing: 0.18em; text-transform: uppercase; color: var(--muted); cursor: pointer; padding: 0.5rem 0.9rem; border-radius: 2px; }
-    .comment-form { display: none; margin-top: 1.4rem; -webkit-flex-direction: column; flex-direction: column; gap: 1rem; }
-    .comment-form.visible { display: -webkit-flex; display: flex; }
-    .form-field { display: -webkit-flex; display: flex; -webkit-flex-direction: column; flex-direction: column; gap: 0.4rem; }
-    .form-label { font-size: 0.6rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--muted); }
-    .form-input, .form-textarea { font-family: var(--mono); font-size: 0.82rem; font-weight: 300; color: var(--text); background: transparent; border: 1px solid var(--line); border-radius: 2px; padding: 0.65rem 0.8rem; outline: none; width: 100%; -webkit-appearance: none; appearance: none; }
-    .form-textarea { resize: none; height: 90px; line-height: 1.6; }
-    .char-counter { font-size: 0.58rem; letter-spacing: 0.12em; color: var(--muted); text-align: right; }
-    .char-counter.over { color: #c0392b; }
-    .form-submit { font-family: var(--mono); font-size: 0.68rem; letter-spacing: 0.16em; text-transform: uppercase; color: var(--bg); background: var(--text); border: none; padding: 0.7rem 1.2rem; border-radius: 2px; cursor: pointer; -webkit-align-self: flex-start; align-self: flex-start; }
-    .form-submit:disabled { background: var(--line); cursor: not-allowed; }
-    .form-status { font-size: 0.68rem; letter-spacing: 0.1em; color: var(--muted); display: none; margin-top: 0.5rem; }
-    .form-status.visible { display: block; }
+    .csec { margin-top: 2rem; padding-top: 1.8rem; border-top: 1px solid var(--line); }
+    .cbtn { background: none; border: 1px solid var(--line); font-family: var(--mono); font-size: 0.62rem; letter-spacing: 0.18em; text-transform: uppercase; color: var(--muted); cursor: pointer; padding: 0.5rem 0.9rem; border-radius: 2px; }
+    .cform { display: none; flex-direction: column; gap: 1rem; margin-top: 1.4rem; }
+    .cform.aberto { display: flex; }
+    .flbl { font-size: 0.6rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--muted); display: block; margin-bottom: 0.4rem; }
+    .finp, .ftxt { font-family: var(--mono); font-size: 0.82rem; color: var(--text); background: transparent; border: 1px solid var(--line); border-radius: 2px; padding: 0.65rem 0.8rem; width: 100%; outline: none; -webkit-appearance: none; }
+    .ftxt { resize: none; height: 90px; line-height: 1.6; }
+    .fct { font-size: 0.58rem; color: var(--muted); text-align: right; margin-top: 0.3rem; }
+    .fct.over { color: #c0392b; }
+    .fenv { font-family: var(--mono); font-size: 0.68rem; letter-spacing: 0.16em; text-transform: uppercase; color: var(--bg); background: var(--text); border: none; padding: 0.7rem 1.2rem; border-radius: 2px; cursor: pointer; align-self: flex-start; }
+    .fenv:disabled { background: var(--line); cursor: not-allowed; }
+    .fmsg { font-size: 0.68rem; color: var(--muted); display: none; margin-top: 0.5rem; }
 
-    .no-results { font-size: 0.72rem; color: var(--muted); padding: 2rem 0; border-top: 1px solid var(--line); }
+    .nenhum { font-size: 0.72rem; color: var(--muted); padding: 2rem 0; border-top: 1px solid var(--line); }
+    .pfooter { font-size: 0.58rem; letter-spacing: 0.16em; color: var(--line); text-transform: uppercase; margin-top: 3rem; }
 
-    .panel-footer { font-size: 0.58rem; letter-spacing: 0.16em; color: var(--line); text-transform: uppercase; margin-top: 3rem; }
-    .wa-svg { width: 13px; height: 13px; fill: currentColor; flex-shrink: 0; }
+    .wsv { width: 13px; height: 13px; fill: currentColor; flex-shrink: 0; vertical-align: middle; }
   </style>
 
 </head>
 <body>
-
 <div class="stage">
 
-  <!-- PANEL 1 — CARTÃO -->
+  <!-- CARTÃO -->
 
   <div class="panel" id="panel-cartao">
     <div class="panel-inner">
@@ -254,386 +207,328 @@
       <p class="role">Psicanalista</p>
       <div class="divider"></div>
       <div class="contact">
-        <div class="contact-item">
-          <span class="contact-label">local</span>
-          <span class="contact-value">Florianópolis, SC</span>
-        </div>
-        <div class="contact-item">
-          <span class="contact-label">atendimento</span>
-          <span class="contact-value">presencial e online</span>
-        </div>
-        <div class="contact-item">
-          <span class="contact-label">contato</span>
-          <a class="contact-value" href="tel:+5548988717486">(48) 98871-7486</a>
-        </div>
+        <div class="ci"><span class="cl">local</span><span class="cv">Florianópolis, SC</span></div>
+        <div class="ci"><span class="cl">atendimento</span><span class="cv">presencial e online</span></div>
+        <div class="ci"><span class="cl">contato</span><a class="cv" href="tel:+5548988717486">(48) 98871-7486</a></div>
       </div>
       <div class="wa-block">
-        <span class="wa-label">WhatsApp</span>
+        <span class="wa-lbl">WhatsApp</span>
         <div class="wa-row">
-          <a href="https://wa.me/5548988717486" target="_blank" rel="noopener">
-            <div class="qr-wrap"><div id="qr-cartao"></div></div>
-          </a>
-          <div class="wa-chat-block">
-            <a class="btn btn-solid" href="https://wa.me/5548988717486" target="_blank" rel="noopener">
-              <svg class="wa-svg" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+          <a href="https://wa.me/5548988717486" target="_blank" rel="noopener"><div class="qr-box"><div id="qr1"></div></div></a>
+          <div class="wa-col">
+            <a class="btn solid" href="https://wa.me/5548988717486" target="_blank" rel="noopener">
+              <svg class="wsv" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
               iniciar conversa
             </a>
-            <span class="btn-hint">escaneie ou toque</span>
+            <span class="hint">escaneie ou toque</span>
           </div>
         </div>
       </div>
-      <div class="nav-buttons">
-        <button class="nav-btn primary" id="btn-agendar">Agendar</button>
-        <button class="nav-btn" id="btn-blog">Blog</button>
+      <div class="nav-row">
+        <button class="nav-btn prim" id="nav-age">Agendar</button>
+        <button class="nav-btn"      id="nav-blog">Blog</button>
       </div>
-      <div class="panel-footer" style="margin-top:2.5rem;">Florianópolis · SC · Brasil</div>
+      <div class="pfooter" style="margin-top:2.5rem">Florianópolis · SC · Brasil</div>
     </div>
   </div>
 
-  <!-- PANEL 2 — AGENDAR -->
+  <!-- AGENDAR -->
 
   <div class="panel" id="panel-agendar">
     <div class="panel-inner">
-      <button class="back-btn" id="back-agendar">voltar</button>
+      <button class="back-btn" id="back-age">‹ voltar</button>
       <div class="sigil">$ ̶</div>
       <h1>Agendar</h1>
       <p class="role">Horário de atendimento</p>
       <div class="divider"></div>
-      <div class="agenda-section">
-        <span class="agenda-section-title">mensagem pronta</span>
-        <div class="msg-bubble">Gostaria de marcar um horário de atendimento, qual sua disponibilidade?</div>
+      <div class="ag-bloco">
+        <span class="ag-titulo">mensagem pronta</span>
+        <div class="msg-box">Gostaria de marcar um horário de atendimento, qual sua disponibilidade?</div>
         <div class="wa-row">
-          <a href="https://wa.me/5548988717486?text=Gostaria%20de%20marcar%20um%20hor%C3%A1rio%20de%20atendimento%2C%20qual%20sua%20disponibilidade%3F" target="_blank" rel="noopener">
-            <div class="qr-wrap"><div id="qr-agendar"></div></div>
-          </a>
-          <div class="wa-chat-block">
-            <a class="btn btn-solid" href="https://wa.me/5548988717486?text=Gostaria%20de%20marcar%20um%20hor%C3%A1rio%20de%20atendimento%2C%20qual%20sua%20disponibilidade%3F" target="_blank" rel="noopener">
-              <svg class="wa-svg" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+          <a id="link-age" href="#" target="_blank" rel="noopener"><div class="qr-box"><div id="qr2"></div></div></a>
+          <div class="wa-col">
+            <a class="btn solid" id="btn-age" href="#" target="_blank" rel="noopener">
+              <svg class="wsv" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
               enviar mensagem
             </a>
-            <span class="btn-hint">escaneie ou toque</span>
+            <span class="hint">escaneie ou toque</span>
           </div>
         </div>
       </div>
-      <div class="agenda-sep"></div>
-      <div class="agenda-section">
-        <span class="agenda-section-title">conversa livre</span>
+      <div class="sep"></div>
+      <div class="ag-bloco">
+        <span class="ag-titulo">conversa livre</span>
         <div class="wa-row">
-          <a href="https://wa.me/5548988717486" target="_blank" rel="noopener">
-            <div class="qr-wrap"><div id="qr-livre"></div></div>
-          </a>
-          <div class="wa-chat-block">
-            <a class="btn btn-outline" href="https://wa.me/5548988717486" target="_blank" rel="noopener">
-              <svg class="wa-svg" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+          <a href="https://wa.me/5548988717486" target="_blank" rel="noopener"><div class="qr-box"><div id="qr3"></div></div></a>
+          <div class="wa-col">
+            <a class="btn outline" href="https://wa.me/5548988717486" target="_blank" rel="noopener">
+              <svg class="wsv" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
               abrir chat
             </a>
-            <span class="btn-hint">escaneie ou toque</span>
+            <span class="hint">escaneie ou toque</span>
           </div>
         </div>
       </div>
-      <div class="panel-footer">Ruberval Silva · Psicanalista</div>
+      <div class="pfooter">Ruberval Silva · Psicanalista</div>
     </div>
   </div>
 
-  <!-- PANEL 3 — BLOG -->
+  <!-- BLOG -->
 
   <div class="panel" id="panel-blog">
     <div class="panel-inner">
-      <button class="back-btn" id="back-blog">voltar</button>
+      <button class="back-btn" id="back-blog">‹ voltar</button>
       <div class="sigil">$ ̶</div>
       <h1>Textos</h1>
       <p class="role">Psicanálise · clínica · teoria</p>
       <div class="divider"></div>
-      <div class="blog-title">filtrar por</div>
-      <div class="tag-filters" id="tag-filters">
-        <button class="tag-btn active" data-tag="todos">todos</button>
-        <button class="tag-btn" data-tag="clínica">clínica</button>
-        <button class="tag-btn" data-tag="teoria">teoria</button>
-        <button class="tag-btn" data-tag="ensaio">ensaio</button>
+      <div class="ftitulo">filtrar por</div>
+      <div class="tags" id="tags">
+        <button class="tag on" data-tag="todos">todos</button>
+        <button class="tag" data-tag="clínica">clínica</button>
+        <button class="tag" data-tag="teoria">teoria</button>
+        <button class="tag" data-tag="ensaio">ensaio</button>
       </div>
-      <div id="lista-textos"><div class="loading">carregando textos…</div></div>
-      <div class="panel-footer">Ruberval Silva · Psicanalista</div>
+      <div id="lista"><div class="loading">carregando textos…</div></div>
+      <div class="pfooter">Ruberval Silva · Psicanalista</div>
     </div>
   </div>
 
 </div><!-- .stage -->
 
 <script>
-  /* ── QR Codes ── */
-  var WA     = "https://wa.me/5548988717486";
-  var WA_MSG = WA + "?text=" + encodeURIComponent("Gostaria de marcar um horário de atendimento, qual sua disponibilidade?");
+var WA     = "https://wa.me/5548988717486";
+var WA_AGE = WA + "?text=" + encodeURIComponent("Gostaria de marcar um horário de atendimento, qual sua disponibilidade?");
+var FORMSPREE_ID = "mwvaeogg";
+var ARQUIVOS = ["texto_1a.txt", "texto_2.txt", "texto_3.txt"];
 
-  function makeQR(id, url, size) {
+/* ── QR Codes ── */
+function makeQR(id, url) {
+  try {
     new QRCode(document.getElementById(id), {
-      text: url, width: size, height: size,
+      text: url, width: 96, height: 96,
       colorDark: "#f0ece4", colorLight: "#0a0a0a",
       correctLevel: QRCode.CorrectLevel.M
     });
-  }
-
-  makeQR("qr-cartao",  WA,     90);
-  makeQR("qr-agendar", WA_MSG, 90);
-  makeQR("qr-livre",   WA,     90);
-
-  /* ── Slide engine — sem classList.replace ── */
-  var panels = {
-    cartao:  document.getElementById("panel-cartao"),
-    agendar: document.getElementById("panel-agendar"),
-    blog:    document.getElementById("panel-blog")
-  };
-
-  function setTranslate(el, x) {
-    el.style.webkitTransform = "translateX(" + x + "%)";
-    el.style.transform       = "translateX(" + x + "%)";
-  }
-
-  function goTo(target) {
-    Object.keys(panels).forEach(function(key) {
-      setTranslate(panels[key], key === target ? 0 : 100);
-      panels[key].scrollTop = 0;
-    });
-  }
-
-  function goBack() {
-    goTo("cartao");
-  }
-
-  document.getElementById("btn-agendar").addEventListener("click", function() { goTo("agendar"); });
-  document.getElementById("btn-blog").addEventListener("click",    function() { goTo("blog"); });
-  document.getElementById("back-agendar").addEventListener("click", goBack);
-  document.getElementById("back-blog").addEventListener("click",    goBack);
-
-  /* ── Parse .txt ── */
-  function parseTexto(raw) {
-    var L = raw.split("\n");
-    return {
-      titulo:    (L[0] || "").trim(),
-      categoria: (L[1] || "").trim().toLowerCase(),
-      data:      (L[2] || "").trim(),
-      dataLabel: (L[3] || "").trim(),
-      resumo:    (L[4] || "").trim(),
-      corpo:     L.slice(5).join("\n").trim()
-    };
-  }
-
-  /* ── Comentário ── */
-  function toggleComentario(formId, btnId) {
-    var form = document.getElementById(formId);
-    var btn  = document.getElementById(btnId);
-    var open = form.style.display === "flex" || form.classList.contains("visible");
-    if (open) {
-      form.style.display = "none";
-      form.classList.remove("visible");
-      btn.textContent = "comente esse texto";
-    } else {
-      form.style.display = "flex";
-      form.classList.add("visible");
-      btn.textContent = "fechar";
-    }
-  }
-
-  function atualizarContador(areaId, countId, max) {
-    var len = document.getElementById(areaId).value.length;
-    var el  = document.getElementById(countId);
-    el.textContent = len + " / " + max;
-    if (len >= max) { el.classList.add("over"); } else { el.classList.remove("over"); }
-  }
-
-  function enviarComentario(formId, statusId, submitId) {
-    var form    = document.getElementById(formId);
-    var status  = document.getElementById(statusId);
-    var submit  = document.getElementById(submitId);
-    var contato = form.querySelector("[name='contato']").value.trim();
-    var msg     = form.querySelector("[name='comentario']").value.trim();
-    var titulo  = form.querySelector("[name='texto']").value;
-    if (!contato || !msg) return;
-
-    submit.disabled    = true;
-    submit.textContent = "enviando…";
-    status.style.display = "none";
-    status.classList.remove("visible");
-
-    var xhr = new XMLHttpRequest();
-    xhr.open("POST", "https://formspree.io/f/" + FORMSPREE_ID, true);
-    xhr.setRequestHeader("Content-Type", "application/json");
-    xhr.setRequestHeader("Accept", "application/json");
-    xhr.onload = function() {
-      if (xhr.status === 200) {
-        status.textContent = "comentário enviado.";
-        status.style.display = "block";
-        status.classList.add("visible");
-        form.querySelector("[name='contato']").value    = "";
-        form.querySelector("[name='comentario']").value = "";
-        submit.textContent = "enviado";
-      } else {
-        status.textContent = "erro ao enviar. tente novamente.";
-        status.style.display = "block";
-        submit.disabled    = false;
-        submit.textContent = "enviar";
-      }
-    };
-    xhr.onerror = function() {
-      status.textContent = "erro ao enviar. tente novamente.";
-      status.style.display = "block";
-      submit.disabled    = false;
-      submit.textContent = "enviar";
-    };
-    xhr.send(JSON.stringify({ contato: contato, comentario: msg, texto: titulo }));
-  }
-
-  function criarForm(titulo, uid) {
-    var MAX = 216;
-    return '<div class="comment-section">' +
-      '<button class="comment-toggle" id="ftoggle-' + uid + '" ' +
-              'onclick="toggleComentario(\'form-' + uid + '\',\'ftoggle-' + uid + '\')">' +
-        'comente esse texto' +
-      '</button>' +
-      '<div class="comment-form" id="form-' + uid + '" style="display:none">' +
-        '<div class="form-field">' +
-          '<label class="form-label">seu contato</label>' +
-          '<input class="form-input" name="contato" type="text" placeholder="nome, e-mail ou telefone" />' +
-        '</div>' +
-        '<input type="hidden" name="texto" value="' + titulo + '" />' +
-        '<div class="form-field">' +
-          '<label class="form-label">comentário</label>' +
-          '<textarea class="form-textarea" name="comentario" id="area-' + uid + '" maxlength="' + MAX + '" ' +
-            'placeholder="escreva aqui…" ' +
-            'oninput="atualizarContador(\'area-' + uid + '\',\'count-' + uid + '\',' + MAX + ')"></textarea>' +
-
-```
-      '<span class="char-counter" id="count-' + uid + '">0 / ' + MAX + '</span>' +
-    '</div>' +
-    '<button class="form-submit" id="submit-' + uid + '" ' +
-            'onclick="enviarComentario(\'form-' + uid + '\',\'status-' + uid + '\',\'submit-' + uid + '\')">' +
-      'enviar' +
-    '</button>' +
-    '<span class="form-status" id="status-' + uid + '" style="display:none"></span>' +
-  '</div>' +
-'</div>';
-```
-
+  } catch(e) {}
 }
 
-/* ── Carregar textos ── */
-var TEXTOS_CARREGADOS = [];
-var activeTag = “todos”;
+window.addEventListener("load", function() {
+  makeQR("qr1", WA);
+  makeQR("qr2", WA_AGE);
+  makeQR("qr3", WA);
+  document.getElementById("link-age").href = WA_AGE;
+  document.getElementById("btn-age").href  = WA_AGE;
+});
 
-function carregarTextos() {
+/* ── Navegação ── */
+function ir(id) {
+  var ps = document.querySelectorAll(".panel");
+  for (var i = 0; i < ps.length; i++) {
+    ps[i].style.webkitTransform = "translateX(100%)";
+    ps[i].style.transform       = "translateX(100%)";
+  }
+  var p = document.getElementById(id);
+  p.style.webkitTransform = "translateX(0)";
+  p.style.transform       = "translateX(0)";
+  p.scrollTop = 0;
+}
+
+/* Inicializa cartão visível */
+document.getElementById("panel-cartao").style.webkitTransform = "translateX(0)";
+document.getElementById("panel-cartao").style.transform       = "translateX(0)";
+
+document.getElementById("nav-age").onclick  = function() { ir("panel-agendar"); };
+document.getElementById("nav-blog").onclick = function() { ir("panel-blog"); };
+document.getElementById("back-age").onclick = function() { ir("panel-cartao"); };
+document.getElementById("back-blog").onclick = function() { ir("panel-cartao"); };
+
+/* ── Tags ── */
+var tagAtiva = "todos";
+var textos   = [];
+
+document.getElementById("tags").addEventListener("click", function(e) {
+  if (!e.target.getAttribute("data-tag")) return;
+  var all = document.querySelectorAll(".tag");
+  for (var i = 0; i < all.length; i++) all[i].classList.remove("on");
+  e.target.classList.add("on");
+  tagAtiva = e.target.getAttribute("data-tag");
+  render(tagAtiva);
+});
+
+/* ── Carregar .txt ── */
 var pendentes = ARQUIVOS.length;
 var resultados = [];
 
-```
-ARQUIVOS.forEach(function(nome, idx) {
+ARQUIVOS.forEach(function(nome) {
   var xhr = new XMLHttpRequest();
   xhr.open("GET", nome, true);
-  xhr.onload = function() {
+  xhr.onreadystatechange = function() {
+    if (xhr.readyState !== 4) return;
     if (xhr.status === 200) {
-      var t = parseTexto(xhr.responseText);
+      var t = parse(xhr.responseText);
       if (t.titulo) resultados.push(t);
     }
     pendentes--;
     if (pendentes === 0) {
-      TEXTOS_CARREGADOS = resultados.sort(function(a, b) {
-        return b.data.localeCompare(a.data);
+      textos = resultados.sort(function(a, b) {
+        if (b.data < a.data) return -1;
+        if (b.data > a.data) return 1;
+        return 0;
       });
-      renderTextos("todos");
-    }
-  };
-  xhr.onerror = function() {
-    pendentes--;
-    if (pendentes === 0) {
-      TEXTOS_CARREGADOS = resultados.sort(function(a, b) {
-        return b.data.localeCompare(a.data);
-      });
-      renderTextos("todos");
+      render("todos");
     }
   };
   xhr.send();
 });
-```
 
+function parse(raw) {
+  var L = raw.split("\n");
+  return {
+    titulo:    (L[0] || "").trim(),
+    categoria: (L[1] || "").trim().toLowerCase(),
+    data:      (L[2] || "").trim(),
+    dataLabel: (L[3] || "").trim(),
+    resumo:    (L[4] || "").trim(),
+    corpo:     L.slice(5).join("\n").trim()
+  };
 }
 
-function renderTextos(tag) {
-var lista    = document.getElementById(“lista-textos”);
-var filtered = tag === “todos”
-? TEXTOS_CARREGADOS
-: TEXTOS_CARREGADOS.filter(function(t) { return t.categoria === tag; });
+/* ── Render ── */
+function render(tag) {
+  var lista = document.getElementById("lista");
+  var filt  = tag === "todos"
+    ? textos
+    : textos.filter(function(t) { return t.categoria === tag; });
 
-```
-lista.innerHTML = "";
+  if (!filt.length) {
+    lista.innerHTML = '<div class="nenhum">nenhum texto nesta categoria.</div>';
+    return;
+  }
 
-if (!filtered.length) {
-  lista.innerHTML = '<div class="no-results">nenhum texto nesta categoria.</div>';
-  return;
+  var html = "";
+  filt.forEach(function(t, i) {
+    var uid = tag + "-" + i;
+    var ps  = t.corpo.split(/\n\n+/)
+      .map(function(p) { return p.replace(/\n/g, " ").trim(); })
+      .filter(function(p) { return p.length > 0; })
+      .map(function(p)    { return "<p>" + p + "</p>"; })
+      .join("");
+
+    html +=
+      '<article class="texto">' +
+        '<div class="tmeta">' +
+          '<span class="tdata">' + t.dataLabel + '</span>' +
+          '<span class="tcat">'  + t.categoria + '</span>' +
+        '</div>' +
+        '<h2 class="ttitulo">'  + t.titulo  + '</h2>' +
+        '<p class="tresumo">'   + t.resumo  + '</p>' +
+        '<button class="ler-btn" id="lbtn-' + uid + '" onclick="lerToggle(\'' + uid + '\')">' +
+          '<span class="arr">›</span> <span id="llbl-' + uid + '">ler</span>' +
+        '</button>' +
+        '<div class="tcorpo" id="corpo-' + uid + '">' +
+          ps +
+          formHTML(t.titulo, uid) +
+        '</div>' +
+      '</article>';
+  });
+
+  lista.innerHTML = html;
 }
 
-filtered.forEach(function(t, i) {
-  var uid = tag + "-" + i;
-  var ps  = t.corpo.split(/\n\n+/)
-    .map(function(p) { return p.replace(/\n/g, " ").trim(); })
-    .filter(function(p) { return p.length > 0; })
-    .map(function(p)    { return "<p>" + p + "</p>"; })
-    .join("");
-
-  var art = document.createElement("article");
-  art.className = "texto-item";
-  art.innerHTML =
-    '<div class="texto-meta">' +
-      '<span class="texto-data">' + t.dataLabel + '</span>' +
-      '<span class="texto-cat">'  + t.categoria + '</span>' +
-    '</div>' +
-    '<h2 class="texto-titulo">'  + t.titulo  + '</h2>' +
-    '<p class="texto-resumo">'   + t.resumo  + '</p>' +
-    '<button class="toggle-btn" data-uid="' + uid + '">' +
-      '<span class="toggle-arrow">›</span>' +
-      '<span class="toggle-label">ler</span>' +
-    '</button>' +
-    '<div class="texto-body" id="body-' + uid + '">' + ps + criarForm(t.titulo, uid) + '</div>';
-
-  lista.appendChild(art);
-});
-```
-
+function lerToggle(uid) {
+  var corpo = document.getElementById("corpo-" + uid);
+  var lbl   = document.getElementById("llbl-"  + uid);
+  var btn   = document.getElementById("lbtn-"  + uid);
+  if (corpo.style.display === "block") {
+    corpo.style.display = "none";
+    lbl.textContent = "ler";
+    btn.classList.remove("open");
+  } else {
+    corpo.style.display = "block";
+    lbl.textContent = "fechar";
+    btn.classList.add("open");
+  }
 }
 
-/* ── Tag filter ── */
-document.getElementById(“tag-filters”).addEventListener(“click”, function(e) {
-var btn = e.target;
-while (btn && !btn.classList.contains(“tag-btn”)) btn = btn.parentNode;
-if (!btn) return;
-var btns = document.querySelectorAll(”.tag-btn”);
-for (var i = 0; i < btns.length; i++) btns[i].classList.remove(“active”);
-btn.classList.add(“active”);
-activeTag = btn.getAttribute(“data-tag”);
-renderTextos(activeTag);
-});
+/* ── Formulário ── */
+function formHTML(titulo, uid) {
+  var MAX = 216;
+  return '<div class="csec">' +
+    '<button class="cbtn" id="cbtn-' + uid + '" onclick="toggleForm(\'' + uid + '\')">comente esse texto</button>' +
+    '<div class="cform" id="cform-' + uid + '">' +
+      '<div><label class="flbl">seu contato</label>' +
+        '<input class="finp" id="cinp-' + uid + '" type="text" placeholder="nome, e-mail ou telefone" /></div>' +
+      '<input type="hidden" id="ctxt-' + uid + '" value="' + titulo + '" />' +
+      '<div><label class="flbl">comentário</label>' +
+        '<textarea class="ftxt" id="carea-' + uid + '" maxlength="' + MAX + '" ' +
+          'placeholder="escreva aqui…" ' +
+          'oninput="contarChars(\'' + uid + '\',' + MAX + ')"></textarea>' +
 
-/* ── Toggle expand ── */
-document.getElementById(“lista-textos”).addEventListener(“click”, function(e) {
-var btn = e.target;
-while (btn && !btn.classList.contains(“toggle-btn”)) btn = btn.parentNode;
-if (!btn) return;
-var uid    = btn.getAttribute(“data-uid”);
-var body   = document.getElementById(“body-” + uid);
-var label  = btn.querySelector(”.toggle-label”);
-var arrow  = btn.querySelector(”.toggle-arrow”);
-var isOpen = body.classList.contains(“visible”);
-if (isOpen) {
-body.classList.remove(“visible”);
-body.style.display = “none”;
-btn.classList.remove(“open”);
-label.textContent = “ler”;
+```
+    '<div class="fct" id="cct-' + uid + '">0 / ' + MAX + '</div></div>' +
+  '<button class="fenv" id="cenv-' + uid + '" onclick="enviar(\'' + uid + '\')">enviar</button>' +
+  '<div class="fmsg" id="cmsg-' + uid + '"></div>' +
+'</div>' +
+```
+
+‘</div>’;
+}
+
+function toggleForm(uid) {
+var form = document.getElementById(“cform-” + uid);
+var btn  = document.getElementById(“cbtn-”  + uid);
+if (form.classList.contains(“aberto”)) {
+form.classList.remove(“aberto”);
+btn.textContent = “comente esse texto”;
 } else {
-body.classList.add(“visible”);
-body.style.display = “block”;
-btn.classList.add(“open”);
-label.textContent = “fechar”;
+form.classList.add(“aberto”);
+btn.textContent = “fechar”;
 }
-});
+}
 
-/* ── Init ── */
-carregarTextos();
+function contarChars(uid, max) {
+var len = document.getElementById(“carea-” + uid).value.length;
+var el  = document.getElementById(“cct-”   + uid);
+el.textContent = len + “ / “ + max;
+if (len >= max) el.classList.add(“over”);
+else            el.classList.remove(“over”);
+}
+
+function enviar(uid) {
+var contato = document.getElementById(“cinp-”  + uid).value.trim();
+var msg     = document.getElementById(“carea-” + uid).value.trim();
+var titulo  = document.getElementById(“ctxt-”  + uid).value;
+var envBtn  = document.getElementById(“cenv-”  + uid);
+var msgEl   = document.getElementById(“cmsg-”  + uid);
+if (!contato || !msg) return;
+
+envBtn.disabled    = true;
+envBtn.textContent = “enviando…”;
+msgEl.style.display = “none”;
+
+var xhr = new XMLHttpRequest();
+xhr.open(“POST”, “https://formspree.io/f/” + FORMSPREE_ID, true);
+xhr.setRequestHeader(“Content-Type”,  “application/json”);
+xhr.setRequestHeader(“Accept”,        “application/json”);
+xhr.onreadystatechange = function() {
+if (xhr.readyState !== 4) return;
+if (xhr.status === 200) {
+msgEl.textContent    = “comentário enviado.”;
+msgEl.style.display  = “block”;
+envBtn.textContent   = “enviado”;
+document.getElementById(“cinp-”  + uid).value = “”;
+document.getElementById(“carea-” + uid).value = “”;
+document.getElementById(“cct-”   + uid).textContent = “0 / 216”;
+} else {
+msgEl.textContent   = “erro ao enviar. tente novamente.”;
+msgEl.style.display = “block”;
+envBtn.disabled     = false;
+envBtn.textContent  = “enviar”;
+}
+};
+xhr.send(JSON.stringify({ contato: contato, comentario: msg, texto: titulo }));
+}
 </script>
 
 </body>
