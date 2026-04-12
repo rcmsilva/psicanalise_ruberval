@@ -277,7 +277,7 @@ function render(tag) {
         <div class="csec">
           <button class="cbtn" onclick="toggleForm('f-${i}')">comentar</button>
           <div class="cform" id="f-${i}">
-            <input class="finp" id="cont-${i}" placeholder="seu contato" />
+            <input class="finp" id="cont-${i}" placeholder="e-mail" />
             <textarea class="ftxt" id="msg-${i}" placeholder="comentário"></textarea>
             <button class="fenv" onclick="enviar('${i}', '${t.titulo}')">enviar</button>
             <div class="fmsg" id="resp-${i}"></div>
@@ -299,16 +299,38 @@ function toggleForm(id) {
 }
 
 function enviar(idx, titulo) {
-  const cont = document.getElementById(`cont-${idx}`).value;
-  const msg = document.getElementById(`msg-${idx}`).value;
+  const campoContato = document.getElementById(`cont-${idx}`);
+  const campoMensagem = document.getElementById(`msg-${idx}`);
   const resp = document.getElementById(`resp-${idx}`);
   
+  const dados = { 
+    contato: campoContato.value, 
+    mensagem: campoMensagem.value, 
+    texto: titulo 
+  };
+
   fetch(`https://formspree.io/f/${FORMSPREE_ID}`, {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({ contato: cont, mensagem: msg, texto: titulo })
-  }).then(() => {
-    resp.innerText = "Enviado com sucesso.";
+    body: JSON.stringify(dados)
+  }).then(response => {
+    if (response.ok) {
+      // 1. Exibe a mensagem de sucesso
+      resp.innerText = "Enviado com sucesso.";
+      resp.style.display = "block";
+      
+      // 2. Limpa os campos de texto
+      campoContato.value = "";
+      campoMensagem.value = "";
+      
+      // 3. (Opcional) Esconde a mensagem de sucesso após 3 segundos
+      setTimeout(() => { resp.style.display = "none"; }, 3000);
+    } else {
+      resp.innerText = "Erro ao enviar. Tente novamente.";
+      resp.style.display = "block";
+    }
+  }).catch(() => {
+    resp.innerText = "Erro de conexão.";
     resp.style.display = "block";
   });
 }
