@@ -1,5 +1,4 @@
 <!DOCTYPE html>
-
 <html lang="pt-BR">
 <head>
   <meta charset="UTF-8" />
@@ -12,7 +11,6 @@
 
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-
     :root {
       --bg:    #f0ece4;
       --text:  #0a0a0a;
@@ -21,7 +19,6 @@
       --mono:  'IBM Plex Mono', monospace;
       --serif: 'IBM Plex Serif', serif;
     }
-
     html, body {
       height: 100%;
       overflow: hidden;
@@ -31,16 +28,7 @@
       color: var(--text);
       -webkit-font-smoothing: antialiased;
     }
-
-    /* ── Stage ── */
-    .stage {
-      position: relative;
-      width: 100%;
-      height: 100vh;
-      overflow: hidden;
-    }
-
-    /* ── Panels ── */
+    .stage { position: relative; width: 100%; height: 100vh; overflow: hidden; }
     .panel {
       position: absolute;
       top: 0; left: 0;
@@ -49,157 +37,77 @@
       background: var(--bg);
       overflow-y: auto;
       -webkit-overflow-scrolling: touch;
-      -webkit-transition: -webkit-transform 0.38s cubic-bezier(0.65,0,0.35,1);
       transition: transform 0.38s cubic-bezier(0.65,0,0.35,1);
     }
-
-    #panel-cartao  { -webkit-transform: translateX(0);    transform: translateX(0); }
-    #panel-agendar { -webkit-transform: translateX(100%); transform: translateX(100%); }
-    #panel-blog    { -webkit-transform: translateX(100%); transform: translateX(100%); }
-
-    .panel-inner {
-      max-width: 480px;
-      margin: 0 auto;
-      padding: 3.5rem 2rem 5rem;
-    }
-
-    /* ── Base ── */
+    #panel-cartao  { transform: translateX(0); }
+    #panel-agendar { transform: translateX(100%); }
+    #panel-blog    { transform: translateX(100%); }
+    .panel-inner { max-width: 480px; margin: 0 auto; padding: 3.5rem 2rem 5rem; }
     .sigil { font-size: 1rem; color: var(--muted); letter-spacing: 0.15em; margin-bottom: 2.8rem; user-select: none; }
-
-    h1 { font-size: clamp(1.35rem, 4vw, 1.7rem); font-weight: 400; letter-spacing: 0.04em; color: var(--text); margin-bottom: 0.45rem; }
-
+    h1 { font-size: clamp(1.35rem, 4vw, 1.7rem); font-weight: 400; letter-spacing: 0.04em; margin-bottom: 0.45rem; }
     .role { font-size: 0.7rem; letter-spacing: 0.22em; text-transform: uppercase; color: var(--muted); margin-bottom: 3rem; }
-
     .divider { width: 2rem; height: 1px; background: var(--line); margin-bottom: 3rem; }
-
-    /* ── Contact ── */
     .contact { display: flex; flex-direction: column; gap: 1.2rem; margin-bottom: 3rem; }
     .ci { display: flex; align-items: baseline; gap: 1.2rem; }
     .cl { font-size: 0.62rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--muted); min-width: 4.8rem; flex-shrink: 0; }
-    .cv { font-size: 0.88rem; color: var(--text); }
-    a.cv { text-decoration: none; color: var(--text); }
-
-    /* ── WA block ── */
+    .cv { font-size: 0.88rem; color: var(--text); text-decoration: none; }
     .wa-block { display: flex; flex-direction: column; gap: 0.9rem; margin-bottom: 3rem; }
     .wa-lbl { font-size: 0.62rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--muted); }
     .wa-row { display: flex; align-items: center; gap: 1.4rem; }
-    .qr-box { display: inline-block; padding: 8px; background: var(--text); border-radius: 2px; flex-shrink: 0; }
+    .qr-box { display: inline-block; padding: 8px; background: var(--text); border-radius: 2px; }
     .qr-box canvas, .qr-box img { display: block; }
     .wa-col { display: flex; flex-direction: column; gap: 0.7rem; }
-
-    /* ── Buttons ── */
     .btn {
-      display: inline-flex;
-      align-items: center;
-      gap: 0.5rem;
-      font-family: var(--mono);
-      font-weight: 400;
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
-      text-decoration: none;
-      cursor: pointer;
-      border-radius: 2px;
-      -webkit-transition: background 0.2s, color 0.2s;
-      transition: background 0.2s, color 0.2s;
+      display: inline-flex; align-items: center; gap: 0.5rem;
+      font-family: var(--mono); font-weight: 400; letter-spacing: 0.1em;
+      text-transform: uppercase; text-decoration: none; border-radius: 2px;
+      transition: background 0.2s, color 0.2s; cursor: pointer;
     }
-
-    .solid   { font-size: 0.72rem; color: var(--bg); background: var(--text); border: none; padding: 0.6rem 1rem; white-space: nowrap; }
-    .outline { font-size: 0.72rem; color: var(--text); background: transparent; border: 1px solid var(--line); padding: 0.6rem 1rem; white-space: nowrap; }
-    .hint    { font-size: 0.58rem; letter-spacing: 0.12em; color: var(--muted); }
-    .solid:hover   { background: var(--muted); }
-    .outline:hover { border-color: var(--muted); color: var(--muted); }
-
-    /* ── Nav buttons (cartão) ── */
+    .solid { font-size: 0.72rem; color: var(--bg); background: var(--text); border: none; padding: 0.6rem 1rem; }
+    .outline { font-size: 0.72rem; color: var(--text); background: transparent; border: 1px solid var(--line); padding: 0.6rem 1rem; }
+    .hint { font-size: 0.58rem; letter-spacing: 0.12em; color: var(--muted); }
     .nav-row { display: flex; gap: 0.8rem; }
-
     .nav-btn {
-      flex: 1;
-      font-family: var(--mono);
-      font-size: 0.7rem;
-      font-weight: 400;
-      letter-spacing: 0.18em;
-      text-transform: uppercase;
-      border: 1px solid var(--text);
-      background: transparent;
-      color: var(--text);
-      padding: 0.9rem 1rem;
-      cursor: pointer;
-      border-radius: 2px;
-      -webkit-transition: background 0.2s, color 0.2s;
-      transition: background 0.2s, color 0.2s;
+      flex: 1; font-family: var(--mono); font-size: 0.7rem; letter-spacing: 0.18em;
+      text-transform: uppercase; border: 1px solid var(--text); background: transparent;
+      padding: 0.9rem 1rem; cursor: pointer; transition: 0.2s;
     }
-
     .nav-btn.prim { background: var(--text); color: var(--bg); }
-
-    /* ── Back button ── */
-    .back-btn {
-      display: block;
-      background: none;
-      border: none;
-      font-family: var(--mono);
-      font-size: 0.62rem;
-      letter-spacing: 0.2em;
-      text-transform: uppercase;
-      color: var(--muted);
-      cursor: pointer;
-      padding: 0;
-      margin-bottom: 3rem;
-      text-align: left;
-    }
-
-    /* ── Agendar ── */
+    .back-btn { background: none; border: none; font-size: 0.62rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--muted); cursor: pointer; margin-bottom: 3rem; }
     .ag-bloco { margin-bottom: 2.8rem; }
     .ag-titulo { font-size: 0.62rem; letter-spacing: 0.22em; text-transform: uppercase; color: var(--muted); display: block; margin-bottom: 1rem; }
-    .msg-box { background: var(--line); border-left: 2px solid var(--muted); padding: 1rem 1.2rem; border-radius: 0 2px 2px 0; font-size: 0.82rem; line-height: 1.65; color: var(--text); margin-bottom: 1.2rem; }
+    .msg-box { background: var(--line); border-left: 2px solid var(--muted); padding: 1rem 1.2rem; font-size: 0.82rem; line-height: 1.65; margin-bottom: 1.2rem; }
     .sep { height: 1px; background: var(--line); margin: 2.5rem 0; }
-
-    /* ── Blog ── */
     .ftitulo { font-size: 0.62rem; letter-spacing: 0.22em; text-transform: uppercase; color: var(--muted); margin-bottom: 1.2rem; }
     .tags { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-bottom: 2.5rem; }
-    .tag { font-family: var(--mono); font-size: 0.6rem; letter-spacing: 0.18em; text-transform: uppercase; background: none; border: 1px solid var(--line); color: var(--muted); padding: 0.25rem 0.7rem; border-radius: 1px; cursor: pointer; }
+    .tag { font-size: 0.6rem; letter-spacing: 0.18em; text-transform: uppercase; background: none; border: 1px solid var(--line); color: var(--muted); padding: 0.25rem 0.7rem; cursor: pointer; }
     .tag.on { background: var(--text); border-color: var(--text); color: var(--bg); }
-    .loading { font-size: 0.68rem; color: var(--muted); padding: 2rem 0; }
-
-    /* ── Texto ── */
     .texto { border-top: 1px solid var(--line); padding: 2rem 0; }
     .tmeta { display: flex; align-items: baseline; gap: 1rem; margin-bottom: 0.8rem; }
     .tdata { font-size: 0.6rem; letter-spacing: 0.16em; color: var(--muted); }
-    .tcat  { font-size: 0.58rem; letter-spacing: 0.18em; text-transform: uppercase; color: var(--muted); border: 1px solid var(--line); padding: 0.12rem 0.45rem; border-radius: 1px; }
-    .ttitulo { font-family: var(--serif); font-size: 1.05rem; font-weight: 400; color: var(--text); margin-bottom: 0.8rem; line-height: 1.4; }
-    .tresumo { font-family: var(--serif); font-size: 0.86rem; font-weight: 300; color: var(--muted); line-height: 1.75; margin-bottom: 1rem; }
-    .ler-btn { background: none; border: none; font-family: var(--mono); font-size: 0.6rem; letter-spacing: 0.18em; text-transform: uppercase; color: var(--muted); cursor: pointer; padding: 0; display: flex; align-items: center; gap: 0.4rem; }
-    .arr { display: inline-block; -webkit-transition: -webkit-transform 0.3s; transition: transform 0.3s; }
-    .ler-btn.open .arr { -webkit-transform: rotate(90deg); transform: rotate(90deg); }
+    .tcat { font-size: 0.58rem; letter-spacing: 0.18em; text-transform: uppercase; color: var(--muted); border: 1px solid var(--line); padding: 0.12rem 0.45rem; border-radius: 1px; }
+    .ttitulo { font-family: var(--serif); font-size: 1.05rem; margin-bottom: 0.8rem; line-height: 1.4; }
+    .tresumo { font-family: var(--serif); font-size: 0.86rem; color: var(--muted); line-height: 1.75; margin-bottom: 1rem; }
+    .ler-btn { background: none; border: none; font-family: var(--mono); font-size: 0.6rem; letter-spacing: 0.18em; text-transform: uppercase; color: var(--muted); cursor: pointer; display: flex; align-items: center; gap: 0.4rem; }
+    .arr { transition: transform 0.3s; }
+    .ler-btn.open .arr { transform: rotate(90deg); }
     .tcorpo { display: none; margin-top: 1.6rem; padding-top: 1.6rem; border-top: 1px solid var(--line); }
-    .tcorpo p { font-family: var(--serif); font-size: 0.93rem; font-weight: 300; line-height: 1.85; color: var(--text); margin-bottom: 1.3rem; }
-    .tcorpo p:last-child { margin-bottom: 0; }
-
-    /* ── Comentário ── */
+    .tcorpo p { font-family: var(--serif); font-size: 0.93rem; line-height: 1.85; margin-bottom: 1.3rem; }
     .csec { margin-top: 2rem; padding-top: 1.8rem; border-top: 1px solid var(--line); }
-    .cbtn { background: none; border: 1px solid var(--line); font-family: var(--mono); font-size: 0.62rem; letter-spacing: 0.18em; text-transform: uppercase; color: var(--muted); cursor: pointer; padding: 0.5rem 0.9rem; border-radius: 2px; }
+    .cbtn { background: none; border: 1px solid var(--line); font-size: 0.62rem; text-transform: uppercase; color: var(--muted); cursor: pointer; padding: 0.5rem 0.9rem; }
     .cform { display: none; flex-direction: column; gap: 1rem; margin-top: 1.4rem; }
     .cform.aberto { display: flex; }
-    .flbl { font-size: 0.6rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--muted); display: block; margin-bottom: 0.4rem; }
-    .finp, .ftxt { font-family: var(--mono); font-size: 0.82rem; color: var(--text); background: transparent; border: 1px solid var(--line); border-radius: 2px; padding: 0.65rem 0.8rem; width: 100%; outline: none; -webkit-appearance: none; }
-    .ftxt { resize: none; height: 90px; line-height: 1.6; }
-    .fct { font-size: 0.58rem; color: var(--muted); text-align: right; margin-top: 0.3rem; }
-    .fct.over { color: #c0392b; }
-    .fenv { font-family: var(--mono); font-size: 0.68rem; letter-spacing: 0.16em; text-transform: uppercase; color: var(--bg); background: var(--text); border: none; padding: 0.7rem 1.2rem; border-radius: 2px; cursor: pointer; align-self: flex-start; }
-    .fenv:disabled { background: var(--line); cursor: not-allowed; }
+    .finp, .ftxt { font-family: var(--mono); font-size: 0.82rem; background: transparent; border: 1px solid var(--line); padding: 0.65rem 0.8rem; width: 100%; outline: none; }
+    .ftxt { resize: none; height: 90px; }
+    .fenv { font-size: 0.68rem; text-transform: uppercase; color: var(--bg); background: var(--text); border: none; padding: 0.7rem 1.2rem; cursor: pointer; align-self: flex-start; }
     .fmsg { font-size: 0.68rem; color: var(--muted); display: none; margin-top: 0.5rem; }
-
-    .nenhum { font-size: 0.72rem; color: var(--muted); padding: 2rem 0; border-top: 1px solid var(--line); }
     .pfooter { font-size: 0.58rem; letter-spacing: 0.16em; color: var(--line); text-transform: uppercase; margin-top: 3rem; }
-
-    .wsv { width: 13px; height: 13px; fill: currentColor; flex-shrink: 0; vertical-align: middle; }
+    .wsv { width: 13px; height: 13px; fill: currentColor; }
   </style>
-
 </head>
 <body>
+
 <div class="stage">
-
-  <!-- CARTÃO -->
-
   <div class="panel" id="panel-cartao">
     <div class="panel-inner">
       <div class="sigil">$ ̶</div>
@@ -214,9 +122,9 @@
       <div class="wa-block">
         <span class="wa-lbl">WhatsApp</span>
         <div class="wa-row">
-          <a href="https://wa.me/5548988717486" target="_blank" rel="noopener"><div class="qr-box"><div id="qr1"></div></div></a>
+          <div class="qr-box"><div id="qr1"></div></div>
           <div class="wa-col">
-            <a class="btn solid" href="https://wa.me/5548988717486" target="_blank" rel="noopener">
+            <a class="btn solid" href="https://wa.me/5548988717486" target="_blank">
               <svg class="wsv" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
               iniciar conversa
             </a>
@@ -226,18 +134,15 @@
       </div>
       <div class="nav-row">
         <button class="nav-btn prim" id="nav-age">Agendar</button>
-        <button class="nav-btn"      id="nav-blog">Blog</button>
+        <button class="nav-btn" id="nav-blog">Blog</button>
       </div>
-      <div class="pfooter" style="margin-top:2.5rem">Florianópolis · SC · Brasil</div>
+      <div class="pfooter">Florianópolis · SC · Brasil</div>
     </div>
   </div>
-
-  <!-- AGENDAR -->
 
   <div class="panel" id="panel-agendar">
     <div class="panel-inner">
       <button class="back-btn" id="back-age">‹ voltar</button>
-      <div class="sigil">$ ̶</div>
       <h1>Agendar</h1>
       <p class="role">Horário de atendimento</p>
       <div class="divider"></div>
@@ -245,13 +150,9 @@
         <span class="ag-titulo">mensagem pronta</span>
         <div class="msg-box">Gostaria de marcar um horário de atendimento, qual sua disponibilidade?</div>
         <div class="wa-row">
-          <a id="link-age" href="#" target="_blank" rel="noopener"><div class="qr-box"><div id="qr2"></div></div></a>
+          <div class="qr-box"><div id="qr2"></div></div>
           <div class="wa-col">
-            <a class="btn solid" id="btn-age" href="#" target="_blank" rel="noopener">
-              <svg class="wsv" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
-              enviar mensagem
-            </a>
-            <span class="hint">escaneie ou toque</span>
+            <a class="btn solid" id="btn-age" href="#">enviar mensagem</a>
           </div>
         </div>
       </div>
@@ -259,26 +160,18 @@
       <div class="ag-bloco">
         <span class="ag-titulo">conversa livre</span>
         <div class="wa-row">
-          <a href="https://wa.me/5548988717486" target="_blank" rel="noopener"><div class="qr-box"><div id="qr3"></div></div></a>
+          <div class="qr-box"><div id="qr3"></div></div>
           <div class="wa-col">
-            <a class="btn outline" href="https://wa.me/5548988717486" target="_blank" rel="noopener">
-              <svg class="wsv" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
-              abrir chat
-            </a>
-            <span class="hint">escaneie ou toque</span>
+            <a class="btn outline" href="https://wa.me/5548988717486">abrir chat</a>
           </div>
         </div>
       </div>
-      <div class="pfooter">Ruberval Silva · Psicanalista</div>
     </div>
   </div>
-
-  <!-- BLOG -->
 
   <div class="panel" id="panel-blog">
     <div class="panel-inner">
       <button class="back-btn" id="back-blog">‹ voltar</button>
-      <div class="sigil">$ ̶</div>
       <h1>Textos</h1>
       <p class="role">Psicanálise · clínica · teoria</p>
       <div class="divider"></div>
@@ -290,246 +183,126 @@
         <button class="tag" data-tag="ensaio">ensaio</button>
       </div>
       <div id="lista"><div class="loading">carregando textos…</div></div>
-      <div class="pfooter">Ruberval Silva · Psicanalista</div>
     </div>
   </div>
-
-</div><!-- .stage -->
+</div>
 
 <script>
-var WA     = "https://wa.me/5548988717486";
+var WA = "https://wa.me/5548988717486";
 var WA_AGE = WA + "?text=" + encodeURIComponent("Gostaria de marcar um horário de atendimento, qual sua disponibilidade?");
 var FORMSPREE_ID = "mwvaeogg";
 var ARQUIVOS = ["texto_1a.txt", "texto_2.txt", "texto_3.txt"];
 
-/* ── QR Codes ── */
 function makeQR(id, url) {
-  try {
-    new QRCode(document.getElementById(id), {
-      text: url, width: 96, height: 96,
-      colorDark: "#f0ece4", colorLight: "#0a0a0a",
-      correctLevel: QRCode.CorrectLevel.M
-    });
-  } catch(e) {}
+  new QRCode(document.getElementById(id), {
+    text: url, width: 80, height: 80,
+    colorDark: "#f0ece4", colorLight: "#0a0a0a",
+    correctLevel: QRCode.CorrectLevel.M
+  });
 }
 
 window.addEventListener("load", function() {
   makeQR("qr1", WA);
   makeQR("qr2", WA_AGE);
   makeQR("qr3", WA);
-  document.getElementById("link-age").href = WA_AGE;
-  document.getElementById("btn-age").href  = WA_AGE;
+  document.getElementById("btn-age").href = WA_AGE;
+  carregarTextos();
 });
 
-/* ── Navegação ── */
 function ir(id) {
-  var ps = document.querySelectorAll(".panel");
-  for (var i = 0; i < ps.length; i++) {
-    ps[i].style.webkitTransform = "translateX(100%)";
-    ps[i].style.transform       = "translateX(100%)";
-  }
-  var p = document.getElementById(id);
-  p.style.webkitTransform = "translateX(0)";
-  p.style.transform       = "translateX(0)";
-  p.scrollTop = 0;
+  document.querySelectorAll(".panel").forEach(p => {
+    p.style.transform = "translateX(100%)";
+  });
+  const target = document.getElementById(id);
+  target.style.transform = "translateX(0)";
+  target.scrollTop = 0;
 }
 
-/* Inicializa cartão visível */
-document.getElementById("panel-cartao").style.webkitTransform = "translateX(0)";
-document.getElementById("panel-cartao").style.transform       = "translateX(0)";
+document.getElementById("nav-age").onclick = () => ir("panel-agendar");
+document.getElementById("nav-blog").onclick = () => ir("panel-blog");
+document.getElementById("back-age").onclick = () => ir("panel-cartao");
+document.getElementById("back-blog").onclick = () => ir("panel-cartao");
 
-document.getElementById("nav-age").onclick  = function() { ir("panel-agendar"); };
-document.getElementById("nav-blog").onclick = function() { ir("panel-blog"); };
-document.getElementById("back-age").onclick = function() { ir("panel-cartao"); };
-document.getElementById("back-blog").onclick = function() { ir("panel-cartao"); };
-
-/* ── Tags ── */
-var tagAtiva = "todos";
-var textos   = [];
-
-document.getElementById("tags").addEventListener("click", function(e) {
-  if (!e.target.getAttribute("data-tag")) return;
-  var all = document.querySelectorAll(".tag");
-  for (var i = 0; i < all.length; i++) all[i].classList.remove("on");
-  e.target.classList.add("on");
-  tagAtiva = e.target.getAttribute("data-tag");
-  render(tagAtiva);
-});
-
-/* ── Carregar .txt ── */
-var pendentes = ARQUIVOS.length;
-var resultados = [];
-
-ARQUIVOS.forEach(function(nome) {
-  var xhr = new XMLHttpRequest();
-  xhr.open("GET", nome, true);
-  xhr.onreadystatechange = function() {
-    if (xhr.readyState !== 4) return;
-    if (xhr.status === 200) {
-      var t = parse(xhr.responseText);
-      if (t.titulo) resultados.push(t);
-    }
-    pendentes--;
-    if (pendentes === 0) {
-      textos = resultados.sort(function(a, b) {
-        if (b.data < a.data) return -1;
-        if (b.data > a.data) return 1;
-        return 0;
-      });
-      render("todos");
-    }
-  };
-  xhr.send();
-});
+var textos = [];
+function carregarTextos() {
+  let carregados = 0;
+  ARQUIVOS.forEach(nome => {
+    fetch(nome).then(r => r.text()).then(txt => {
+      textos.push(parse(txt));
+      carregados++;
+      if(carregados === ARQUIVOS.length) render("todos");
+    }).catch(() => carregados++);
+  });
+}
 
 function parse(raw) {
   var L = raw.split("\n");
   return {
-    titulo:    (L[0] || "").trim(),
+    titulo: (L[0] || "").trim(),
     categoria: (L[1] || "").trim().toLowerCase(),
-    data:      (L[2] || "").trim(),
+    data: (L[2] || "").trim(),
     dataLabel: (L[3] || "").trim(),
-    resumo:    (L[4] || "").trim(),
-    corpo:     L.slice(5).join("\n").trim()
+    resumo: (L[4] || "").trim(),
+    corpo: L.slice(5).join("\n").trim()
   };
 }
 
-/* ── Render ── */
 function render(tag) {
-  var lista = document.getElementById("lista");
-  var filt  = tag === "todos"
-    ? textos
-    : textos.filter(function(t) { return t.categoria === tag; });
+  const lista = document.getElementById("lista");
+  const filt = tag === "todos" ? textos : textos.filter(t => t.categoria === tag);
+  lista.innerHTML = filt.map((t, i) => `
+    <article class="texto">
+      <div class="tmeta"><span class="tdata">${t.dataLabel}</span><span class="tcat">${t.categoria}</span></div>
+      <h2 class="ttitulo">${t.titulo}</h2>
+      <p class="tresumo">${t.resumo}</p>
+      <button class="ler-btn" onclick="lerToggle('t-${i}')"><span class="arr">›</span> ler</button>
+      <div class="tcorpo" id="t-${i}">
+        ${t.corpo.split("\n\n").map(p => `<p>${p}</p>`).join("")}
+        <div class="csec">
+          <button class="cbtn" onclick="toggleForm('f-${i}')">comentar</button>
+          <div class="cform" id="f-${i}">
+            <input class="finp" id="cont-${i}" placeholder="seu contato" />
+            <textarea class="ftxt" id="msg-${i}" placeholder="comentário"></textarea>
+            <button class="fenv" onclick="enviar('${i}', '${t.titulo}')">enviar</button>
+            <div class="fmsg" id="resp-${i}"></div>
+          </div>
+        </div>
+      </div>
+    </article>
+  `).join("");
+}
 
-  if (!filt.length) {
-    lista.innerHTML = '<div class="nenhum">nenhum texto nesta categoria.</div>';
-    return;
-  }
+function lerToggle(id) {
+  const el = document.getElementById(id);
+  el.style.display = el.style.display === "block" ? "none" : "block";
+}
 
-  var html = "";
-  filt.forEach(function(t, i) {
-    var uid = tag + "-" + i;
-    var ps  = t.corpo.split(/\n\n+/)
-      .map(function(p) { return p.replace(/\n/g, " ").trim(); })
-      .filter(function(p) { return p.length > 0; })
-      .map(function(p)    { return "<p>" + p + "</p>"; })
-      .join("");
+function toggleForm(id) {
+  const el = document.getElementById(id);
+  el.classList.toggle("aberto");
+}
 
-    html +=
-      '<article class="texto">' +
-        '<div class="tmeta">' +
-          '<span class="tdata">' + t.dataLabel + '</span>' +
-          '<span class="tcat">'  + t.categoria + '</span>' +
-        '</div>' +
-        '<h2 class="ttitulo">'  + t.titulo  + '</h2>' +
-        '<p class="tresumo">'   + t.resumo  + '</p>' +
-        '<button class="ler-btn" id="lbtn-' + uid + '" onclick="lerToggle(\'' + uid + '\')">' +
-          '<span class="arr">›</span> <span id="llbl-' + uid + '">ler</span>' +
-        '</button>' +
-        '<div class="tcorpo" id="corpo-' + uid + '">' +
-          ps +
-          formHTML(t.titulo, uid) +
-        '</div>' +
-      '</article>';
+function enviar(idx, titulo) {
+  const cont = document.getElementById(`cont-${idx}`).value;
+  const msg = document.getElementById(`msg-${idx}`).value;
+  const resp = document.getElementById(`resp-${idx}`);
+  
+  fetch(`https://formspree.io/f/${FORMSPREE_ID}`, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ contato: cont, mensagem: msg, texto: titulo })
+  }).then(() => {
+    resp.innerText = "Enviado com sucesso.";
+    resp.style.display = "block";
   });
-
-  lista.innerHTML = html;
 }
 
-function lerToggle(uid) {
-  var corpo = document.getElementById("corpo-" + uid);
-  var lbl   = document.getElementById("llbl-"  + uid);
-  var btn   = document.getElementById("lbtn-"  + uid);
-  if (corpo.style.display === "block") {
-    corpo.style.display = "none";
-    lbl.textContent = "ler";
-    btn.classList.remove("open");
-  } else {
-    corpo.style.display = "block";
-    lbl.textContent = "fechar";
-    btn.classList.add("open");
-  }
-}
-
-/* ── Formulário ── */
-function formHTML(titulo, uid) {
-  var MAX = 216;
-  return '<div class="csec">' +
-    '<button class="cbtn" id="cbtn-' + uid + '" onclick="toggleForm(\'' + uid + '\')">comente esse texto</button>' +
-    '<div class="cform" id="cform-' + uid + '">' +
-      '<div><label class="flbl">seu contato</label>' +
-        '<input class="finp" id="cinp-' + uid + '" type="text" placeholder="nome, e-mail ou telefone" /></div>' +
-      '<input type="hidden" id="ctxt-' + uid + '" value="' + titulo + '" />' +
-      '<div><label class="flbl">comentário</label>' +
-        '<textarea class="ftxt" id="carea-' + uid + '" maxlength="' + MAX + '" ' +
-          'placeholder="escreva aqui…" ' +
-          'oninput="contarChars(\'' + uid + '\',' + MAX + ')"></textarea>' +
-
-```
-    '<div class="fct" id="cct-' + uid + '">0 / ' + MAX + '</div></div>' +
-  '<button class="fenv" id="cenv-' + uid + '" onclick="enviar(\'' + uid + '\')">enviar</button>' +
-  '<div class="fmsg" id="cmsg-' + uid + '"></div>' +
-'</div>' +
-```
-
-‘</div>’;
-}
-
-function toggleForm(uid) {
-var form = document.getElementById(“cform-” + uid);
-var btn  = document.getElementById(“cbtn-”  + uid);
-if (form.classList.contains(“aberto”)) {
-form.classList.remove(“aberto”);
-btn.textContent = “comente esse texto”;
-} else {
-form.classList.add(“aberto”);
-btn.textContent = “fechar”;
-}
-}
-
-function contarChars(uid, max) {
-var len = document.getElementById(“carea-” + uid).value.length;
-var el  = document.getElementById(“cct-”   + uid);
-el.textContent = len + “ / “ + max;
-if (len >= max) el.classList.add(“over”);
-else            el.classList.remove(“over”);
-}
-
-function enviar(uid) {
-var contato = document.getElementById(“cinp-”  + uid).value.trim();
-var msg     = document.getElementById(“carea-” + uid).value.trim();
-var titulo  = document.getElementById(“ctxt-”  + uid).value;
-var envBtn  = document.getElementById(“cenv-”  + uid);
-var msgEl   = document.getElementById(“cmsg-”  + uid);
-if (!contato || !msg) return;
-
-envBtn.disabled    = true;
-envBtn.textContent = “enviando…”;
-msgEl.style.display = “none”;
-
-var xhr = new XMLHttpRequest();
-xhr.open(“POST”, “https://formspree.io/f/” + FORMSPREE_ID, true);
-xhr.setRequestHeader(“Content-Type”,  “application/json”);
-xhr.setRequestHeader(“Accept”,        “application/json”);
-xhr.onreadystatechange = function() {
-if (xhr.readyState !== 4) return;
-if (xhr.status === 200) {
-msgEl.textContent    = “comentário enviado.”;
-msgEl.style.display  = “block”;
-envBtn.textContent   = “enviado”;
-document.getElementById(“cinp-”  + uid).value = “”;
-document.getElementById(“carea-” + uid).value = “”;
-document.getElementById(“cct-”   + uid).textContent = “0 / 216”;
-} else {
-msgEl.textContent   = “erro ao enviar. tente novamente.”;
-msgEl.style.display = “block”;
-envBtn.disabled     = false;
-envBtn.textContent  = “enviar”;
-}
+document.getElementById("tags").onclick = (e) => {
+  if(!e.target.dataset.tag) return;
+  document.querySelectorAll(".tag").forEach(t => t.classList.remove("on"));
+  e.target.classList.add("on");
+  render(e.target.dataset.tag);
 };
-xhr.send(JSON.stringify({ contato: contato, comentario: msg, texto: titulo }));
-}
 </script>
-
 </body>
 </html>
