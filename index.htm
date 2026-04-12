@@ -1,0 +1,502 @@
+<!DOCTYPE html>
+
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Ruberval Silva — Psicanalista</title>
+  <meta name="description" content="Ruberval Silva, psicanalista. Florianópolis, SC." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@300;400&family=IBM+Plex+Serif:ital,wght@0,300;0,400;1,300;1,400&display=swap" rel="stylesheet" />
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+
+  <script>
+  const FORMSPREE_ID = "mwvaeogg";
+
+  const ARQUIVOS = [
+    "texto_1a.txt",
+    "texto_2.txt",
+    "texto_3.txt"
+  ];
+  </script>
+
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg:    #f0ece4;
+      --text:  #0a0a0a;
+      --muted: #6a6a60;
+      --line:  #d0ccc4;
+      --mono:  'IBM Plex Mono', monospace;
+      --serif: 'IBM Plex Serif', serif;
+      --slide: 0.42s cubic-bezier(0.65, 0, 0.35, 1);
+    }
+
+    html, body {
+      height: 100%;
+      overflow: hidden;
+      background: var(--bg);
+      font-family: var(--mono);
+      font-weight: 300;
+      color: var(--text);
+      -webkit-font-smoothing: antialiased;
+    }
+
+    .stage { position: relative; width: 100%; height: 100vh; overflow: hidden; }
+
+    .panel {
+      position: absolute;
+      inset: 0;
+      overflow-y: auto;
+      overflow-x: hidden;
+      background: var(--bg);
+      transition: transform var(--slide);
+      will-change: transform;
+    }
+
+    .panel.is-active  { transform: translateX(0); }
+    .panel.is-behind  { transform: translateX(-100%); }
+    .panel.is-ahead   { transform: translateX(100%); }
+
+    .panel-inner {
+      max-width: 480px;
+      margin: 0 auto;
+      padding: 3.5rem 2rem 5rem;
+    }
+
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(10px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    .panel.is-active .panel-inner { animation: fadeUp 0.5s ease forwards; }
+
+    .back-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      background: none;
+      border: none;
+      font-family: var(--mono);
+      font-size: 0.62rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--muted);
+      cursor: pointer;
+      padding: 0;
+      margin-bottom: 3rem;
+      transition: color 0.2s;
+    }
+
+    .back-btn:hover { color: var(--text); }
+    .back-btn::before { content: "‹"; font-size: 0.9rem; line-height: 1; }
+
+    .sigil { font-size: 1rem; color: var(--muted); letter-spacing: 0.15em; margin-bottom: 2.8rem; user-select: none; }
+
+    h1 { font-size: clamp(1.35rem, 4vw, 1.7rem); font-weight: 400; letter-spacing: 0.04em; color: var(--text); margin-bottom: 0.45rem; }
+
+    .role { font-size: 0.7rem; letter-spacing: 0.22em; text-transform: uppercase; color: var(--muted); margin-bottom: 3rem; }
+
+    .divider { width: 2rem; height: 1px; background: var(--line); margin-bottom: 3rem; }
+
+    .contact { display: flex; flex-direction: column; gap: 1.2rem; margin-bottom: 3rem; }
+    .contact-item { display: flex; align-items: baseline; gap: 1.2rem; }
+    .contact-label { font-size: 0.62rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--muted); min-width: 4.8rem; flex-shrink: 0; }
+    .contact-value { font-size: 0.88rem; color: var(--text); letter-spacing: 0.03em; }
+    a.contact-value { color: var(--text); text-decoration: none; transition: color 0.2s; }
+    a.contact-value:hover { color: var(--muted); }
+
+    .wa-block { display: flex; flex-direction: column; gap: 0.9rem; margin-bottom: 3rem; }
+    .wa-label { font-size: 0.62rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--muted); }
+    .wa-row { display: flex; align-items: center; gap: 1.4rem; }
+    .qr-wrap { display: inline-block; padding: 8px; background: var(--text); border-radius: 2px; flex-shrink: 0; transition: opacity 0.2s; }
+    .qr-wrap:hover { opacity: 0.8; }
+    .qr-wrap canvas, .qr-wrap img { display: block; }
+    .wa-chat-block { display: flex; flex-direction: column; gap: 0.7rem; }
+
+    .btn { display: inline-flex; align-items: center; gap: 0.55rem; font-family: var(--mono); font-weight: 400; letter-spacing: 0.1em; text-transform: uppercase; text-decoration: none; border: none; cursor: pointer; transition: background 0.2s, color 0.2s, border-color 0.2s; border-radius: 2px; }
+    .btn-solid { font-size: 0.72rem; color: var(--bg); background: var(--text); padding: 0.6rem 1rem; white-space: nowrap; }
+    .btn-solid:hover { background: var(--muted); }
+    .btn-outline { font-size: 0.72rem; color: var(--text); background: transparent; border: 1px solid var(--line); padding: 0.6rem 1rem; white-space: nowrap; }
+    .btn-outline:hover { border-color: var(--muted); color: var(--muted); }
+    .btn svg { width: 13px; height: 13px; fill: currentColor; flex-shrink: 0; }
+    .btn-hint { font-size: 0.58rem; letter-spacing: 0.12em; color: var(--muted); }
+
+    .nav-buttons { display: grid; grid-template-columns: 1fr 1fr; gap: 0.8rem; }
+    .nav-btn { font-family: var(--mono); font-size: 0.7rem; font-weight: 400; letter-spacing: 0.18em; text-transform: uppercase; border: 1px solid var(--text); background: transparent; color: var(--text); padding: 0.9rem 1rem; cursor: pointer; border-radius: 2px; transition: background 0.2s, color 0.2s; }
+    .nav-btn:hover, .nav-btn.primary { background: var(--text); color: var(--bg); }
+
+    .agenda-section { margin-bottom: 2.8rem; }
+    .agenda-section-title { font-size: 0.62rem; letter-spacing: 0.22em; text-transform: uppercase; color: var(--muted); margin-bottom: 1rem; display: block; }
+    .msg-bubble { background: var(--line); border-left: 2px solid var(--muted); padding: 1rem 1.2rem; border-radius: 0 2px 2px 0; font-size: 0.82rem; line-height: 1.65; color: var(--text); margin-bottom: 1.2rem; }
+    .agenda-sep { width: 100%; height: 1px; background: var(--line); margin: 2.5rem 0; }
+
+    .blog-title { font-size: 0.62rem; letter-spacing: 0.22em; text-transform: uppercase; color: var(--muted); margin-bottom: 1.2rem; }
+    .tag-filters { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-bottom: 2.5rem; }
+    .tag-btn { font-family: var(--mono); font-size: 0.6rem; letter-spacing: 0.18em; text-transform: uppercase; background: none; border: 1px solid var(--line); color: var(--muted); padding: 0.25rem 0.7rem; border-radius: 1px; cursor: pointer; transition: background 0.15s, color 0.15s, border-color 0.15s; }
+    .tag-btn:hover { border-color: var(--muted); color: var(--text); }
+    .tag-btn.active { background: var(--text); border-color: var(--text); color: var(--bg); }
+
+    .loading { font-size: 0.68rem; letter-spacing: 0.14em; color: var(--muted); padding: 2rem 0; }
+
+    .texto-item { border-top: 1px solid var(--line); padding: 2rem 0; }
+    .texto-meta { display: flex; align-items: baseline; gap: 1rem; margin-bottom: 0.8rem; }
+    .texto-data { font-size: 0.6rem; letter-spacing: 0.16em; color: var(--muted); }
+    .texto-cat { font-size: 0.58rem; letter-spacing: 0.18em; text-transform: uppercase; color: var(--muted); border: 1px solid var(--line); padding: 0.12rem 0.45rem; border-radius: 1px; }
+    .texto-titulo { font-family: var(--serif); font-size: 1.05rem; font-weight: 400; color: var(--text); margin-bottom: 0.8rem; line-height: 1.4; }
+    .texto-resumo { font-family: var(--serif); font-size: 0.86rem; font-weight: 300; color: var(--muted); line-height: 1.75; margin-bottom: 1rem; }
+
+    .toggle-btn { background: none; border: none; font-family: var(--mono); font-size: 0.6rem; letter-spacing: 0.18em; text-transform: uppercase; color: var(--muted); cursor: pointer; padding: 0; display: flex; align-items: center; gap: 0.4rem; transition: color 0.2s; }
+    .toggle-btn:hover { color: var(--text); }
+    .toggle-arrow { display: inline-block; transition: transform 0.3s; }
+    .toggle-btn.open .toggle-arrow { transform: rotate(90deg); }
+
+    .texto-body { display: none; margin-top: 1.6rem; padding-top: 1.6rem; border-top: 1px solid var(--line); }
+    .texto-body.visible { display: block; }
+    .texto-body p { font-family: var(--serif); font-size: 0.93rem; font-weight: 300; line-height: 1.85; color: var(--text); margin-bottom: 1.3rem; }
+    .texto-body p:last-child { margin-bottom: 0; }
+
+    /* ── Comentário ── */
+    .comment-section { margin-top: 2rem; padding-top: 1.8rem; border-top: 1px solid var(--line); }
+    .comment-toggle { background: none; border: 1px solid var(--line); font-family: var(--mono); font-size: 0.62rem; letter-spacing: 0.18em; text-transform: uppercase; color: var(--muted); cursor: pointer; padding: 0.5rem 0.9rem; border-radius: 2px; transition: border-color 0.2s, color 0.2s; }
+    .comment-toggle:hover { border-color: var(--text); color: var(--text); }
+    .comment-form { display: none; margin-top: 1.4rem; flex-direction: column; gap: 1rem; }
+    .comment-form.visible { display: flex; }
+    .form-field { display: flex; flex-direction: column; gap: 0.4rem; }
+    .form-label { font-size: 0.6rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--muted); }
+    .form-input, .form-textarea { font-family: var(--mono); font-size: 0.82rem; font-weight: 300; color: var(--text); background: transparent; border: 1px solid var(--line); border-radius: 2px; padding: 0.65rem 0.8rem; outline: none; transition: border-color 0.2s; width: 100%; }
+    .form-input:focus, .form-textarea:focus { border-color: var(--muted); }
+    .form-textarea { resize: none; height: 90px; line-height: 1.6; }
+    .char-counter { font-size: 0.58rem; letter-spacing: 0.12em; color: var(--muted); text-align: right; }
+    .char-counter.over { color: #c0392b; }
+    .form-submit { font-family: var(--mono); font-size: 0.68rem; letter-spacing: 0.16em; text-transform: uppercase; color: var(--bg); background: var(--text); border: none; padding: 0.7rem 1.2rem; border-radius: 2px; cursor: pointer; transition: background 0.2s; align-self: flex-start; }
+    .form-submit:hover { background: var(--muted); }
+    .form-submit:disabled { background: var(--line); cursor: not-allowed; }
+    .form-status { font-size: 0.68rem; letter-spacing: 0.1em; color: var(--muted); display: none; }
+    .form-status.visible { display: block; }
+
+    .no-results { font-size: 0.72rem; color: var(--muted); letter-spacing: 0.1em; padding: 2rem 0; border-top: 1px solid var(--line); }
+
+    .panel-footer { font-size: 0.58rem; letter-spacing: 0.16em; color: var(--line); text-transform: uppercase; margin-top: 3rem; user-select: none; }
+    .wa-svg { width: 13px; height: 13px; fill: currentColor; flex-shrink: 0; }
+  </style>
+
+</head>
+<body>
+
+<div class="stage">
+
+  <!-- PANEL 1 — CARTÃO -->
+
+  <div class="panel is-active" id="panel-cartao">
+    <div class="panel-inner">
+      <div class="sigil">$ ̶</div>
+      <h1>Ruberval Silva</h1>
+      <p class="role">Psicanalista</p>
+      <div class="divider"></div>
+      <div class="contact">
+        <div class="contact-item">
+          <span class="contact-label">local</span>
+          <span class="contact-value">Florianópolis, SC</span>
+        </div>
+        <div class="contact-item">
+          <span class="contact-label">atendimento</span>
+          <span class="contact-value">presencial e online</span>
+        </div>
+        <div class="contact-item">
+          <span class="contact-label">contato</span>
+          <a class="contact-value" href="tel:+5548988717486">(48) 98871-7486</a>
+        </div>
+      </div>
+      <div class="wa-block">
+        <span class="wa-label">WhatsApp</span>
+        <div class="wa-row">
+          <a href="https://wa.me/5548988717486" target="_blank" rel="noopener">
+            <div class="qr-wrap"><div id="qr-cartao"></div></div>
+          </a>
+          <div class="wa-chat-block">
+            <a class="btn btn-solid" href="https://wa.me/5548988717486" target="_blank" rel="noopener">
+              <svg class="wa-svg" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+              iniciar conversa
+            </a>
+            <span class="btn-hint">escaneie ou toque</span>
+          </div>
+        </div>
+      </div>
+      <div class="nav-buttons">
+        <button class="nav-btn primary" onclick="slideTo('panel-agendar','panel-cartao')">Agendar</button>
+        <button class="nav-btn" onclick="slideTo('panel-blog','panel-cartao')">Blog</button>
+      </div>
+      <div class="panel-footer" style="margin-top:2.5rem;">Florianópolis · SC · Brasil</div>
+    </div>
+  </div>
+
+  <!-- PANEL 2 — AGENDAR -->
+
+  <div class="panel is-ahead" id="panel-agendar">
+    <div class="panel-inner">
+      <button class="back-btn" onclick="slideBack('panel-cartao','panel-agendar')">voltar</button>
+      <div class="sigil">$ ̶</div>
+      <h1>Agendar</h1>
+      <p class="role">Horário de atendimento</p>
+      <div class="divider"></div>
+      <div class="agenda-section">
+        <span class="agenda-section-title">mensagem pronta</span>
+        <div class="msg-bubble">Gostaria de marcar um horário de atendimento, qual sua disponibilidade?</div>
+        <div class="wa-row">
+          <a href="https://wa.me/5548988717486?text=Gostaria%20de%20marcar%20um%20hor%C3%A1rio%20de%20atendimento%2C%20qual%20sua%20disponibilidade%3F" target="_blank" rel="noopener">
+            <div class="qr-wrap"><div id="qr-agendar"></div></div>
+          </a>
+          <div class="wa-chat-block">
+            <a class="btn btn-solid" href="https://wa.me/5548988717486?text=Gostaria%20de%20marcar%20um%20hor%C3%A1rio%20de%20atendimento%2C%20qual%20sua%20disponibilidade%3F" target="_blank" rel="noopener">
+              <svg class="wa-svg" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+              enviar mensagem
+            </a>
+            <span class="btn-hint">escaneie ou toque</span>
+          </div>
+        </div>
+      </div>
+      <div class="agenda-sep"></div>
+      <div class="agenda-section">
+        <span class="agenda-section-title">conversa livre</span>
+        <div class="wa-row">
+          <a href="https://wa.me/5548988717486" target="_blank" rel="noopener">
+            <div class="qr-wrap"><div id="qr-livre"></div></div>
+          </a>
+          <div class="wa-chat-block">
+            <a class="btn btn-outline" href="https://wa.me/5548988717486" target="_blank" rel="noopener">
+              <svg class="wa-svg" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+              abrir chat
+            </a>
+            <span class="btn-hint">escaneie ou toque</span>
+          </div>
+        </div>
+      </div>
+      <div class="panel-footer">Ruberval Silva · Psicanalista</div>
+    </div>
+  </div>
+
+  <!-- PANEL 3 — BLOG -->
+
+  <div class="panel is-ahead" id="panel-blog">
+    <div class="panel-inner">
+      <button class="back-btn" onclick="slideBack('panel-cartao','panel-blog')">voltar</button>
+      <div class="sigil">$ ̶</div>
+      <h1>Textos</h1>
+      <p class="role">Psicanálise · clínica · teoria</p>
+      <div class="divider"></div>
+      <div class="blog-title">filtrar por</div>
+      <div class="tag-filters" id="tag-filters">
+        <button class="tag-btn active" data-tag="todos">todos</button>
+        <button class="tag-btn" data-tag="clínica">clínica</button>
+        <button class="tag-btn" data-tag="teoria">teoria</button>
+        <button class="tag-btn" data-tag="ensaio">ensaio</button>
+      </div>
+      <div id="lista-textos"><div class="loading">carregando textos…</div></div>
+      <div class="panel-footer">Ruberval Silva · Psicanalista</div>
+    </div>
+  </div>
+
+</div>
+
+<script>
+  const WA     = "https://wa.me/5548988717486";
+  const WA_MSG = WA + "?text=" + encodeURIComponent("Gostaria de marcar um horário de atendimento, qual sua disponibilidade?");
+
+  function makeQR(id, url, size) {
+    new QRCode(document.getElementById(id), { text: url, width: size, height: size, colorDark: "#f0ece4", colorLight: "#0a0a0a", correctLevel: QRCode.CorrectLevel.M });
+  }
+
+  makeQR("qr-cartao",  WA,     90);
+  makeQR("qr-agendar", WA_MSG, 90);
+  makeQR("qr-livre",   WA,     90);
+
+  function slideTo(targetId, fromId) {
+    document.getElementById(fromId).classList.replace("is-active", "is-behind");
+    const t = document.getElementById(targetId);
+    t.classList.remove("is-ahead", "is-behind");
+    t.classList.add("is-active");
+    t.scrollTop = 0;
+  }
+
+  function slideBack(targetId, fromId) {
+    document.getElementById(fromId).classList.replace("is-active", "is-ahead");
+    const t = document.getElementById(targetId);
+    t.classList.remove("is-behind", "is-ahead");
+    t.classList.add("is-active");
+    t.scrollTop = 0;
+  }
+
+  function parseTexto(raw) {
+    const L = raw.split("\n");
+    return {
+      titulo:    (L[0] || "").trim(),
+      categoria: (L[1] || "").trim().toLowerCase(),
+      data:      (L[2] || "").trim(),
+      dataLabel: (L[3] || "").trim(),
+      resumo:    (L[4] || "").trim(),
+      corpo:     L.slice(5).join("\n").trim()
+    };
+  }
+
+  function toggleComentario(formId, toggleId) {
+    const form   = document.getElementById(formId);
+    const toggle = document.getElementById(toggleId);
+    const isOpen = form.classList.contains("visible");
+    form.classList.toggle("visible", !isOpen);
+    toggle.textContent = isOpen ? "comente esse texto" : "fechar";
+  }
+
+  function atualizarContador(areaId, countId, max) {
+    const len = document.getElementById(areaId).value.length;
+    const el  = document.getElementById(countId);
+    el.textContent = `${len} / ${max}`;
+    el.classList.toggle("over", len >= max);
+  }
+
+  async function enviarComentario(e, formId, statusId, submitId) {
+    e.preventDefault();
+    const form     = document.getElementById(formId);
+    const status   = document.getElementById(statusId);
+    const submit   = document.getElementById(submitId);
+    const contato  = form.querySelector('[name="contato"]').value.trim();
+    const msg      = form.querySelector('[name="comentario"]').value.trim();
+    const titulo   = form.querySelector('[name="texto"]').value;
+    if (!contato || !msg) return;
+
+    submit.disabled    = true;
+    submit.textContent = "enviando…";
+    status.classList.remove("visible");
+
+    try {
+      const res = await fetch(`https://formspree.io/f/${FORMSPREE_ID}`, {
+        method:  "POST",
+        headers: { "Content-Type": "application/json", "Accept": "application/json" },
+        body: JSON.stringify({ contato, comentario: msg, texto: titulo })
+      });
+      if (res.ok) {
+        status.textContent = "comentário enviado.";
+        status.classList.add("visible");
+        form.querySelector('[name="contato"]').value    = "";
+        form.querySelector('[name="comentario"]').value = "";
+        submit.textContent = "enviado";
+      } else { throw new Error(); }
+    } catch {
+      status.textContent = "erro ao enviar. tente novamente.";
+      status.classList.add("visible");
+      submit.disabled    = false;
+      submit.textContent = "enviar";
+    }
+  }
+
+  function criarForm(titulo, uid) {
+    const MAX = 216;
+    return `
+      <div class="comment-section">
+        <button class="comment-toggle" id="ftoggle-${uid}"
+                onclick="toggleComentario('form-${uid}','ftoggle-${uid}')">
+          comente esse texto
+        </button>
+        <div class="comment-form" id="form-${uid}">
+          <div class="form-field">
+            <label class="form-label">seu contato</label>
+            <input class="form-input" name="contato" type="text" placeholder="nome, e-mail ou telefone" required />
+          </div>
+          <input type="hidden" name="texto" value="${titulo}" />
+          <div class="form-field">
+            <label class="form-label">comentário</label>
+            <textarea class="form-textarea" name="comentario" maxlength="${MAX}"
+              placeholder="escreva aqui…"
+              oninput="atualizarContador('area-${uid}','count-${uid}',${MAX})"
+              id="area-${uid}" required></textarea>
+
+```
+        <span class="char-counter" id="count-${uid}">0 / ${MAX}</span>
+      </div>
+      <button class="form-submit" id="submit-${uid}"
+              onclick="enviarComentario(event,'form-${uid}','status-${uid}','submit-${uid}')">
+        enviar
+      </button>
+      <span class="form-status" id="status-${uid}"></span>
+    </div>
+  </div>`;
+```
+
+}
+
+let TEXTOS_CARREGADOS = [];
+let activeTag = “todos”;
+
+async function carregarTextos() {
+const resultados = await Promise.allSettled(
+ARQUIVOS.map(nome =>
+fetch(nome).then(r => { if (!r.ok) throw new Error(); return r.text(); }).then(parseTexto)
+)
+);
+TEXTOS_CARREGADOS = resultados
+.filter(r => r.status === “fulfilled”)
+.map(r => r.value)
+.filter(t => t.titulo)
+.sort((a, b) => b.data.localeCompare(a.data));
+renderTextos(“todos”);
+}
+
+function renderTextos(tag) {
+const lista    = document.getElementById(“lista-textos”);
+const filtered = tag === “todos” ? TEXTOS_CARREGADOS : TEXTOS_CARREGADOS.filter(t => t.categoria === tag);
+lista.innerHTML = “”;
+if (!filtered.length) { lista.innerHTML = ‘<div class="no-results">nenhum texto nesta categoria.</div>’; return; }
+
+```
+filtered.forEach((t, i) => {
+  const uid = `${tag}-${i}`;
+  const ps  = t.corpo.split(/\n\n+/).map(p => p.replace(/\n/g," ").trim()).filter(Boolean).map(p=>`<p>${p}</p>`).join("");
+  const art = document.createElement("article");
+  art.className = "texto-item";
+  art.innerHTML = `
+    <div class="texto-meta">
+      <span class="texto-data">${t.dataLabel}</span>
+      <span class="texto-cat">${t.categoria}</span>
+    </div>
+    <h2 class="texto-titulo">${t.titulo}</h2>
+    <p class="texto-resumo">${t.resumo}</p>
+    <button class="toggle-btn" data-uid="${uid}">
+      <span class="toggle-arrow">›</span>
+      <span class="toggle-label">ler</span>
+    </button>
+    <div class="texto-body" id="body-${uid}">${ps}${criarForm(t.titulo, uid)}</div>
+  `;
+  lista.appendChild(art);
+});
+```
+
+}
+
+document.getElementById(“tag-filters”).addEventListener(“click”, e => {
+const btn = e.target.closest(”.tag-btn”);
+if (!btn) return;
+document.querySelectorAll(”.tag-btn”).forEach(b => b.classList.remove(“active”));
+btn.classList.add(“active”);
+activeTag = btn.dataset.tag;
+renderTextos(activeTag);
+});
+
+document.getElementById(“lista-textos”).addEventListener(“click”, e => {
+const btn = e.target.closest(”.toggle-btn”);
+if (!btn) return;
+const uid    = btn.dataset.uid;
+const body   = document.getElementById(`body-${uid}`);
+const label  = btn.querySelector(”.toggle-label”);
+const isOpen = body.classList.contains(“visible”);
+body.classList.toggle(“visible”, !isOpen);
+btn.classList.toggle(“open”, !isOpen);
+label.textContent = isOpen ? “ler” : “fechar”;
+});
+
+carregarTextos();
+</script>
+
+</body>
+</html>
