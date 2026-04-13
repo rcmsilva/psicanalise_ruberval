@@ -129,11 +129,10 @@
         <span class="wa-lbl">WhatsApp</span>
         <div class="wa-row">
           <a href="https://wa.me/5548988717486" target="_blank" rel="noopener">
-            <div class="qr-box"><div id="qr1"></div></div>
+            <div class="qr-box"><div id="qr-home"></div></div>
           </a>
           <div class="wa-col">
             <a class="btn solid" href="https://wa.me/5548988717486" target="_blank" rel="noopener">iniciar conversa</a>
-            <span style="font-size:0.55rem; color:var(--muted); letter-spacing:0.1em;">escaneie ou toque</span>
           </div>
         </div>
       </div>
@@ -158,11 +157,10 @@
       
       <div class="wa-row">
         <a id="link-age" href="#" target="_blank" rel="noopener">
-          <div class="qr-box"><div id="qr2"></div></div>
+          <div class="qr-box"><div id="qr-age"></div></div>
         </a>
         <div class="wa-col">
-          <a class="btn solid" id="btn-age" href="#" target="_blank" rel="noopener">enviar mensagem</a>
-          <span style="font-size:0.55rem; color:var(--muted); letter-spacing:0.1em; margin-top:0.5rem; display:block;">confirme sua vaga via WhatsApp</span>
+          <a class="btn solid" id="btn-age" href="#" target="_blank" rel="noopener">confirmar via WhatsApp</a>
         </div>
       </div>
       <div class="pfooter">Ruberval Silva · Psicanalista</div>
@@ -194,18 +192,23 @@
 </div>
 
 <script>
-var WA = "https://wa.me/5548988717486";
-var WA_AGE = WA + "?text=" + encodeURIComponent("Gostaria de marcar uma sessão, qual sua disponibilidade?");
+var WA_BASE = "https://wa.me/5548988717486";
+var MSG_PRONTA = "Gostaria de marcar uma sessão, qual sua disponibilidade?";
+var WA_AGE = WA_BASE + "?text=" + encodeURIComponent(MSG_PRONTA);
 var FORMSPREE_ID = "mwvaeogg";
 var ARQUIVOS = ["texto_1a.txt", "texto_2.txt", "texto_3.txt"];
 var MAX_CHARS = 216;
 var textos = [];
 
 window.addEventListener("load", function() {
-  new QRCode(document.getElementById("qr1"), { text: WA, width: 80, height: 80, colorDark: "#f0ece4", colorLight: "#0a0a0a", correctLevel: QRCode.CorrectLevel.M });
-  new QRCode(document.getElementById("qr2"), { text: WA_AGE, width: 80, height: 80, colorDark: "#f0ece4", colorLight: "#0a0a0a", correctLevel: QRCode.CorrectLevel.M });
+  // QR Codes
+  new QRCode(document.getElementById("qr-home"), { text: WA_BASE, width: 80, height: 80, colorDark: "#f0ece4", colorLight: "#0a0a0a", correctLevel: QRCode.CorrectLevel.M });
+  new QRCode(document.getElementById("qr-age"), { text: WA_AGE, width: 80, height: 80, colorDark: "#f0ece4", colorLight: "#0a0a0a", correctLevel: QRCode.CorrectLevel.M });
+  
+  // Links de agendamento
   document.getElementById("btn-age").href = WA_AGE;
   document.getElementById("link-age").href = WA_AGE;
+  
   carregarTextos();
 });
 
@@ -271,7 +274,8 @@ function render(tag) {
       '<button class="ler-btn" onclick="lerToggle(' + i + ')"><span class="arr" id="arr-' + i + '">›</span> <span id="lbl-' + i + '">ler</span></button>' +
       '<div class="tcorpo" id="corpo-' + i + '">' +
         ps +
-        '<button class="ler-btn" style="margin:2.5rem 0; padding:1rem; border:1px solid var(--line); width:100%; justify-content:center;" onclick="fecharTexto(' + i + ')">' +
+        /* BOTÃO FECHAR E VOLTAR AO TOPO */
+        '<button class="ler-btn" style="margin:2.5rem 0; padding:1.2rem; border:1px solid var(--line); width:100%; justify-content:center;" onclick="fecharTexto(' + i + ')">' +
           '<span class="arr" style="transform:rotate(270deg)">›</span> fechar e voltar ao topo' +
         '</button>' +
         '<div class="csec">' +
@@ -334,10 +338,10 @@ function enviar(i, tit) {
   }).then(res => {
     r.style.display = "block";
     if(res.ok) {
-      r.textContent = "Mensagem enviada com sucesso.";
+      r.textContent = "Enviado com sucesso.";
       c.value = ""; m.value = ""; b.textContent = "enviado";
     } else {
-      r.textContent = "Erro ao enviar.";
+      r.textContent = "Erro no envio.";
       b.disabled = false; b.textContent = "enviar";
     }
   });
