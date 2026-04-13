@@ -3,11 +3,12 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Ruberval Silva - Psicanalista em Florianópolis, SC. Atendimento presencial e online." />
   <title>Ruberval Silva — Psicanalista</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@300;400&family=IBM+Plex+Serif:ital,wght@0,300;0,400;1,300;1,400&display=swap" rel="stylesheet" />
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js" defer></script>
 
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
@@ -79,11 +80,21 @@
     }
     .nav-btn.prim { background: var(--text); color: var(--bg); }
     
-    .back-btn { background: none; border: none; font-family: var(--mono); font-size: 0.62rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--muted); cursor: pointer; margin-bottom: 3rem; display: block; }
+    .back-btn { 
+      background: none; border: none; font-family: var(--mono); font-size: 0.62rem; letter-spacing: 0.2em; 
+      text-transform: uppercase; color: var(--muted); cursor: pointer; margin-bottom: 2rem; padding: 0; 
+      transition: color 0.2s;
+    }
+    .back-btn:hover { color: var(--text); }
+    
     .msg-box { background: var(--line); border-left: 2px solid var(--muted); padding: 1rem 1.2rem; font-size: 0.82rem; line-height: 1.65; margin-bottom: 2rem; }
     
     .tags { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-bottom: 2.5rem; }
-    .tag { font-family: var(--mono); font-size: 0.6rem; letter-spacing: 0.18em; text-transform: uppercase; background: none; border: 1px solid var(--line); color: var(--muted); padding: 0.25rem 0.7rem; cursor: pointer; border-radius: 1px; }
+    .tag { 
+      font-family: var(--mono); font-size: 0.6rem; letter-spacing: 0.18em; text-transform: uppercase; 
+      background: none; border: 1px solid var(--line); color: var(--muted); padding: 0.25rem 0.6rem; 
+      cursor: pointer; transition: 0.2s; border-radius: 2px;
+    }
     .tag.on { background: var(--text); border-color: var(--text); color: var(--bg); }
     
     .texto { border-top: 1px solid var(--line); padding: 2rem 0; }
@@ -93,20 +104,46 @@
     .ttitulo { font-family: var(--serif); font-size: 1.1rem; font-weight: 400; margin-bottom: 0.8rem; line-height: 1.4; }
     .tresumo { font-family: var(--serif); font-size: 0.86rem; font-weight: 300; color: var(--muted); line-height: 1.75; margin-bottom: 1rem; }
     
-    .ler-btn { background: none; border: none; font-family: var(--mono); font-size: 0.6rem; letter-spacing: 0.18em; text-transform: uppercase; color: var(--muted); cursor: pointer; display: flex; align-items: center; gap: 0.4rem; padding: 0.5rem 0; }
+    .ler-btn { 
+      background: none; border: none; font-family: var(--mono); font-size: 0.6rem; letter-spacing: 0.18em; 
+      text-transform: uppercase; color: var(--muted); cursor: pointer; display: flex; align-items: center; 
+      gap: 0.4rem; transition: color 0.2s; padding: 0;
+    }
+    .ler-btn:hover { color: var(--text); }
+    
     .arr { display: inline-block; transition: transform 0.3s; }
     .tcorpo { display: none; margin-top: 1.6rem; padding-top: 1.6rem; border-top: 1px solid var(--line); }
     .tcorpo p { font-family: var(--serif); font-size: 0.95rem; line-height: 1.85; margin-bottom: 1.3rem; }
     
     .csec { margin-top: 2.5rem; padding-top: 1.8rem; border-top: 1px solid var(--line); }
-    .cbtn { background: none; border: 1px solid var(--line); font-family: var(--mono); font-size: 0.62rem; text-transform: uppercase; color: var(--muted); cursor: pointer; padding: 0.5rem 0.9rem; border-radius: 2px; }
+    .cbtn { 
+      background: none; border: 1px solid var(--line); font-family: var(--mono); font-size: 0.62rem; 
+      text-transform: uppercase; color: var(--muted); cursor: pointer; padding: 0.5rem 0.9rem; 
+      transition: 0.2s; border-radius: 2px;
+    }
+    .cbtn:hover { background: var(--line); }
+    
     .cform { display: none; flex-direction: column; gap: 1rem; margin-top: 1.4rem; }
     .cform.aberto { display: flex; }
     
-    .finp, .ftxt { font-family: var(--mono); font-size: 0.82rem; background: transparent; border: 1px solid var(--line); padding: 0.65rem 0.8rem; width: 100%; outline: none; color: var(--text); border-radius: 2px; -webkit-appearance: none; appearance: none; }
+    .finp, .ftxt { 
+      font-family: var(--mono); font-size: 0.82rem; background: transparent; border: 1px solid var(--line); 
+      padding: 0.65rem 0.8rem; width: 100%; outline: none; color: var(--text); border-radius: 2px;
+      transition: border-color 0.2s;
+    }
+    .finp:focus, .ftxt:focus { border-color: var(--text); }
     .ftxt { resize: none; height: 100px; line-height: 1.6; }
-    .fenv { font-family: var(--mono); font-size: 0.68rem; text-transform: uppercase; color: var(--bg); background: var(--text); border: none; padding: 0.7rem 1.2rem; cursor: pointer; align-self: flex-start; border-radius: 2px; }
+    .fenv { 
+      font-family: var(--mono); font-size: 0.68rem; text-transform: uppercase; color: var(--bg); 
+      background: var(--text); border: none; padding: 0.7rem 1.2rem; cursor: pointer; align-self: flex-start; 
+      transition: 0.2s; border-radius: 2px;
+    }
+    .fenv:hover:not(:disabled) { background: var(--muted); }
     .fenv:disabled { opacity: 0.5; cursor: not-allowed; }
+    
+    .fmsg { font-size: 0.65rem; margin-top: 0.5rem; }
+    .fmsg.success { color: #27ae60; }
+    .fmsg.error { color: var(--error); }
     
     .pfooter { font-size: 0.58rem; letter-spacing: 0.16em; color: var(--line); text-transform: uppercase; margin-top: 3rem; }
   </style>
@@ -197,209 +234,361 @@
 </div>
 
 <script>
-var WA_BASE = "https://wa.me/5548988717486";
-var MSG_PRONTA = "Gostaria de marcar uma sessão, qual sua disponibilidade?";
-var WA_AGE = WA_BASE + "?text=" + encodeURIComponent(MSG_PRONTA);
-var FORMSPREE_ID = "mwvaeogg";
-var MAX_CHARS = 216;
-var textos = [];
-
-window.addEventListener("load", function() {
-  new QRCode(document.getElementById("qr-home"), { text: WA_BASE, width: 80, height: 80, colorDark: "#f0ece4", colorLight: "#0a0a0a", correctLevel: QRCode.CorrectLevel.M });
-  new QRCode(document.getElementById("qr-age"), { text: WA_AGE, width: 80, height: 80, colorDark: "#f0ece4", colorLight: "#0a0a0a", correctLevel: QRCode.CorrectLevel.M });
-  
-  document.getElementById("btn-age").href = WA_AGE;
-  document.getElementById("link-age").href = WA_AGE;
-  
-  carregarTextos();
-});
-
-function ir(id) {
-  document.querySelectorAll(".panel").forEach(p => p.style.transform = "translateX(100%)");
-  var alvo = document.getElementById(id);
-  alvo.style.transform = "translateX(0)";
-  alvo.scrollTop = 0;
-}
-
-document.getElementById("nav-age").onclick = () => ir("panel-agendar");
-document.getElementById("nav-blog").onclick = () => ir("panel-blog");
-document.getElementById("back-age").onclick = () => ir("panel-cartao");
-document.getElementById("back-blog").onclick = () => ir("panel-cartao");
-
-  function carregarTextos() {
-  // Busca a lista de nomes de arquivos em um arquivo separado
-  fetch('lista.json')
-    .then(r => {
-      if (!r.ok) throw new Error("Erro ao carregar lista.json");
-      return r.json();
-    })
-    .then(arquivos => {
-      var carregados = 0;
-      if (arquivos.length === 0) finalizeLoad();
-
-      arquivos.forEach(nome => {
-        fetch(nome)
-          .then(r => {
-            if (!r.ok) throw new Error("Falha ao carregar " + nome);
-            return r.text();
-          })
-          .then(txt => {
-            var t = parse(txt);
-            if(t.titulo) textos.push(t);
-          })
-          .catch(err => console.error(err))
-          .finally(() => {
-            carregados++;
-            if(carregados === arquivos.length) finalizeLoad();
-          });
-      });
-    })
-    .catch(err => {
-      console.error(err);
-      document.getElementById("lista").innerHTML = '<div style="font-size:0.7rem;color:var(--muted);padding:2rem 0;">Erro ao carregar o índice de textos.</div>';
-    });
-}
-
-
-function finalizeLoad() {
-  textos.sort((a, b) => b.data.localeCompare(a.data));
-  render("todos");
-}
-
-function parse(raw) {
-  var L = raw.split("\n");
-  return {
-    titulo: (L[0] || "").trim(),
-    categoria: (L[1] || "").trim().toLowerCase(),
-    data: (L[2] || "").trim(),
-    dataLabel: (L[3] || "").trim(),
-    resumo: (L[4] || "").trim(),
-    corpo: L.slice(5).join("\n").trim()
+  // Configuration
+  const CONFIG = {
+    WA_BASE: "https://wa.me/5548988717486",
+    MSG_PRONTA: "Gostaria de marcar uma sessão, qual sua disponibilidade?",
+    FORMSPREE_ID: "mwvaeogg",
+    MAX_CHARS: 216,
+    FETCH_TIMEOUT: 8000
   };
-}
 
-function render(tag) {
-  var lista = document.getElementById("lista");
-  var filt = tag === "todos" ? textos : textos.filter(t => t.categoria === tag);
-  
-  if(!filt.length) {
-    lista.innerHTML = '<div style="font-size:0.7rem;color:var(--muted);padding:2rem 0;">Nenhum texto encontrado.</div>';
-    return;
+  let textos = [];
+  let textosMap = new Map();
+
+  function escapeHtml(text) {
+    const map = {
+      '&': '&amp;',
+      '<': '&lt;',
+      '>': '&gt;',
+      '"': '&quot;',
+      "'": '&#039;'
+    };
+    return String(text).replace(/[&<>\"']/g, char => map[char]);
   }
 
-  lista.innerHTML = filt.map((t, i) => {
-    var tituloEscapado = t.titulo.replace(/'/g, "\\'").replace(/"/g, "&quot;");
-    var ps = t.corpo.split(/\n\n+/).map(p => "<p>" + p.replace(/\n/g, " ") + "</p>").join("");
-    
-    return '<article class="texto" id="artigo-' + i + '">' +
-      '<div class="tmeta"><span class="tdata">' + t.dataLabel + '</span><span class="tcat">' + t.categoria + '</span></div>' +
-      '<h2 class="ttitulo">' + t.titulo + '</h2>' +
-      '<p class="tresumo">' + t.resumo + '</p>' +
-      '<button class="ler-btn" onclick="lerToggle(' + i + ')"><span class="arr" id="arr-' + i + '">›</span> <span id="lbl-' + i + '">ler</span></button>' +
-      '<div class="tcorpo" id="corpo-' + i + '">' +
-        ps +
-        '<button class="ler-btn" style="margin:2.5rem 0; padding:1.2rem; border:1px solid var(--line); width:100%; justify-content:center;" onclick="fecharTexto(' + i + ')">' +
-          '<span class="arr" style="transform:rotate(270deg)">›</span> fechar e voltar ao topo' +
-        '</button>' +
-        '<div class="csec">' +
-          '<button class="cbtn" id="cbtn-' + i + '" onclick="toggleForm(' + i + ')">comentar</button>' +
-          '<div class="cform" id="cform-' + i + '">' +
-            '<input type="text" class="finp" id="cont-' + i + '" placeholder="seu contato" />' +
-            '<textarea class="ftxt" id="msg-' + i + '" maxlength="' + MAX_CHARS + '" placeholder="sua mensagem…" oninput="contar(' + i + ')"></textarea>' +
-            '<div style="font-size:0.55rem; text-align:right; color:var(--muted); margin-top:0.3rem;" id="fct-' + i + '">0 / ' + MAX_CHARS + '</div>' +
-            '<button class="fenv" id="fenv-' + i + '" onclick="enviar(' + i + ', \'' + tituloEscapado + '\')">enviar</button>' +
-            '<div class="fmsg" id="resp-' + i + '" style="font-size:0.65rem; margin-top:0.5rem; display:none;"></div>' +
-          '</div>' +
-        '</div>' +
-      '</div>' +
-    '</article>';
-  }).join("");
-}
+  function fetchWithTimeout(url, options = {}, timeout = CONFIG.FETCH_TIMEOUT) {
+    return Promise.race([
+      fetch(url, options),
+      new Promise((_, reject) =>
+        setTimeout(() => reject(new Error('Timeout ao carregar recurso')), timeout)
+      )
+    ]);
+  }
 
-function lerToggle(i) {
-  var c = document.getElementById("corpo-" + i);
-  var a = document.getElementById("arr-" + i);
-  var l = document.getElementById("lbl-" + i);
-  var aberto = c.style.display === "block";
-  c.style.display = aberto ? "none" : "block";
-  a.style.transform = aberto ? "" : "rotate(90deg)";
-  l.textContent = aberto ? "ler" : "fechar";
-}
+  function initializeQRCodes() {
+    const qrHome = document.getElementById("qr-home");
+    const qrAge = document.getElementById("qr-age");
 
-function fecharTexto(i) {
-  lerToggle(i);
-  var el = document.getElementById("artigo-" + i);
-  var painel = document.getElementById("panel-blog");
-  if (el && painel) painel.scrollTop = el.offsetTop - 20;
-}
-
-function toggleForm(i) {
-  var f = document.getElementById("cform-" + i);
-  var b = document.getElementById("cbtn-" + i);
-  f.classList.toggle("aberto");
-  b.textContent = f.classList.contains("aberto") ? "fechar" : "comentar";
-}
-
-function contar(i) {
-  var n = document.getElementById("msg-" + i).value.length;
-  var el = document.getElementById("fct-" + i);
-  el.textContent = n + " / " + MAX_CHARS;
-  el.style.color = n >= MAX_CHARS ? "var(--error)" : "var(--muted)";
-}
-
-function enviar(i, tit) {
-  var c = document.getElementById("cont-" + i);
-  var m = document.getElementById("msg-" + i);
-  var r = document.getElementById("resp-" + i);
-  var b = document.getElementById("fenv-" + i);
-  
-  if(!c.value.trim() || !m.value.trim()) return;
-  
-  b.disabled = true; 
-  b.textContent = "enviando...";
-
-  fetch("https://formspree.io/f/" + FORMSPREE_ID, {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
-    body: JSON.stringify({ contato: c.value, mensagem: m.value, texto: tit })
-  }).then(res => {
-    r.style.display = "block";
-    if(res.ok) {
-      r.textContent = "Enviado com sucesso.";
-      c.value = ""; m.value = ""; 
-      b.textContent = "enviado";
-      contar(i); 
-
-      setTimeout(function() {
-        r.style.display = "none";
-        r.textContent = "";
-        b.disabled = false;
-        b.textContent = "enviar";
-      }, 3000);
-
-    } else {
-      r.textContent = "Erro no envio.";
-      b.disabled = false; 
-      b.textContent = "enviar";
+    if (!qrHome || !qrAge) {
+      console.warn("Elementos QR não encontrados");
+      return;
     }
-  }).catch(function() {
-    r.textContent = "Erro de conexão.";
-    r.style.display = "block";
-    b.disabled = false;
-    b.textContent = "enviar";
-    
-    setTimeout(function() {
-      r.style.display = "none";
-    }, 3000);
-  });
-}
 
-document.getElementById("tags").onclick = (e) => {
-  if(!e.target.dataset.tag) return;
-  document.querySelectorAll(".tag").forEach(t => t.classList.remove("on"));
-  e.target.classList.add("on");
-  render(e.target.dataset.tag);
-};
+    try {
+      const WA_AGE = CONFIG.WA_BASE + "?text=" + encodeURIComponent(CONFIG.MSG_PRONTA);
+      
+      new QRCode(qrHome, {
+        text: CONFIG.WA_BASE,
+        width: 80,
+        height: 80,
+        colorDark: "#f0ece4",
+        colorLight: "#0a0a0a",
+        correctLevel: QRCode.CorrectLevel.M
+      });
+
+      new QRCode(qrAge, {
+        text: WA_AGE,
+        width: 80,
+        height: 80,
+        colorDark: "#f0ece4",
+        colorLight: "#0a0a0a",
+        correctLevel: QRCode.CorrectLevel.M
+      });
+
+      const btnAge = document.getElementById("btn-age");
+      const linkAge = document.getElementById("link-age");
+      if (btnAge) btnAge.href = WA_AGE;
+      if (linkAge) linkAge.href = WA_AGE;
+    } catch (err) {
+      console.error("Erro ao gerar QR codes:", err);
+    }
+  }
+
+  window.addEventListener("load", function() {
+    initializeQRCodes();
+    carregarTextos();
+  });
+
+  function ir(id) {
+    const panels = document.querySelectorAll(".panel");
+    panels.forEach(p => p.style.transform = "translateX(100%)");
+    const alvo = document.getElementById(id);
+    if (alvo) {
+      alvo.style.transform = "translateX(0)";
+      alvo.scrollTop = 0;
+    }
+  }
+
+  const navAge = document.getElementById("nav-age");
+  const navBlog = document.getElementById("nav-blog");
+  const backAge = document.getElementById("back-age");
+  const backBlog = document.getElementById("back-blog");
+
+  if (navAge) navAge.addEventListener("click", () => ir("panel-agendar"));
+  if (navBlog) navBlog.addEventListener("click", () => ir("panel-blog"));
+  if (backAge) backAge.addEventListener("click", () => ir("panel-cartao"));
+  if (backBlog) backBlog.addEventListener("click", () => ir("panel-cartao"));
+
+  function carregarTextos() {
+    fetchWithTimeout('lista.json')
+      .then(r => {
+        if (!r.ok) throw new Error("Erro ao carregar lista.json");
+        return r.json();
+      })
+      .then(arquivos => {
+        if (!Array.isArray(arquivos)) {
+          throw new Error("Formato inválido de lista.json");
+        }
+
+        if (arquivos.length === 0) {
+          finalizeLoad();
+          return;
+        }
+
+        let carregados = 0;
+        arquivos.forEach(nome => {
+          fetchWithTimeout(nome)
+            .then(r => {
+              if (!r.ok) throw new Error("Falha ao carregar " + nome);
+              return r.text();
+            })
+            .then(txt => {
+              const t = parse(txt);
+              if (t.titulo) {
+                textos.push(t);
+                textosMap.set(t.titulo, t);
+              }
+            })
+            .catch(err => {
+              console.error("Erro ao processar " + nome + ":", err);
+            })
+            .finally(() => {
+              carregados++;
+              if (carregados === arquivos.length) finalizeLoad();
+            });
+        });
+      })
+      .catch(err => {
+        console.error("Erro ao carregar índice:", err);
+        const lista = document.getElementById("lista");
+        if (lista) {
+          lista.innerHTML = '<div style="font-size:0.7rem;color:var(--error);padding:2rem 0;">⚠ Erro ao carregar o índice de textos. Tente recarregar a página.</div>';
+        }
+      });
+  }
+
+  function parse(raw) {
+    const lines = raw.split("\n");
+    return {
+      titulo: (lines[0] || "").trim(),
+      categoria: (lines[1] || "").trim().toLowerCase(),
+      data: (lines[2] || "").trim(),
+      dataLabel: (lines[3] || "").trim(),
+      resumo: (lines[4] || "").trim(),
+      corpo: lines.slice(5).join("\n").trim()
+    };
+  }
+
+  function finalizeLoad() {
+    textos.sort((a, b) => b.data.localeCompare(a.data));
+    render("todos");
+  }
+
+  function render(tag) {
+    const lista = document.getElementById("lista");
+    if (!lista) return;
+
+    const filt = tag === "todos" ? textos : textos.filter(t => t.categoria === tag);
+
+    if (!filt.length) {
+      lista.innerHTML = '<div style="font-size:0.7rem;color:var(--muted);padding:2rem 0;">Nenhum texto encontrado.</div>';
+      return;
+    }
+
+    lista.innerHTML = filt.map((t, i) => {
+      const ps = t.corpo
+        .split(/\n\n+/)
+        .map(p => "<p>" + escapeHtml(p.replace(/\n/g, " ")) + "</p>")
+        .join("");
+
+      return `<article class="texto" data-index="${i}">
+        <div class="tmeta">
+          <span class="tdata">${escapeHtml(t.dataLabel)}</span>
+          <span class="tcat">${escapeHtml(t.categoria)}</span>
+        </div>
+        <h2 class="ttitulo">${escapeHtml(t.titulo)}</h2>
+        <p class="tresumo">${escapeHtml(t.resumo)}</p>
+        <button class="ler-btn" data-action="toggle" data-index="${i}">
+          <span class="arr">›</span> <span>ler</span>
+        </button>
+        <div class="tcorpo" style="display:none;">
+          ${ps}
+          <button class="ler-btn" style="margin:2.5rem 0; padding:1.2rem; border:1px solid var(--line); width:100%; justify-content:center;" data-action="fechar" data-index="${i}">
+            <span class="arr" style="transform:rotate(270deg)">›</span> fechar e voltar ao topo
+          </button>
+          <div class="csec">
+            <button class="cbtn" data-action="toggleForm" data-index="${i}">comentar</button>
+            <div class="cform">
+              <input type="text" class="finp" placeholder="seu contato" />
+              <textarea class="ftxt" maxlength="${CONFIG.MAX_CHARS}" placeholder="sua mensagem…"></textarea>
+              <div style="font-size:0.55rem; text-align:right; color:var(--muted); margin-top:0.3rem;">0 / ${CONFIG.MAX_CHARS}</div>
+              <button class="fenv" data-action="enviar" data-index="${i}" data-titulo="${escapeHtml(t.titulo)}">enviar</button>
+              <div class="fmsg" style="display:none;"></div>
+            </div>
+          </div>
+        </div>
+      </article>`;
+    }).join("");
+
+    attachArticleListeners();
+  }
+
+  function attachArticleListeners() {
+    const lista = document.getElementById("lista");
+    if (!lista) return;
+
+    lista.addEventListener("click", e => {
+      const action = e.target.closest("[data-action]");
+      if (!action) return;
+
+      const type = action.dataset.action;
+      const index = parseInt(action.dataset.index, 10);
+      const article = action.closest("article");
+
+      if (type === "toggle") lerToggle(article);
+      else if (type === "fechar") fecharTexto(article);
+      else if (type === "toggleForm") toggleForm(article);
+      else if (type === "enviar") enviar(article, action.dataset.titulo);
+    });
+
+    lista.addEventListener("input", e => {
+      if (e.target.classList.contains("ftxt")) {
+        const article = e.target.closest("article");
+        contar(article);
+      }
+    });
+  }
+
+  function lerToggle(article) {
+    const corpo = article.querySelector(".tcorpo");
+    const btn = article.querySelector('[data-action="toggle"]');
+    const arr = btn.querySelector(".arr");
+    const label = btn.querySelector("span:last-child");
+
+    const isOpen = corpo.style.display === "block";
+    corpo.style.display = isOpen ? "none" : "block";
+    arr.style.transform = isOpen ? "" : "rotate(90deg)";
+    label.textContent = isOpen ? "ler" : "fechar";
+  }
+
+  function fecharTexto(article) {
+    const corpo = article.querySelector(".tcorpo");
+    const btn = article.querySelector('[data-action="toggle"]');
+
+    corpo.style.display = "none";
+    btn.querySelector(".arr").style.transform = "";
+    btn.querySelector("span:last-child").textContent = "ler";
+
+    const panel = document.getElementById("panel-blog");
+    if (panel) panel.scrollTop = article.offsetTop - 20;
+  }
+
+  function toggleForm(article) {
+    const form = article.querySelector(".cform");
+    const btn = article.querySelector('[data-action="toggleForm"]');
+    const isOpen = form.classList.contains("aberto");
+
+    form.classList.toggle("aberto");
+    btn.textContent = isOpen ? "comentar" : "fechar";
+  }
+
+  function contar(article) {
+    const textarea = article.querySelector(".ftxt");
+    const counter = article.querySelector(".fenv").parentElement.querySelector("div");
+    const n = textarea.value.length;
+
+    if (counter) {
+      counter.textContent = `${n} / ${CONFIG.MAX_CHARS}`;
+      counter.style.color = n >= CONFIG.MAX_CHARS ? "var(--error)" : "var(--muted)";
+    }
+  }
+
+  function enviar(article, titulo) {
+    const input = article.querySelector(".finp");
+    const textarea = article.querySelector(".ftxt");
+    const msg = article.querySelector(".fmsg");
+    const btn = article.querySelector('[data-action="enviar"]');
+
+    if (!input.value.trim() || !textarea.value.trim()) return;
+
+    btn.disabled = true;
+    btn.textContent = "enviando...";
+    msg.style.display = "none";
+
+    fetchWithTimeout("https://formspree.io/f/" + CONFIG.FORMSPREE_ID, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'Accept': 'application/json'
+      },
+      body: JSON.stringify({
+        contato: input.value,
+        mensagem: textarea.value,
+        texto: titulo
+      })
+    })
+      .then(res => {
+        msg.style.display = "block";
+        if (res.ok) {
+          msg.textContent = "✓ Enviado com sucesso!";
+          msg.classList.remove("error");
+          msg.classList.add("success");
+          input.value = "";
+          textarea.value = "";
+          btn.textContent = "enviado";
+          contar(article);
+
+          setTimeout(() => {
+            msg.style.display = "none";
+            msg.textContent = "";
+            btn.disabled = false;
+            btn.textContent = "enviar";
+            msg.classList.remove("success");
+          }, 4000);
+        } else {
+          msg.textContent = "✗ Erro no envio. Tente novamente.";
+          msg.classList.add("error");
+          msg.classList.remove("success");
+          btn.disabled = false;
+          btn.textContent = "enviar";
+        }
+      })
+      .catch(err => {
+        console.error("Erro ao enviar:", err);
+        msg.style.display = "block";
+        msg.textContent = "✗ Erro de conexão. Tente novamente.";
+        msg.classList.add("error");
+        msg.classList.remove("success");
+        btn.disabled = false;
+        btn.textContent = "enviar";
+
+        setTimeout(() => {
+          msg.style.display = "none";
+          msg.classList.remove("error");
+        }, 4000);
+      });
+  }
+
+  const tagsContainer = document.getElementById("tags");
+  if (tagsContainer) {
+    tagsContainer.addEventListener("click", e => {
+      if (!e.target.dataset.tag) return;
+      document.querySelectorAll(".tag").forEach(t => t.classList.remove("on"));
+      e.target.classList.add("on");
+      render(e.target.dataset.tag);
+    });
+  }
 </script>
 </body>
 </html>
