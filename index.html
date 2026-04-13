@@ -264,13 +264,17 @@ function render(tag) {
   }
   lista.innerHTML = filt.map((t, i) => {
     var ps = t.corpo.split(/\n\n+/).map(p => "<p>" + p.replace(/\n/g, " ") + "</p>").join("");
-    return '<article class="texto">' +
+    return '<article class="texto" id="artigo-' + i + '">' + // Adicionei ID aqui
       '<div class="tmeta"><span class="tdata">' + t.dataLabel + '</span><span class="tcat">' + t.categoria + '</span></div>' +
       '<h2 class="ttitulo">' + t.titulo + '</h2>' +
       '<p class="tresumo">' + t.resumo + '</p>' +
       '<button class="ler-btn" onclick="lerToggle(' + i + ')"><span class="arr" id="arr-' + i + '">›</span> <span id="lbl-' + i + '">ler</span></button>' +
       '<div class="tcorpo" id="corpo-' + i + '">' +
         ps +
+        // NOVO BOTÃO FECHAR NO FINAL DO TEXTO
+        '<button class="ler-btn" style="margin: 1.5rem 0; opacity: 0.8;" onclick="lerToggle(' + i + '); document.getElementById(\'artigo-\'+' + i + ').scrollIntoView({behavior: \'smooth\'});">' +
+          '<span class="arr" style="transform: rotate(270deg);">›</span> fechar texto' +
+        '</button>' +
         '<div class="csec">' +
           '<button class="cbtn" id="cbtn-' + i + '" onclick="toggleForm(' + i + ')">comentar</button>' +
           '<div class="cform" id="cform-' + i + '">' +
