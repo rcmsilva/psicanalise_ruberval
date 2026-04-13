@@ -201,7 +201,6 @@ var WA_BASE = "https://wa.me/5548988717486";
 var MSG_PRONTA = "Gostaria de marcar uma sessão, qual sua disponibilidade?";
 var WA_AGE = WA_BASE + "?text=" + encodeURIComponent(MSG_PRONTA);
 var FORMSPREE_ID = "mwvaeogg";
-var ARQUIVOS = ["texto_1a.txt", "texto_2.txt", "texto_3.txt"];
 var MAX_CHARS = 216;
 var textos = [];
 
@@ -228,18 +227,23 @@ document.getElementById("back-age").onclick = () => ir("panel-cartao");
 document.getElementById("back-blog").onclick = () => ir("panel-cartao");
 
 function carregarTextos() {
-  var carregados = 0;
-  ARQUIVOS.forEach(nome => {
-    fetch(nome).then(r => r.text()).then(txt => {
-      var t = parse(txt);
-      if(t.titulo) textos.push(t);
-      carregados++;
-      if(carregados === ARQUIVOS.length) finalizeLoad();
-    }).catch(() => {
-      carregados++;
-      if(carregados === ARQUIVOS.length) finalizeLoad();
+  // Busca a lista de nomes de arquivos em um arquivo separado
+  fetch('lista.json')
+    .then(r => r.json())
+    .then(arquivos => {
+      var carregados = 0;
+      arquivos.forEach(nome => {
+        fetch(nome).then(r => r.text()).then(txt => {
+          var t = parse(txt);
+          if(t.titulo) textos.push(t);
+          carregados++;
+          if(carregados === arquivos.length) finalizeLoad();
+        }).catch(() => {
+          carregados++;
+          if(carregados === arquivos.length) finalizeLoad();
+        });
+      });
     });
-  });
 }
 
 function finalizeLoad() {
