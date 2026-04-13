@@ -340,16 +340,32 @@ function enviar(i, tit) {
     r.style.display = "block";
     if(res.ok) {
       r.textContent = "Enviado com sucesso.";
-      c.value = ""; m.value = ""; b.textContent = "enviado";
+      c.value = ""; m.value = ""; 
+      b.textContent = "enviado";
+
+      // Lógica de 3 segundos para resetar
+      setTimeout(function() {
+        r.style.display = "none";
+        r.textContent = "";
+        b.disabled = false;
+        b.textContent = "enviar";
+      }, 3000);
+
     } else {
       r.textContent = "Erro no envio.";
-      b.disabled = false; b.textContent = "enviar";
+      b.disabled = false; 
+      b.textContent = "enviar";
     }
-  }).catch(function() { // <--- O código entra aqui
+  }).catch(function() {
     r.textContent = "Erro de conexão.";
     r.style.display = "block";
     b.disabled = false;
     b.textContent = "enviar";
+    
+    // Resetar também em caso de erro de conexão após 3s (opcional)
+    setTimeout(function() {
+      r.style.display = "none";
+    }, 3000);
   });
 }
 
