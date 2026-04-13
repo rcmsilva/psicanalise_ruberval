@@ -59,7 +59,6 @@
     .wa-row { display: flex; align-items: center; gap: 1.4rem; }
     .qr-box { display: inline-block; padding: 8px; background: var(--text); border-radius: 2px; }
     .qr-box canvas, .qr-box img { display: block; }
-    .wa-col { display: flex; flex-direction: column; gap: 0.7rem; }
     
     .btn {
       display: inline-flex; align-items: center; gap: 0.5rem;
@@ -67,10 +66,8 @@
       text-transform: uppercase; text-decoration: none; border-radius: 2px;
       transition: background 0.2s, color 0.2s; cursor: pointer;
     }
-    .solid   { font-size: 0.72rem; color: var(--bg); background: var(--text); border: none; padding: 0.6rem 1rem; }
-    .outline { font-size: 0.72rem; color: var(--text); background: transparent; border: 1px solid var(--line); padding: 0.6rem 1rem; }
-    .solid:hover   { background: var(--muted); }
-    .outline:hover { border-color: var(--muted); color: var(--muted); }
+    .solid { font-size: 0.72rem; color: var(--bg); background: var(--text); border: none; padding: 0.6rem 1rem; }
+    .solid:hover { background: var(--muted); }
     
     .nav-row { display: flex; gap: 0.8rem; }
     .nav-btn {
@@ -81,7 +78,7 @@
     .nav-btn.prim { background: var(--text); color: var(--bg); }
     
     .back-btn { background: none; border: none; font-family: var(--mono); font-size: 0.62rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--muted); cursor: pointer; margin-bottom: 3rem; display: block; }
-    .msg-box { background: var(--line); border-left: 2px solid var(--muted); padding: 1rem 1.2rem; font-size: 0.82rem; line-height: 1.65; margin-bottom: 1.2rem; }
+    .msg-box { background: var(--line); border-left: 2px solid var(--muted); padding: 1rem 1.2rem; font-size: 0.82rem; line-height: 1.65; margin-bottom: 2rem; }
     
     .tags { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-bottom: 2.5rem; }
     .tag { font-family: var(--mono); font-size: 0.6rem; letter-spacing: 0.18em; text-transform: uppercase; background: none; border: 1px solid var(--line); color: var(--muted); padding: 0.25rem 0.7rem; cursor: pointer; border-radius: 1px; }
@@ -109,7 +106,6 @@
     .fenv { font-family: var(--mono); font-size: 0.68rem; text-transform: uppercase; color: var(--bg); background: var(--text); border: none; padding: 0.7rem 1.2rem; cursor: pointer; align-self: flex-start; border-radius: 2px; }
     
     .pfooter { font-size: 0.58rem; letter-spacing: 0.16em; color: var(--line); text-transform: uppercase; margin-top: 3rem; }
-    .wsv { width: 14px; height: 14px; fill: currentColor; }
   </style>
 </head>
 <body>
@@ -166,6 +162,7 @@
         </a>
         <div class="wa-col">
           <a class="btn solid" id="btn-age" href="#" target="_blank" rel="noopener">enviar mensagem</a>
+          <span style="font-size:0.55rem; color:var(--muted); letter-spacing:0.1em; margin-top:0.5rem; display:block;">confirme sua vaga via WhatsApp</span>
         </div>
       </div>
       <div class="pfooter">Ruberval Silva · Psicanalista</div>
@@ -212,7 +209,6 @@ window.addEventListener("load", function() {
   carregarTextos();
 });
 
-// Navegação entre painéis
 function ir(id) {
   document.querySelectorAll(".panel").forEach(p => p.style.transform = "translateX(100%)");
   var alvo = document.getElementById(id);
@@ -225,7 +221,6 @@ document.getElementById("nav-blog").onclick = () => ir("panel-blog");
 document.getElementById("back-age").onclick = () => ir("panel-cartao");
 document.getElementById("back-blog").onclick = () => ir("panel-cartao");
 
-// Lógica do Blog
 function carregarTextos() {
   var carregados = 0;
   ARQUIVOS.forEach(nome => {
@@ -276,15 +271,15 @@ function render(tag) {
       '<button class="ler-btn" onclick="lerToggle(' + i + ')"><span class="arr" id="arr-' + i + '">›</span> <span id="lbl-' + i + '">ler</span></button>' +
       '<div class="tcorpo" id="corpo-' + i + '">' +
         ps +
-        '<button class="ler-btn" style="margin:2rem 0; padding:1rem; border:1px solid var(--line); width:100%; justify-content:center;" onclick="fecharTexto(' + i + ')">' +
-          '<span class="arr" style="transform:rotate(270deg)">›</span> fechar texto' +
+        '<button class="ler-btn" style="margin:2.5rem 0; padding:1rem; border:1px solid var(--line); width:100%; justify-content:center;" onclick="fecharTexto(' + i + ')">' +
+          '<span class="arr" style="transform:rotate(270deg)">›</span> fechar e voltar ao topo' +
         '</button>' +
         '<div class="csec">' +
           '<button class="cbtn" id="cbtn-' + i + '" onclick="toggleForm(' + i + ')">comentar</button>' +
           '<div class="cform" id="cform-' + i + '">' +
             '<input class="finp" id="cont-' + i + '" placeholder="seu e-mail" />' +
             '<textarea class="ftxt" id="msg-' + i + '" maxlength="' + MAX_CHARS + '" placeholder="sua mensagem…" oninput="contar(' + i + ')"></textarea>' +
-            '<div style="font-size:0.55rem; text-align:right; color:var(--muted);" id="fct-' + i + '">0 / ' + MAX_CHARS + '</div>' +
+            '<div style="font-size:0.55rem; text-align:right; color:var(--muted); margin-top:0.3rem;" id="fct-' + i + '">0 / ' + MAX_CHARS + '</div>' +
             '<button class="fenv" id="fenv-' + i + '" onclick="enviar(' + i + ', \'' + t.titulo.replace(/'/g, "\\'") + '\')">enviar</button>' +
             '<div class="fmsg" id="resp-' + i + '" style="font-size:0.65rem; margin-top:0.5rem; display:none;"></div>' +
           '</div>' +
@@ -339,10 +334,10 @@ function enviar(i, tit) {
   }).then(res => {
     r.style.display = "block";
     if(res.ok) {
-      r.textContent = "Mensagem enviada.";
+      r.textContent = "Mensagem enviada com sucesso.";
       c.value = ""; m.value = ""; b.textContent = "enviado";
     } else {
-      r.textContent = "Erro no envio.";
+      r.textContent = "Erro ao enviar.";
       b.disabled = false; b.textContent = "enviar";
     }
   });
