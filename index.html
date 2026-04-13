@@ -304,11 +304,9 @@ function lerToggle(i) {
 
 function fecharTexto(i) {
   lerToggle(i);
-  var el = document.getElementById('artigo-' + i);
-  var painel = document.getElementById('panel-blog');
-  if (el && painel) {
-    painel.scrollTo({ top: el.offsetTop - 20, behavior: 'smooth' });
-  }
+  var el = document.getElementById("artigo-" + i);
+  var painel = document.getElementById("panel-blog");
+  if (el && painel) painel.scrollTop = el.offsetTop - 20;
 }
 
 function toggleForm(i) {
@@ -328,8 +326,12 @@ function enviar(i, tit) {
   var m = document.getElementById("msg-" + i);
   var r = document.getElementById("resp-" + i);
   var b = document.getElementById("fenv-" + i);
+  
   if(!c.value.trim() || !m.value.trim()) return;
-  b.disabled = true; b.textContent = "enviando...";
+  
+  b.disabled = true; 
+  b.textContent = "enviando...";
+
   fetch("https://formspree.io/f/" + FORMSPREE_ID, {
     method: 'POST',
     headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
@@ -343,6 +345,11 @@ function enviar(i, tit) {
       r.textContent = "Erro no envio.";
       b.disabled = false; b.textContent = "enviar";
     }
+  }).catch(function() { // <--- O código entra aqui
+    r.textContent = "Erro de conexão.";
+    r.style.display = "block";
+    b.disabled = false;
+    b.textContent = "enviar";
   });
 }
 
