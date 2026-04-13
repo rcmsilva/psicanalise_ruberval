@@ -150,9 +150,10 @@
       <button class="back-btn" id="back-age">‹ voltar</button>
       <div class="sigil">$ ̶</div>
       <h1>Agendar</h1>
-      <p class="role">Sessão</p>
+      <p class="role">SESSÃO</p>
       <div class="divider"></div>
       
+      <span class="wa-lbl" style="margin-bottom: 0.9rem; display: block;">MENSAGEM PRONTA</span>
       <div class="msg-box">Gostaria de marcar uma sessão, qual sua disponibilidade?</div>
       
       <div class="wa-row">
@@ -160,9 +161,10 @@
           <div class="qr-box"><div id="qr-age"></div></div>
         </a>
         <div class="wa-col">
-          <a class="btn solid" id="btn-age" href="#" target="_blank" rel="noopener">confirmar via WhatsApp</a>
+          <a class="btn solid" id="btn-age" href="#" target="_blank" rel="noopener">ENVIAR MENSAGEM</a>
         </div>
       </div>
+      
       <div class="pfooter">Ruberval Silva · Psicanalista</div>
     </div>
   </div>
@@ -201,11 +203,9 @@ var MAX_CHARS = 216;
 var textos = [];
 
 window.addEventListener("load", function() {
-  // QR Codes
   new QRCode(document.getElementById("qr-home"), { text: WA_BASE, width: 80, height: 80, colorDark: "#f0ece4", colorLight: "#0a0a0a", correctLevel: QRCode.CorrectLevel.M });
   new QRCode(document.getElementById("qr-age"), { text: WA_AGE, width: 80, height: 80, colorDark: "#f0ece4", colorLight: "#0a0a0a", correctLevel: QRCode.CorrectLevel.M });
   
-  // Links de agendamento
   document.getElementById("btn-age").href = WA_AGE;
   document.getElementById("link-age").href = WA_AGE;
   
@@ -274,7 +274,6 @@ function render(tag) {
       '<button class="ler-btn" onclick="lerToggle(' + i + ')"><span class="arr" id="arr-' + i + '">›</span> <span id="lbl-' + i + '">ler</span></button>' +
       '<div class="tcorpo" id="corpo-' + i + '">' +
         ps +
-        /* BOTÃO FECHAR E VOLTAR AO TOPO */
         '<button class="ler-btn" style="margin:2.5rem 0; padding:1.2rem; border:1px solid var(--line); width:100%; justify-content:center;" onclick="fecharTexto(' + i + ')">' +
           '<span class="arr" style="transform:rotate(270deg)">›</span> fechar e voltar ao topo' +
         '</button>' +
