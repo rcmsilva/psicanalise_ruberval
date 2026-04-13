@@ -15,12 +15,18 @@ DICA DE FORMATAÇÃO:
 ---
 COMO ADICIONAR NOVOS TEXTOS NO SITE:
 
-1. Procure no código HTML a linha que começa com: var ARQUIVOS = [...]
-2. Ela está localizada logo no início da tag <script>, linha 204
-3. Adicione o nome do seu novo arquivo entre aspas e separado por vírgula.
-
-Exemplo atual:
-var ARQUIVOS = ["texto_1a.txt", "texto_2.txt", "texto_3.txt"];
-
-Se você criar o "texto_4.txt", mude para:
-var ARQUIVOS = ["texto_1a.txt", "texto_2.txt", "texto_3.txt", "texto_4.txt"];
+1. Abra o arquivo lista.json que está localizado no mesmo diretorio dos textos e index
+2. Insira o nome do texto conforme a sequencia que há no texto, adicione uma virgula e preserve os colchetes
+3. arquivo atual:
+[
+  "texto_1a.txt",
+  "texto_2.txt",
+  "texto_3.txt"
+]
+4. inserindo o arquivo "texto_4.txt"
+[
+  "texto_1a.txt",
+  "texto_2.txt",
+  "texto_3.txt",
+  "texto_4.txt"
+]
