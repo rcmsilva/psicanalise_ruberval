@@ -269,9 +269,7 @@ function render(tag) {
   }
 
   lista.innerHTML = filt.map((t, i) => {
-    // AQUI: Escapamos o título para não quebrar o atributo 'onclick' do HTML
     var tituloEscapado = t.titulo.replace(/'/g, "\\'").replace(/"/g, "&quot;");
-    
     var ps = t.corpo.split(/\n\n+/).map(p => "<p>" + p.replace(/\n/g, " ") + "</p>").join("");
     
     return '<article class="texto" id="artigo-' + i + '">' +
@@ -290,35 +288,7 @@ function render(tag) {
             '<input type="text" class="finp" id="cont-' + i + '" placeholder="seu contato" />' +
             '<textarea class="ftxt" id="msg-' + i + '" maxlength="' + MAX_CHARS + '" placeholder="sua mensagem…" oninput="contar(' + i + ')"></textarea>' +
             '<div style="font-size:0.55rem; text-align:right; color:var(--muted); margin-top:0.3rem;" id="fct-' + i + '">0 / ' + MAX_CHARS + '</div>' +
-            // AQUI: Usamos a variável tituloEscapado no onclick
             '<button class="fenv" id="fenv-' + i + '" onclick="enviar(' + i + ', \'' + tituloEscapado + '\')">enviar</button>' +
-            '<div class="fmsg" id="resp-' + i + '" style="font-size:0.65rem; margin-top:0.5rem; display:none;"></div>' +
-          '</div>' +
-        '</div>' +
-      '</div>' +
-    '</article>';
-  }).join("");
-}
-
-  lista.innerHTML = filt.map((t, i) => {
-    var ps = t.corpo.split(/\n\n+/).map(p => "<p>" + p.replace(/\n/g, " ") + "</p>").join("");
-    return '<article class="texto" id="artigo-' + i + '">' +
-      '<div class="tmeta"><span class="tdata">' + t.dataLabel + '</span><span class="tcat">' + t.categoria + '</span></div>' +
-      '<h2 class="ttitulo">' + t.titulo + '</h2>' +
-      '<p class="tresumo">' + t.resumo + '</p>' +
-      '<button class="ler-btn" onclick="lerToggle(' + i + ')"><span class="arr" id="arr-' + i + '">›</span> <span id="lbl-' + i + '">ler</span></button>' +
-      '<div class="tcorpo" id="corpo-' + i + '">' +
-        ps +
-        '<button class="ler-btn" style="margin:2.5rem 0; padding:1.2rem; border:1px solid var(--line); width:100%; justify-content:center;" onclick="fecharTexto(' + i + ')">' +
-          '<span class="arr" style="transform:rotate(270deg)">›</span> fechar e voltar ao topo' +
-        '</button>' +
-        '<div class="csec">' +
-          '<button class="cbtn" id="cbtn-' + i + '" onclick="toggleForm(' + i + ')">comentar</button>' +
-          '<div class="cform" id="cform-' + i + '">' +
-            '<input type="text" class="finp" id="cont-' + i + '" placeholder="seu contato" />' +
-            '<textarea class="ftxt" id="msg-' + i + '" maxlength="' + MAX_CHARS + '" placeholder="sua mensagem…" oninput="contar(' + i + ')"></textarea>' +
-            '<div style="font-size:0.55rem; text-align:right; color:var(--muted); margin-top:0.3rem;" id="fct-' + i + '">0 / ' + MAX_CHARS + '</div>' +
-            '<button class="fenv" id="fenv-' + i + '" onclick="enviar(' + i + ', \'' + t.titulo.replace(/'/g, "\\'") + '\')">enviar</button>' +
             '<div class="fmsg" id="resp-' + i + '" style="font-size:0.65rem; margin-top:0.5rem; display:none;"></div>' +
           '</div>' +
         '</div>' +
@@ -379,7 +349,7 @@ function enviar(i, tit) {
       r.textContent = "Enviado com sucesso.";
       c.value = ""; m.value = ""; 
       b.textContent = "enviado";
-      contar(i); // Reseta o contador visual para 0
+      contar(i); 
 
       setTimeout(function() {
         r.style.display = "none";
