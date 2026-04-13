@@ -1,16 +1,20 @@
 Hic sunt dracones: o sujeito e seu território, ou a psicose como paradigma
 teoria 
-2018-10-10
-Outubro 2018
+2017-10-10
+Julho 2017
 constituição da realidade - publicado na Revista Arteira No 9
 
 "Meio século de freudismo aplicado a psicose deixa seu problema ainda por repensar, ou, em outros termos, no status quo ante" (LACAN, 1998, p.537).
+
+-------
 
 O sujeito da psicanálise não é um dado, ou um agente, é o efeito da relação entre significantes; de outra forma: aquilo que um significante representa para outro significante. Assim definido, como um efeito, não se pode dizer que é autônomo em relação à realidade, ou seja, a heteronomia do sujeito é dada pela estrutura própria da linguagem (MILLER, 2009). 
 
  Este escrito propõe pensar a constituição do sujeito e da realidade tomando como pano de fundo o texto "De uma questão preliminar a todo tratamento possível da psicose" de Jacques Lacan. 
 Dois pressupostos permeiam esse texto: a ideia da construção do laço social como algo mais amplo, ou seja, amparado na ideia de construção e coesão do grupo social, o recurso heurístico aqui é da ordem da experiência do sujeito em sociedade; o uso da noção de função simbólica como uma relação que se realiza através do uso e seleção de certas imagens ordenadas. A ideia de função simbólica aqui é relacionada ao ato da fala, relacionada a capacidade de ligar imagens a uma função que construa uma realidade possível. Há uma redundância proposital na referencia à ordem simbólica para a construção da função simbólica a partir de uma hierarquização de funções imaginárias. Dito de outra forma, em todo o texto, o esforço é relacionar o ato da fala como o resultado de uma função que associa uma imagem (ou função imaginária) a uma cadeia significante. Trata-se portanto de uma leitura onde se propõe que a ordem simbólica engendra uma função materializada no ato da fala e a função imaginária engendra uma ordem com o falo como ponto fundamental.  
-***
+
+-------
+
 Ao lançar outra luz para o problema da psicose tomando como ponto de partida a abordagem freudiana, Lacan parte do problema do sujeito da percepção, principalmente seu papel como unificador e corretor de distorções sensoriais. De forma aguda, afirma:
 Assim é que a teoria da abstração, necessária para dar conta do conhecimento, fixou-se numa teoria abstrata das faculdades do sujeito, que as mais radicais petições sensualistas não conseguiram tomar mais funcionais no que tange aos efeitos subjetivos. (LACAN, 1998, p.537)
  	O problema da análise freudiana é de pressuposto, independente das correções teóricas adicionadas ao longo do seu desenvolvimento: o pressuposto da estabilidade do percipiens diante do perceptum. Este pressuposto deixa de lado os efeitos subjetivos da relação sujeito e realidade.
@@ -32,13 +36,16 @@ O Lugar do Sujeito na Realidade em Construção
 Tendo em vista o que foi dito acima, é preciso montar uma realidade que seja um conjunto de possibilidades que garantam a possibilidade de laço social, para isso, o ponto de início é a localização do sujeito no discurso do Outro, esse movimento é dado pelo esquema L.  A forma como essa localização se dá dentro da ordem simbólica passa pelo processo das identificações, para o sujeito neurótico a identificação é uma série infinita e, na dúvida, se recorre a um significante ordenador. No psicótico não há a dúvida e quando uma ordem é necessária, o retorno é um conjunto vazio no que tange o laço social. O delírio psicótico é uma realidade particular também em construção.
 
 Esquema L
+
 No esquema L, o conjunto realidade ainda não está constituído, pois não se trata de um conjunto qualquer, trata-se de um conjunto ordenado. O esquema L posiciona o sujeito na relação com o Outro e com o objeto, mas não indica o significante ordenador da realidade. Nessa relação se constitui o estado - neurose ou psicose: os efeitos no sujeito com aposição da palavra "Porca!" definem seu estado, por exemplo. 
 A partir do falo como função imaginária, primordial e ordenadora, Lacan(1998) - com o esquema R - mostra de que forma se constrói o conjunto realidade para o sujeito, ou, dito de outra forma, quais são os elementos necessários para se ter um espaço de realidade que seja fundador das possibilidades de laço social. Lacan(1998) mostra que a realidade pode ser lida como o resultado de uma tradução - ou intermediação - entre imaginário e simbólico, onde a ordenação é dada por um significante mestre que delimita as possibilidades de fundação do laço social. O conjunto R hachurado representa as possibilidades de relação entre os elementos do esquema que fundam as relações passíveis de laço social. 
 
 Esquema R
+
 Se o significante mestre falta (esquema I), a realidade deixa de ser um conjunto fechado. Ao evocar o significante ordenador, o sujeito tem como retorno o zero. Importante ressaltar - em primeiro lugar - que esse significante ordenador tem como ponto de apoio primordial uma ordem de identificação imaginária - representada pelo pontilhado na aresta superior esquerda do esquema R e, em segundo lugar, que ordem - nesse sentido -  implica em hierarquia: a realidade do sujeito e do laço se funda a partir de um significante mestre. Através de uma identificação com a ordem fálica pela via da lógica do significante (MILLER, 2009) , o sujeito constrói o sentido necessário para a realidade (e para o laço social). Caso o retorno seja um zero, que equivale a dizer que a identificação não passa pela via da lógica do significante (MILLER, 2009) e sim é um curto-circuito com o objeto, o sujeito alucina uma realidade e o laço social sucumbe. Basta observar que o esquema I é aberto, o sujeito é como que inundado por significantes, não há um limite, um ponto final. Por escapar a lógica das diferenças, o sujeito entra em uma lógica de identidade direta com o objeto. No esquema I, o Nome-do-Pai na posição de A, não existe. O esquema é a representação gráfica de uma distorção imaginária projetada no sentido que causa a queda da função simbólica constitutiva do laço social. "Para que a psicose se desencadeie é preciso que o Nome-do-Pai foracluido seja invocado em oposição simbólica ao sujeito" (LACAN, 1998, p.584).
 
 Esquema I (com o sintoma de Schreber)
+
 Na necessidade de construir sentido, o sujeito alucina e monta um sentido outro.
 De uma forma muito sintética, no psicótico há um problema na operação de metaforização. O ponto final da metaforização é o Nome-do-Pai, sem esse ponto final se "abre um furo no significado" e a realidade - o sentido – escoa (LACAN, 1999).  
 Nesse sentido, a realidade pode ser lida como o resultado da mediação entre simbólico e imaginário: dessa mediação o produto mais pronunciado é o sentido. O laço social funda-se nesse sentido partilhado - da ordem "cultural" grosseiramente falando - portanto é fenômeno geral, não pode ser qualquer coisa; a solução para o problema do sentido que tem consigo as questões fundamentais para o sujeito (o que quero? o que sou (nisso)? ) é única e singular. Na compatibilização entre a realidade - psíquica e cambiante - do sujeito e os "dados de cultura" funda-se o laço social. Não se trata aqui de definir fundamentalmente o sentido como o único meio  de definir ou de descrever a construção da realidade, ou a única via de resposta possível para as questões fundamentais do sujeito: o fora de sentido pode ser lido como um efeito de corpo, como resultado da impossibilidade da definição de uma relação unívoca entre os sexos. A experiência subjetiva de cada um é muito mais ampla e muito mais exuberante do que os limites da construção do sentido; do que os limites da linguagem, portanto.  Por outro lado, o foco dessa reflexão se restringe aos limites da linguagem que possibilitam a constituição do laço social conforme entendido nos parágrafos iniciais. Uma saída interessante e em aberto para formalizar o sem sentido em um discurso sem fala – numa teoria psicanalítica, portanto -  seria a topologia do sujeito proposta por Lacan.  Através da topologia do sujeito abre-se uma via para perceber os ecos do fora de sentido desse sentido partilhado no sujeito (em seu corpo), lidar com os ecos desse fora do sentido  é parte integrante da solução singular que o sujeito dará para suas questões fundamentais (o que quero? o que sou (nisso)? ). Em outras palavras, o caráter arbitrário e violento da ordem cultural se manifesta no sujeito como um fora de sentido, atingindo diretamente seu corpo. De forma um pouco mais precisa, na tensão entre a não complementaridade sexual e o arbitrário cultural emerge o fora de sentido que irá definir o sujeito através de um sintoma.  De qualquer forma, a via de acesso ao fora de sentido se materializa em um ato de fala em análise – dito de outra forma, na experiência analítica - , isto é, é preciso construir um sentido para se chegar no fora de sentido, seja como efeito, seja como fato manifesto na impossibilidade de falar. Essa é uma reflexão que fica em aberto para os fins deste escrito.
@@ -47,6 +54,8 @@ Colocar o problema da psicose dentro da ideia de construção da realidade atrav
 Um pouco mais além: um neurótico pode ser visto como um psicótico com um delírio estável que funda o laço social. Por essa via e tomando a psicose como limite, o questionamento de quem é e onde está o sujeito torna-se radical.
 Para terminar essa digressão uma nota de Lacan sobre Freud que parece orientar toda a questão apresentada: "O Eu freudiano é o bom e velho percipiens, resistente a tudo e responsável pela função de síntese" (LACAN, 1998, p. 549).
 Esse Eu, não pode ser nem forte, nem fraco: ele não existe.
+
+-------
 
 Bibliografia
 
