@@ -15,8 +15,8 @@ DICA DE FORMATAÇÃO:
 ---
 COMO ADICIONAR NOVOS TEXTOS NO SITE:
 
-1. Procure no código HTML a linha que começa com: var ARQUIVOS = [...] (linha 202)
-2. Ela está localizada logo no início da tag <script>, aproximadamente na linha 190.
+1. Procure no código HTML a linha que começa com: var ARQUIVOS = [...]
+2. Ela está localizada logo no início da tag <script>, linha 204
 3. Adicione o nome do seu novo arquivo entre aspas e separado por vírgula.
 
 Exemplo atual:
