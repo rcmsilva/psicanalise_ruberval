@@ -226,25 +226,40 @@ document.getElementById("nav-blog").onclick = () => ir("panel-blog");
 document.getElementById("back-age").onclick = () => ir("panel-cartao");
 document.getElementById("back-blog").onclick = () => ir("panel-cartao");
 
-function carregarTextos() {
+  function carregarTextos() {
   // Busca a lista de nomes de arquivos em um arquivo separado
   fetch('lista.json')
-    .then(r => r.json())
+    .then(r => {
+      if (!r.ok) throw new Error("Erro ao carregar lista.json");
+      return r.json();
+    })
     .then(arquivos => {
       var carregados = 0;
+      if (arquivos.length === 0) finalizeLoad();
+
       arquivos.forEach(nome => {
-        fetch(nome).then(r => r.text()).then(txt => {
-          var t = parse(txt);
-          if(t.titulo) textos.push(t);
-          carregados++;
-          if(carregados === arquivos.length) finalizeLoad();
-        }).catch(() => {
-          carregados++;
-          if(carregados === arquivos.length) finalizeLoad();
-        });
+        fetch(nome)
+          .then(r => {
+            if (!r.ok) throw new Error("Falha ao carregar " + nome);
+            return r.text();
+          })
+          .then(txt => {
+            var t = parse(txt);
+            if(t.titulo) textos.push(t);
+          })
+          .catch(err => console.error(err))
+          .finally(() => {
+            carregados++;
+            if(carregados === arquivos.length) finalizeLoad();
+          });
       });
+    })
+    .catch(err => {
+      console.error(err);
+      document.getElementById("lista").innerHTML = '<div style="font-size:0.7rem;color:var(--muted);padding:2rem 0;">Erro ao carregar o índice de textos.</div>';
     });
 }
+
 
 function finalizeLoad() {
   textos.sort((a, b) => b.data.localeCompare(a.data));
