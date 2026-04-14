@@ -3,13 +3,10 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="description" content="Ruberval Silva - Psicanalista em Florianópolis, SC. Atendimento presencial e online." />
   <title>Ruberval Silva — Psicanalista</title>
-  
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@300;400&family=IBM+Plex+Serif:ital,wght@0,300;0,400;1,300;1,400&display=swap" rel="stylesheet" />
-  
   <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
 
   <style>
@@ -19,7 +16,6 @@
       --text:  #0a0a0a;
       --muted: #6a6a60;
       --line:  #d0ccc4;
-      --error: #c0392b;
       --mono:  'IBM Plex Mono', monospace;
       --serif: 'IBM Plex Serif', serif;
     }
@@ -46,34 +42,32 @@
     #panel-cartao  { transform: translateX(0); }
     #panel-agendar { transform: translateX(100%); }
     #panel-blog    { transform: translateX(100%); }
-
     .panel-inner { max-width: 480px; margin: 0 auto; padding: 3.5rem 2rem 5rem; }
     .sigil { font-size: 1rem; color: var(--muted); letter-spacing: 0.15em; margin-bottom: 2.8rem; user-select: none; }
     h1 { font-size: clamp(1.35rem, 4vw, 1.7rem); font-weight: 400; letter-spacing: 0.04em; margin-bottom: 0.45rem; }
     .role { font-size: 0.7rem; letter-spacing: 0.22em; text-transform: uppercase; color: var(--muted); margin-bottom: 3rem; }
     .divider { width: 2rem; height: 1px; background: var(--line); margin-bottom: 3rem; }
-
     .contact { display: flex; flex-direction: column; gap: 1.2rem; margin-bottom: 3rem; }
     .ci { display: flex; align-items: baseline; gap: 1.2rem; }
     .cl { font-size: 0.62rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--muted); min-width: 4.8rem; flex-shrink: 0; }
     .cv { font-size: 0.88rem; color: var(--text); text-decoration: none; }
-
     .wa-block { display: flex; flex-direction: column; gap: 0.9rem; margin-bottom: 3rem; }
     .wa-lbl { font-size: 0.62rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--muted); }
     .wa-row { display: flex; align-items: center; gap: 1.4rem; }
-    .wa-col { display: flex; flex-direction: column; gap: 0.7rem; }
     .qr-box { display: inline-block; padding: 8px; background: var(--text); border-radius: 2px; }
     .qr-box canvas, .qr-box img { display: block; }
-
+    .wa-col { display: flex; flex-direction: column; gap: 0.7rem; }
     .btn {
       display: inline-flex; align-items: center; gap: 0.5rem;
       font-family: var(--mono); font-weight: 400; letter-spacing: 0.1em;
       text-transform: uppercase; text-decoration: none; border-radius: 2px;
       transition: background 0.2s, color 0.2s; cursor: pointer;
     }
-    .solid { font-size: 0.72rem; color: var(--bg); background: var(--text); border: none; padding: 0.6rem 1rem; }
-    .solid:hover { background: var(--muted); }
-
+    .solid   { font-size: 0.72rem; color: var(--bg); background: var(--text); border: none; padding: 0.6rem 1rem; }
+    .outline { font-size: 0.72rem; color: var(--text); background: transparent; border: 1px solid var(--line); padding: 0.6rem 1rem; }
+    .solid:hover   { background: var(--muted); }
+    .outline:hover { border-color: var(--muted); color: var(--muted); }
+    .hint { font-size: 0.58rem; letter-spacing: 0.12em; color: var(--muted); }
     .nav-row { display: flex; gap: 0.8rem; }
     .nav-btn {
       flex: 1; font-family: var(--mono); font-size: 0.7rem; letter-spacing: 0.18em;
@@ -81,110 +75,67 @@
       color: var(--text); padding: 0.9rem 1rem; cursor: pointer; transition: 0.2s;
     }
     .nav-btn.prim { background: var(--text); color: var(--bg); }
-
-    .back-btn {
-      background: none; border: none; font-family: var(--mono); font-size: 0.62rem;
-      letter-spacing: 0.2em; text-transform: uppercase; color: var(--muted);
-      cursor: pointer; margin-bottom: 2rem; padding: 0; transition: color 0.2s;
-    }
-    .back-btn:hover { color: var(--text); }
-
-    .msg-box { background: var(--line); border-left: 2px solid var(--muted); padding: 1rem 1.2rem; font-size: 0.82rem; line-height: 1.65; margin-bottom: 2rem; }
-
+    .back-btn { background: none; border: none; font-family: var(--mono); font-size: 0.62rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--muted); cursor: pointer; margin-bottom: 3rem; display: block; }
+    .ag-bloco { margin-bottom: 2.8rem; }
+    .ag-titulo { font-size: 0.62rem; letter-spacing: 0.22em; text-transform: uppercase; color: var(--muted); display: block; margin-bottom: 1rem; }
+    .msg-box { background: var(--line); border-left: 2px solid var(--muted); padding: 1rem 1.2rem; font-size: 0.82rem; line-height: 1.65; margin-bottom: 1.2rem; }
+    .sep { height: 1px; background: var(--line); margin: 2.5rem 0; }
+    .ftitulo { font-size: 0.62rem; letter-spacing: 0.22em; text-transform: uppercase; color: var(--muted); margin-bottom: 1.2rem; }
     .tags { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-bottom: 2.5rem; }
-    .tag {
-      font-family: var(--mono); font-size: 0.6rem; letter-spacing: 0.18em; text-transform: uppercase;
-      background: none; border: 1px solid var(--line); color: var(--muted); padding: 0.25rem 0.6rem;
-      cursor: pointer; transition: 0.2s; border-radius: 2px;
-    }
+    .tag { font-family: var(--mono); font-size: 0.6rem; letter-spacing: 0.18em; text-transform: uppercase; background: none; border: 1px solid var(--line); color: var(--muted); padding: 0.25rem 0.7rem; cursor: pointer; border-radius: 1px; }
     .tag.on { background: var(--text); border-color: var(--text); color: var(--bg); }
-
     .texto { border-top: 1px solid var(--line); padding: 2rem 0; }
     .tmeta { display: flex; align-items: baseline; gap: 1rem; margin-bottom: 0.8rem; }
     .tdata { font-size: 0.6rem; letter-spacing: 0.16em; color: var(--muted); }
     .tcat  { font-size: 0.58rem; letter-spacing: 0.18em; text-transform: uppercase; color: var(--muted); border: 1px solid var(--line); padding: 0.12rem 0.45rem; border-radius: 1px; }
-    .ttitulo { font-family: var(--serif); font-size: 1.1rem; font-weight: 400; margin-bottom: 0.8rem; line-height: 1.4; }
+    .ttitulo { font-family: var(--serif); font-size: 1.05rem; font-weight: 400; margin-bottom: 0.8rem; line-height: 1.4; }
     .tresumo { font-family: var(--serif); font-size: 0.86rem; font-weight: 300; color: var(--muted); line-height: 1.75; margin-bottom: 1rem; }
-
-    .ler-btn {
-      background: none; border: none; font-family: var(--mono); font-size: 0.6rem;
-      letter-spacing: 0.18em; text-transform: uppercase; color: var(--muted);
-      cursor: pointer; display: flex; align-items: center; gap: 0.4rem;
-      transition: color 0.2s; padding: 0;
-    }
-    .ler-btn:hover { color: var(--text); }
-
+    .ler-btn { background: none; border: none; font-family: var(--mono); font-size: 0.6rem; letter-spacing: 0.18em; text-transform: uppercase; color: var(--muted); cursor: pointer; display: flex; align-items: center; gap: 0.4rem; padding: 0; }
     .arr { display: inline-block; transition: transform 0.3s; }
     .tcorpo { display: none; margin-top: 1.6rem; padding-top: 1.6rem; border-top: 1px solid var(--line); }
-    .tcorpo p { font-family: var(--serif); font-size: 0.95rem; line-height: 1.85; margin-bottom: 1.3rem; }
-
-    .csec { margin-top: 2.5rem; padding-top: 1.8rem; border-top: 1px solid var(--line); }
-    .cbtn {
-      background: none; border: 1px solid var(--line); font-family: var(--mono);
-      font-size: 0.62rem; text-transform: uppercase; color: var(--muted);
-      cursor: pointer; padding: 0.5rem 0.9rem; transition: 0.2s; border-radius: 2px;
-    }
-    .cbtn:hover { background: var(--line); }
-
+    .tcorpo p { font-family: var(--serif); font-size: 0.93rem; line-height: 1.85; margin-bottom: 1.3rem; }
+    .csec { margin-top: 2rem; padding-top: 1.8rem; border-top: 1px solid var(--line); }
+    .cbtn { background: none; border: 1px solid var(--line); font-family: var(--mono); font-size: 0.62rem; text-transform: uppercase; color: var(--muted); cursor: pointer; padding: 0.5rem 0.9rem; border-radius: 2px; }
     .cform { display: none; flex-direction: column; gap: 1rem; margin-top: 1.4rem; }
     .cform.aberto { display: flex; }
-
-    .finp, .ftxt {
-      font-family: var(--mono); font-size: 0.82rem; background: transparent;
-      border: 1px solid var(--line); padding: 0.65rem 0.8rem; width: 100%;
-      outline: none; color: var(--text); border-radius: 2px;
-      -webkit-appearance: none; appearance: none;
-      transition: border-color 0.2s;
-    }
-    .finp:focus, .ftxt:focus { border-color: var(--text); }
-    .ftxt { resize: none; height: 100px; line-height: 1.6; }
-
-    .fct { font-size: 0.55rem; text-align: right; color: var(--muted); margin-top: 0.3rem; }
-
-    .fenv {
-      font-family: var(--mono); font-size: 0.68rem; text-transform: uppercase;
-      color: var(--bg); background: var(--text); border: none; padding: 0.7rem 1.2rem;
-      cursor: pointer; align-self: flex-start; transition: 0.2s; border-radius: 2px;
-    }
-    .fenv:hover:not(:disabled) { background: var(--muted); }
-    .fenv:disabled { opacity: 0.5; cursor: not-allowed; }
-
-    .fmsg { font-size: 0.65rem; margin-top: 0.5rem; }
-    .fmsg.success { color: #27ae60; }
-    .fmsg.error   { color: var(--error); }
-
+    .finp, .ftxt { font-family: var(--mono); font-size: 0.82rem; background: transparent; border: 1px solid var(--line); padding: 0.65rem 0.8rem; width: 100%; outline: none; color: var(--text); border-radius: 2px; }
+    .ftxt { resize: none; height: 90px; line-height: 1.6; }
+    .fct { font-size: 0.58rem; color: var(--muted); text-align: right; margin-top: 0.3rem; }
+    .fct.over { color: #c0392b; }
+    .fenv { font-family: var(--mono); font-size: 0.68rem; text-transform: uppercase; color: var(--bg); background: var(--text); border: none; padding: 0.7rem 1.2rem; cursor: pointer; align-self: flex-start; border-radius: 2px; }
+    .fenv:disabled { background: var(--line); cursor: not-allowed; }
+    .fmsg { font-size: 0.68rem; color: var(--muted); display: none; margin-top: 0.5rem; }
     .pfooter { font-size: 0.58rem; letter-spacing: 0.16em; color: var(--line); text-transform: uppercase; margin-top: 3rem; }
+    .wsv { width: 13px; height: 13px; fill: currentColor; flex-shrink: 0; }
   </style>
 </head>
 <body>
 
 <div class="stage">
-
   <div class="panel" id="panel-cartao">
     <div class="panel-inner">
       <div class="sigil">$ ̶</div>
       <h1>Ruberval Silva</h1>
       <p class="role">Psicanalista</p>
       <div class="divider"></div>
-
       <div class="contact">
         <div class="ci"><span class="cl">local</span><span class="cv">Florianópolis, SC</span></div>
         <div class="ci"><span class="cl">atendimento</span><span class="cv">presencial e online</span></div>
         <div class="ci"><span class="cl">contato</span><a class="cv" href="tel:+5548988717486">(48) 98871-7486</a></div>
       </div>
-
       <div class="wa-block">
         <span class="wa-lbl">WhatsApp</span>
         <div class="wa-row">
-          <a href="https://wa.me/5548988717486" target="_blank" rel="noopener">
-            <div class="qr-box"><div id="qr-home"></div></div>
-          </a>
+          <a href="https://wa.me/5548988717486" target="_blank" rel="noopener"><div class="qr-box"><div id="qr1"></div></div></a>
           <div class="wa-col">
-            <a class="btn solid" href="https://wa.me/5548988717486" target="_blank" rel="noopener">iniciar conversa</a>
+            <a class="btn solid" href="https://wa.me/5548988717486" target="_blank" rel="noopener">
+              <svg class="wsv" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+              iniciar conversa
+            </a>
+            <span class="hint">escaneie ou toque</span>
           </div>
         </div>
       </div>
-
       <div class="nav-row">
         <button class="nav-btn prim" id="nav-age">Agendar</button>
         <button class="nav-btn" id="nav-blog">Blog</button>
@@ -198,18 +149,26 @@
       <button class="back-btn" id="back-age">‹ voltar</button>
       <div class="sigil">$ ̶</div>
       <h1>Agendar</h1>
-      <p class="role">SESSÃO</p>
+      <p class="role">Sessão</p>
       <div class="divider"></div>
-
-      <span class="wa-lbl" style="margin-bottom:0.9rem;display:block;">MENSAGEM PRONTA</span>
-      <div class="msg-box">Gostaria de marcar uma sessão, qual sua disponibilidade?</div>
-
-      <div class="wa-row">
-        <a id="link-age" href="#" target="_blank" rel="noopener">
-          <div class="qr-box"><div id="qr-age"></div></div>
-        </a>
-        <div class="wa-col">
-          <a class="btn solid" id="btn-age" href="#" target="_blank" rel="noopener">ENVIAR MENSAGEM</a>
+      <div class="ag-bloco">
+        <span class="ag-titulo">mensagem pronta</span>
+        <div class="msg-box">Gostaria de marcar uma sessão, qual sua disponibilidade?</div>
+        <div class="wa-row">
+          <a id="link-age" href="#" target="_blank" rel="noopener"><div class="qr-box"><div id="qr2"></div></div></a>
+          <div class="wa-col">
+            <a class="btn solid" id="btn-age" href="#" target="_blank" rel="noopener">enviar mensagem</a>
+          </div>
+        </div>
+      </div>
+      <div class="sep"></div>
+      <div class="ag-bloco">
+        <span class="ag-titulo">conversa livre</span>
+        <div class="wa-row">
+          <a href="https://wa.me/5548988717486" target="_blank" rel="noopener"><div class="qr-box"><div id="qr3"></div></div></a>
+          <div class="wa-col">
+            <a class="btn outline" href="https://wa.me/5548988717486" target="_blank" rel="noopener">abrir chat</a>
+          </div>
         </div>
       </div>
       <div class="pfooter">Ruberval Silva · Psicanalista</div>
@@ -223,237 +182,172 @@
       <h1>Textos</h1>
       <p class="role">Psicanálise · clínica · teoria</p>
       <div class="divider"></div>
-
+      <div class="ftitulo">filtrar por</div>
       <div class="tags" id="tags">
         <button class="tag on" data-tag="todos">todos</button>
         <button class="tag" data-tag="clínica">clínica</button>
         <button class="tag" data-tag="teoria">teoria</button>
         <button class="tag" data-tag="ensaio">ensaio</button>
       </div>
-
-      <div id="lista">
-        <div style="font-size:0.68rem;color:var(--muted);padding:2rem 0;">carregando textos…</div>
-      </div>
+      <div id="lista"><div style="font-size:0.68rem;color:var(--muted);padding:2rem 0;">carregando textos…</div></div>
       <div class="pfooter">Ruberval Silva · Psicanalista</div>
     </div>
   </div>
-
 </div>
 
 <script>
-  const CONFIG = {
-    WA_BASE:      "https://wa.me/5548988717486",
-    MSG_PRONTA:   "Gostaria de marcar uma sessão, qual sua disponibilidade?",
-    FORMSPREE_ID: "mwvaeogg",
-    MAX_CHARS:    216,
-    FETCH_TIMEOUT: 8000
-  };
+var WA = "https://wa.me/5548988717486";
+var WA_AGE = WA + "?text=" + encodeURIComponent("Gostaria de marcar uma sessão, qual sua disponibilidade?");
+var FORMSPREE_ID = "mwvaeogg";
+var ARQUIVOS = ["texto_1a.txt", "texto_2.txt", "texto_3.txt"];
+var MAX_CHARS = 216;
 
-  let textos = [];
+window.addEventListener("load", function() {
+  new QRCode(document.getElementById("qr1"), { text: WA, width: 80, height: 80, colorDark: "#f0ece4", colorLight: "#0a0a0a", correctLevel: QRCode.CorrectLevel.M });
+  new QRCode(document.getElementById("qr2"), { text: WA_AGE, width: 80, height: 80, colorDark: "#f0ece4", colorLight: "#0a0a0a", correctLevel: QRCode.CorrectLevel.M });
+  new QRCode(document.getElementById("qr3"), { text: WA, width: 80, height: 80, colorDark: "#f0ece4", colorLight: "#0a0a0a", correctLevel: QRCode.CorrectLevel.M });
+  document.getElementById("btn-age").href = WA_AGE;
+  document.getElementById("link-age").href = WA_AGE;
+  carregarTextos();
+});
 
-  function escapeHtml(text) {
-    const map = { '&':'&amp;', '<':'&lt;', '>':'&gt;', '"':'&quot;', "'":'&#039;' };
-    return String(text).replace(/[&<>"']/g, c => map[c]);
-  }
+function ir(id) {
+  document.querySelectorAll(".panel").forEach(p => p.style.transform = "translateX(100%)");
+  var alvo = document.getElementById(id);
+  alvo.style.transform = "translateX(0)";
+  alvo.scrollTop = 0;
+}
 
-  function fetchWithTimeout(url, options = {}, timeout = CONFIG.FETCH_TIMEOUT) {
-    return Promise.race([
-      fetch(url, options),
-      new Promise((_, reject) =>
-        setTimeout(() => reject(new Error('Timeout')), timeout)
-      )
-    ]);
-  }
+document.getElementById("nav-age").onclick = () => ir("panel-agendar");
+document.getElementById("nav-blog").onclick = () => ir("panel-blog");
+document.getElementById("back-age").onclick = () => ir("panel-cartao");
+document.getElementById("back-blog").onclick = () => ir("panel-cartao");
 
-  function initializeQRCodes() {
-    const qrHome = document.getElementById("qr-home");
-    const qrAge  = document.getElementById("qr-age");
-    if (!qrHome || !qrAge) return;
-    try {
-      const WA_AGE = CONFIG.WA_BASE + "?text=" + encodeURIComponent(CONFIG.MSG_PRONTA);
-      new QRCode(qrHome, { text: CONFIG.WA_BASE, width:80, height:80, colorDark:"#f0ece4", colorLight:"#0a0a0a", correctLevel: QRCode.CorrectLevel.M });
-      new QRCode(qrAge,  { text: WA_AGE,         width:80, height:80, colorDark:"#f0ece4", colorLight:"#0a0a0a", correctLevel: QRCode.CorrectLevel.M });
-      if (document.getElementById("btn-age"))  document.getElementById("btn-age").href  = WA_AGE;
-      if (document.getElementById("link-age")) document.getElementById("link-age").href = WA_AGE;
-    } catch (err) { console.error(err); }
-  }
-
-  window.addEventListener("load", () => { initializeQRCodes(); carregarTextos(); });
-
-  function ir(id) {
-    document.querySelectorAll(".panel").forEach(p => p.style.transform = "translateX(100%)");
-    const alvo = document.getElementById(id);
-    if (alvo) { alvo.style.transform = "translateX(0)"; alvo.scrollTop = 0; }
-  }
-
-  document.getElementById("nav-age").addEventListener("click", () => ir("panel-agendar"));
-  document.getElementById("nav-blog").addEventListener("click", () => ir("panel-blog"));
-  document.getElementById("back-age").addEventListener("click", () => ir("panel-cartao"));
-  document.getElementById("back-blog").addEventListener("click", () => ir("panel-cartao"));
-
-  function carregarTextos() {
-    fetchWithTimeout('lista.json')
-      .then(r => r.ok ? r.json() : Promise.reject())
-      .then(arquivos => {
-        if (!Array.isArray(arquivos) || arquivos.length === 0) { finalizeLoad(); return; }
-        let carregados = 0;
-        arquivos.forEach(nome => {
-          fetchWithTimeout(nome)
-            .then(r => r.ok ? r.text() : null)
-            .catch(() => null) // Garante que o contador incremente mesmo em erro
-            .then(txt => {
-              if (txt) {
-                const t = parse(txt);
-                if (t.titulo) textos.push(t);
-              }
-            })
-            .finally(() => {
-              carregados++;
-              if (carregados === arquivos.length) finalizeLoad();
-            });
-        });
-      })
-      .catch(() => {
-        document.getElementById("lista").innerHTML = '<div style="font-size:0.7rem;color:var(--error);padding:2rem 0;">⚠ Erro ao carregar textos.</div>';
-      });
-  }
-
-  function parse(raw) {
-    const L = raw.split("\n");
-    return {
-      titulo:    (L[0] || "").trim(),
-      categoria: (L[1] || "").trim().toLowerCase(),
-      data:      (L[2] || "").trim(),
-      dataLabel: (L[3] || "").trim(),
-      resumo:    (L[4] || "").trim(),
-      corpo:     L.slice(5).join("\n").trim()
-    };
-  }
-
-  function finalizeLoad() {
-    textos.sort((a, b) => b.data.localeCompare(a.data));
-    render("todos");
-  }
-
-  function render(tag) {
-    const lista = document.getElementById("lista");
-    const filt = tag === "todos" ? textos : textos.filter(t => t.categoria === tag);
-    if (!filt.length) {
-      lista.innerHTML = '<div style="font-size:0.7rem;color:var(--muted);padding:2rem 0;">Nenhum texto encontrado.</div>';
-      return;
-    }
-    lista.innerHTML = filt.map((t, i) => {
-      const ps = t.corpo.split(/\n\n+/).map(p => `<p>${escapeHtml(p.replace(/\n/g, " "))}</p>`).join("");
-      return `
-        <article class="texto">
-          <div class="tmeta"><span class="tdata">${escapeHtml(t.dataLabel)}</span><span class="tcat">${escapeHtml(t.categoria)}</span></div>
-          <h2 class="ttitulo">${escapeHtml(t.titulo)}</h2>
-          <p class="tresumo">${escapeHtml(t.resumo)}</p>
-          <button class="ler-btn" data-action="toggle"><span class="arr">›</span> <span>ler</span></button>
-          <div class="tcorpo" style="display:none;">
-            ${ps}
-            <button class="ler-btn" style="margin:2.5rem 0;padding:1.2rem;border:1px solid var(--line);width:100%;justify-content:center;" data-action="fechar">
-              <span class="arr" style="transform:rotate(270deg)">›</span> fechar
-            </button>
-            <div class="csec">
-              <button class="cbtn" data-action="toggleForm">comentar</button>
-              <div class="cform">
-                <input type="text" class="finp" placeholder="seu contato" />
-                <textarea class="ftxt" maxlength="${CONFIG.MAX_CHARS}" placeholder="sua mensagem…"></textarea>
-                <div class="fct">0 / ${CONFIG.MAX_CHARS}</div>
-                <button class="fenv" data-action="enviar" data-titulo="${escapeHtml(t.titulo)}">enviar</button>
-                <div class="fmsg" style="display:none;"></div>
-              </div>
-            </div>
-          </div>
-        </article>`;
-    }).join("");
-    attachListeners();
-  }
-
-  function attachListeners() {
-    const lista = document.getElementById("lista");
-    lista.onclick = (e) => {
-      const action = e.target.closest("[data-action]");
-      if (!action) return;
-      const article = action.closest("article");
-      const type = action.dataset.action;
-      if (type === "toggle") lerToggle(article);
-      else if (type === "fechar") fecharTexto(article);
-      else if (type === "toggleForm") toggleForm(article);
-      else if (type === "enviar") enviar(article, action.dataset.titulo);
-    };
-    lista.oninput = (e) => { if (e.target.classList.contains("ftxt")) contar(e.target.closest("article")); };
-  }
-
-  function lerToggle(article) {
-    const corpo = article.querySelector(".tcorpo");
-    const btn = article.querySelector("[data-action='toggle']");
-    const label = btn.querySelector("span:last-child");
-    const arr = btn.querySelector(".arr");
-    const isOpen = corpo.style.display === "block";
-    corpo.style.display = isOpen ? "none" : "block";
-    arr.style.transform = isOpen ? "" : "rotate(90deg)";
-    label.textContent = isOpen ? "ler" : "fechar";
-  }
-
-  function fecharTexto(article) {
-    article.querySelector(".tcorpo").style.display = "none";
-    const toggleBtn = article.querySelector("[data-action='toggle']");
-    toggleBtn.querySelector("span:last-child").textContent = "ler";
-    toggleBtn.querySelector(".arr").style.transform = "";
-    document.getElementById("panel-blog").scrollTop = article.offsetTop - 20;
-  }
-
-  function toggleForm(article) {
-    const form = article.querySelector(".cform");
-    const btn = article.querySelector("[data-action='toggleForm']");
-    form.classList.toggle("aberto");
-    btn.textContent = form.classList.contains("aberto") ? "fechar" : "comentar";
-  }
-
-  function contar(article) {
-    const textarea = article.querySelector(".ftxt");
-    const counter = article.querySelector(".fct");
-    counter.textContent = `${textarea.value.length} / ${CONFIG.MAX_CHARS}`;
-    counter.style.color = textarea.value.length >= CONFIG.MAX_CHARS ? "var(--error)" : "var(--muted)";
-  }
-
-  function enviar(article, titulo) {
-    const input = article.querySelector(".finp");
-    const textarea = article.querySelector(".ftxt");
-    const btn = article.querySelector(".fenv");
-    const msg = article.querySelector(".fmsg");
-
-    if (!input.value.trim() || !textarea.value.trim()) return;
-    btn.disabled = true; btn.textContent = "enviando...";
-    
-    fetchWithTimeout("https://formspree.io/f/" + CONFIG.FORMSPREE_ID, {
-      method: "POST",
-      headers: { "Content-Type": "application/json", "Accept": "application/json" },
-      body: JSON.stringify({ contato: input.value, mensagem: textarea.value, texto: titulo })
-    })
-    .then(res => {
-      msg.style.display = "block";
-      if (res.ok) {
-        msg.textContent = "✓ Enviado!"; msg.className = "fmsg success";
-        input.value = ""; textarea.value = ""; btn.textContent = "enviado";
-        setTimeout(() => { msg.style.display = "none"; btn.disabled = false; btn.textContent = "enviar"; }, 4000);
-      } else { throw new Error(); }
-    })
-    .catch(() => {
-      msg.style.display = "block"; msg.textContent = "✗ Erro de rede."; msg.className = "fmsg error";
-      btn.disabled = false; btn.textContent = "enviar";
-      setTimeout(() => { msg.style.display = "none"; }, 4000);
+var textos = [];
+function carregarTextos() {
+  textos = [];
+  var carregados = 0;
+  ARQUIVOS.forEach(nome => {
+    fetch(nome).then(r => r.text()).then(txt => {
+      var t = parse(txt);
+      if(t.titulo) textos.push(t);
+      carregados++;
+      if(carregados === ARQUIVOS.length) {
+        textos.sort((a, b) => b.data.localeCompare(a.data));
+        render("todos");
+      }
+    }).catch(() => {
+      carregados++;
+      if(carregados === ARQUIVOS.length) render("todos");
     });
-  }
+  });
+}
 
-  document.getElementById("tags").onclick = (e) => {
-    if (!e.target.dataset.tag) return;
-    document.querySelectorAll(".tag").forEach(t => t.classList.remove("on"));
-    e.target.classList.add("on");
-    render(e.target.dataset.tag);
+function parse(raw) {
+  var L = raw.split("\n");
+  return {
+    titulo: (L[0] || "").trim(),
+    categoria: (L[1] || "").trim().toLowerCase(),
+    data: (L[2] || "").trim(),
+    dataLabel: (L[3] || "").trim(),
+    resumo: (L[4] || "").trim(),
+    corpo: L.slice(5).join("\n").trim()
   };
+}
+
+function render(tag) {
+  var lista = document.getElementById("lista");
+  var filt = tag === "todos" ? textos : textos.filter(t => t.categoria === tag);
+  if(!filt.length) {
+    lista.innerHTML = '<div style="font-size:0.7rem;color:var(--muted);padding:2rem 0;border-top:1px solid var(--line)">Nenhum texto encontrado.</div>';
+    return;
+  }
+  lista.innerHTML = filt.map((t, i) => {
+    var ps = t.corpo.split(/\n\n+/).map(p => "<p>" + p.replace(/\n/g, " ") + "</p>").join("");
+    return '<article class="texto" id="artigo-' + i + '">' + // Adicionei ID aqui
+      '<div class="tmeta"><span class="tdata">' + t.dataLabel + '</span><span class="tcat">' + t.categoria + '</span></div>' +
+      '<h2 class="ttitulo">' + t.titulo + '</h2>' +
+      '<p class="tresumo">' + t.resumo + '</p>' +
+      '<button class="ler-btn" onclick="lerToggle(' + i + ')"><span class="arr" id="arr-' + i + '">›</span> <span id="lbl-' + i + '">ler</span></button>' +
+      '<div class="tcorpo" id="corpo-' + i + '">' +
+        ps +
+        // NOVO BOTÃO FECHAR NO FINAL DO TEXTO
+        '<button class="ler-btn" style="margin: 1.5rem 0; opacity: 0.8;" onclick="lerToggle(' + i + '); document.getElementById(\'artigo-\'+' + i + ').scrollIntoView({behavior: \'smooth\'});">' +
+          '<span class="arr" style="transform: rotate(270deg);">›</span> fechar texto' +
+        '</button>' +
+        '<div class="csec">' +
+          '<button class="cbtn" id="cbtn-' + i + '" onclick="toggleForm(' + i + ')">comentar</button>' +
+          '<div class="cform" id="cform-' + i + '">' +
+            '<input class="finp" id="cont-' + i + '" placeholder="e-mail para contato" />' +
+            '<textarea class="ftxt" id="msg-' + i + '" maxlength="' + MAX_CHARS + '" placeholder="escreva aqui…" oninput="contar(' + i + ')"></textarea>' +
+            '<div class="fct" id="fct-' + i + '">0 / ' + MAX_CHARS + '</div>' +
+            '<button class="fenv" id="fenv-' + i + '" onclick="enviar(' + i + ', \'' + t.titulo.replace(/'/g, "\\'") + '\')">enviar</button>' +
+            '<div class="fmsg" id="resp-' + i + '"></div>' +
+          '</div>' +
+        '</div>' +
+      '</div>' +
+    '</article>';
+  }).join("");
+}
+
+function lerToggle(i) {
+  var c = document.getElementById("corpo-" + i);
+  var a = document.getElementById("arr-" + i);
+  var l = document.getElementById("lbl-" + i);
+  var aberto = c.style.display === "block";
+  c.style.display = aberto ? "none" : "block";
+  a.style.transform = aberto ? "" : "rotate(90deg)";
+  l.textContent = aberto ? "ler" : "fechar";
+}
+
+function toggleForm(i) {
+  var f = document.getElementById("cform-" + i);
+  var b = document.getElementById("cbtn-" + i);
+  f.classList.toggle("aberto");
+  b.textContent = f.classList.contains("aberto") ? "fechar" : "comentar";
+}
+
+function contar(i) {
+  var n = document.getElementById("msg-" + i).value.length;
+  var el = document.getElementById("fct-" + i);
+  el.textContent = n + " / " + MAX_CHARS;
+  if (n >= MAX_CHARS) el.classList.add("over");
+  else el.classList.remove("over");
+}
+
+function enviar(i, tit) {
+  var c = document.getElementById("cont-" + i);
+  var m = document.getElementById("msg-" + i);
+  var r = document.getElementById("resp-" + i);
+  var b = document.getElementById("fenv-" + i);
+  if(!c.value.trim() || !m.value.trim()) return;
+  b.disabled = true; b.textContent = "enviando...";
+  fetch("https://formspree.io/f/" + FORMSPREE_ID, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+    body: JSON.stringify({ contato: c.value, mensagem: m.value, texto: tit })
+  }).then(res => {
+    if(res.ok) {
+      r.textContent = "Enviado com sucesso."; r.style.display = "block";
+      c.value = ""; m.value = ""; contar(i);
+      b.textContent = "enviado";
+      setTimeout(() => { r.style.display = "none"; b.disabled = false; b.textContent = "enviar"; }, 3000);
+    } else {
+      r.textContent = "Erro ao enviar."; r.style.display = "block";
+      b.disabled = false; b.textContent = "enviar";
+    }
+  }).catch(() => {
+    r.textContent = "Erro de conexão."; r.style.display = "block";
+    b.disabled = false; b.textContent = "enviar";
+  });
+}
+
+document.getElementById("tags").onclick = (e) => {
+  if(!e.target.dataset.tag) return;
+  document.querySelectorAll(".tag").forEach(t => t.classList.remove("on"));
+  e.target.classList.add("on");
+  render(e.target.dataset.tag);
+};
 </script>
 </body>
 </html>
