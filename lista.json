@@ -1,6 +1,3 @@
-[
-  "texto_1a.txt",
-  "texto_2.txt",
-  "texto_3.txt",
-  "texto_4.txt"
-]
+{
+  "arquivos": ["texto_1a.txt", "texto_2.txt", "texto_3.txt", "texto_4"]
+}
