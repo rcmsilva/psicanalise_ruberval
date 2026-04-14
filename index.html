@@ -269,26 +269,16 @@
     const qrHome = document.getElementById("qr-home");
     const qrAge  = document.getElementById("qr-age");
     if (!qrHome || !qrAge) return;
-
     try {
       const WA_AGE = CONFIG.WA_BASE + "?text=" + encodeURIComponent(CONFIG.MSG_PRONTA);
-      
       new QRCode(qrHome, { text: CONFIG.WA_BASE, width:80, height:80, colorDark:"#f0ece4", colorLight:"#0a0a0a", correctLevel: QRCode.CorrectLevel.M });
       new QRCode(qrAge,  { text: WA_AGE,         width:80, height:80, colorDark:"#f0ece4", colorLight:"#0a0a0a", correctLevel: QRCode.CorrectLevel.M });
-
-      const btnAge  = document.getElementById("btn-age");
-      const linkAge = document.getElementById("link-age");
-      if (btnAge)  btnAge.href  = WA_AGE;
-      if (linkAge) linkAge.href = WA_AGE;
-    } catch (err) {
-      console.error("Erro ao gerar QR codes:", err);
-    }
+      if (document.getElementById("btn-age"))  document.getElementById("btn-age").href  = WA_AGE;
+      if (document.getElementById("link-age")) document.getElementById("link-age").href = WA_AGE;
+    } catch (err) { console.error(err); }
   }
 
-  window.addEventListener("load", function() {
-    initializeQRCodes();
-    carregarTextos();
-  });
+  window.addEventListener("load", () => { initializeQRCodes(); carregarTextos(); });
 
   function ir(id) {
     document.querySelectorAll(".panel").forEach(p => p.style.transform = "translateX(100%)");
@@ -303,16 +293,14 @@
 
   function carregarTextos() {
     fetchWithTimeout('lista.json')
-      .then(r => {
-        if (!r.ok) throw new Error("Erro lista.json");
-        return r.json();
-      })
+      .then(r => r.ok ? r.json() : Promise.reject())
       .then(arquivos => {
         if (!Array.isArray(arquivos) || arquivos.length === 0) { finalizeLoad(); return; }
         let carregados = 0;
         arquivos.forEach(nome => {
           fetchWithTimeout(nome)
             .then(r => r.ok ? r.text() : null)
+            .catch(() => null) // Garante que o contador incremente mesmo em erro
             .then(txt => {
               if (txt) {
                 const t = parse(txt);
@@ -325,9 +313,8 @@
             });
         });
       })
-      .catch(err => {
-        console.error(err);
-        document.getElementById("lista").innerHTML = "⚠ Erro ao carregar textos.";
+      .catch(() => {
+        document.getElementById("lista").innerHTML = '<div style="font-size:0.7rem;color:var(--error);padding:2rem 0;">⚠ Erro ao carregar textos.</div>';
       });
   }
 
@@ -351,20 +338,15 @@
   function render(tag) {
     const lista = document.getElementById("lista");
     const filt = tag === "todos" ? textos : textos.filter(t => t.categoria === tag);
-    
     if (!filt.length) {
-      lista.innerHTML = '<div style="font-size:0.7rem;padding:2rem 0;">Nenhum texto.</div>';
+      lista.innerHTML = '<div style="font-size:0.7rem;color:var(--muted);padding:2rem 0;">Nenhum texto encontrado.</div>';
       return;
     }
-
     lista.innerHTML = filt.map((t, i) => {
       const ps = t.corpo.split(/\n\n+/).map(p => `<p>${escapeHtml(p.replace(/\n/g, " "))}</p>`).join("");
       return `
         <article class="texto">
-          <div class="tmeta">
-            <span class="tdata">${escapeHtml(t.dataLabel)}</span>
-            <span class="tcat">${escapeHtml(t.categoria)}</span>
-          </div>
+          <div class="tmeta"><span class="tdata">${escapeHtml(t.dataLabel)}</span><span class="tcat">${escapeHtml(t.categoria)}</span></div>
           <h2 class="ttitulo">${escapeHtml(t.titulo)}</h2>
           <p class="tresumo">${escapeHtml(t.resumo)}</p>
           <button class="ler-btn" data-action="toggle"><span class="arr">›</span> <span>ler</span></button>
@@ -391,7 +373,7 @@
 
   function attachListeners() {
     const lista = document.getElementById("lista");
-    lista.addEventListener("click", e => {
+    lista.onclick = (e) => {
       const action = e.target.closest("[data-action]");
       if (!action) return;
       const article = action.closest("article");
@@ -400,16 +382,15 @@
       else if (type === "fechar") fecharTexto(article);
       else if (type === "toggleForm") toggleForm(article);
       else if (type === "enviar") enviar(article, action.dataset.titulo);
-    });
-    lista.addEventListener("input", e => {
-      if (e.target.classList.contains("ftxt")) contar(e.target.closest("article"));
-    });
+    };
+    lista.oninput = (e) => { if (e.target.classList.contains("ftxt")) contar(e.target.closest("article")); };
   }
 
   function lerToggle(article) {
     const corpo = article.querySelector(".tcorpo");
-    const label = article.querySelector("[data-action='toggle'] span:last-child");
-    const arr = article.querySelector(".arr");
+    const btn = article.querySelector("[data-action='toggle']");
+    const label = btn.querySelector("span:last-child");
+    const arr = btn.querySelector(".arr");
     const isOpen = corpo.style.display === "block";
     corpo.style.display = isOpen ? "none" : "block";
     arr.style.transform = isOpen ? "" : "rotate(90deg)";
@@ -418,8 +399,9 @@
 
   function fecharTexto(article) {
     article.querySelector(".tcorpo").style.display = "none";
-    article.querySelector("[data-action='toggle'] span:last-child").textContent = "ler";
-    article.querySelector(".arr").style.transform = "";
+    const toggleBtn = article.querySelector("[data-action='toggle']");
+    toggleBtn.querySelector("span:last-child").textContent = "ler";
+    toggleBtn.querySelector(".arr").style.transform = "";
     document.getElementById("panel-blog").scrollTop = article.offsetTop - 20;
   }
 
@@ -444,35 +426,34 @@
     const msg = article.querySelector(".fmsg");
 
     if (!input.value.trim() || !textarea.value.trim()) return;
-
-    btn.disabled = true;
-    btn.textContent = "enviando...";
+    btn.disabled = true; btn.textContent = "enviando...";
     
-    fetch("https://formspree.io/f/" + CONFIG.FORMSPREE_ID, {
+    fetchWithTimeout("https://formspree.io/f/" + CONFIG.FORMSPREE_ID, {
       method: "POST",
       headers: { "Content-Type": "application/json", "Accept": "application/json" },
       body: JSON.stringify({ contato: input.value, mensagem: textarea.value, texto: titulo })
-    }).then(res => {
+    })
+    .then(res => {
       msg.style.display = "block";
       if (res.ok) {
-        msg.textContent = "✓ Enviado!";
-        msg.className = "fmsg success";
+        msg.textContent = "✓ Enviado!"; msg.className = "fmsg success";
         input.value = ""; textarea.value = ""; btn.textContent = "enviado";
         setTimeout(() => { msg.style.display = "none"; btn.disabled = false; btn.textContent = "enviar"; }, 4000);
-      } else {
-        msg.textContent = "✗ Erro no envio.";
-        msg.className = "fmsg error";
-        btn.disabled = false; btn.textContent = "enviar";
-      }
+      } else { throw new Error(); }
+    })
+    .catch(() => {
+      msg.style.display = "block"; msg.textContent = "✗ Erro de rede."; msg.className = "fmsg error";
+      btn.disabled = false; btn.textContent = "enviar";
+      setTimeout(() => { msg.style.display = "none"; }, 4000);
     });
   }
 
-  document.getElementById("tags").addEventListener("click", e => {
+  document.getElementById("tags").onclick = (e) => {
     if (!e.target.dataset.tag) return;
     document.querySelectorAll(".tag").forEach(t => t.classList.remove("on"));
     e.target.classList.add("on");
     render(e.target.dataset.tag);
-  });
+  };
 </script>
 </body>
 </html>
