@@ -19,7 +19,7 @@ COMO ADICIONAR NOVOS TEXTOS NO SITE:
 2. Insira o nome do texto conforme a sequencia que há no texto, adicione uma virgula e preserve as chaves e os colchetes
 3. arquivo atual:
 { 
-"arquivos" = [
+"arquivos" : [
   "texto_1a.txt",
   "texto_2.txt",
   "texto_3.txt"
@@ -27,7 +27,7 @@ COMO ADICIONAR NOVOS TEXTOS NO SITE:
 }
 4. inserindo o arquivo "texto_4.txt"
 { 
-"arquivos" = [
+"arquivos" : [
   "texto_1a.txt",
   "texto_2.txt",
   "texto_3.txt", 
