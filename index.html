@@ -164,16 +164,7 @@
           </div>
         </div>
       </div>
-      <div class="sep"></div>
-      <div class="ag-bloco">
-        <span class="ag-titulo">conversa livre</span>
-        <div class="wa-row">
-          <a href="https://wa.me/5548988717486" target="_blank" rel="noopener"><div class="qr-box"><div id="qr3"></div></div></a>
-          <div class="wa-col">
-            <a class="btn outline" href="https://wa.me/5548988717486" target="_blank" rel="noopener">abrir chat</a>
-          </div>
-        </div>
-      </div>
+      <!-- REMOVIDO: bloco "conversa livre" e seu QR code #qr3 -->
       <div class="pfooter">Ruberval Silva · Psicanalista</div>
     </div>
   </div>
@@ -232,11 +223,11 @@ async function fetchWithTimeout(url) {
 window.addEventListener("load", () => {
   const waAge = `${CONFIG.WA_BASE}?text=${encodeURIComponent(CONFIG.WA_MSG)}`;
   
-  // QRCodes
+  // QRCodes (apenas qr1 e qr2; qr3 removido)
   const qrCfg = { width: 80, height: 80, colorDark: "#f0ece4", colorLight: "#0a0a0a", correctLevel: QRCode.CorrectLevel.M };
   new QRCode(document.getElementById("qr1"), { ...qrCfg, text: CONFIG.WA_BASE });
   new QRCode(document.getElementById("qr2"), { ...qrCfg, text: waAge });
-  new QRCode(document.getElementById("qr3"), { ...qrCfg, text: CONFIG.WA_BASE });
+  // QR code #qr3 não existe mais – removido
 
   document.getElementById("btn-age").href = waAge;
   document.getElementById("link-age").href = waAge;
