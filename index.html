@@ -3,7 +3,6 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<!-- Meta tags essenciais para SEO -->
   <meta name="description" content="Ruberval Silva - Psicanálise em Florianópolis, SC. Atendimento presencial e online para adultos. Agende sua sessão e conheça mais sobre a prática psicanalítica." />
   <meta name="robots" content="index, follow" />
   <meta name="author" content="Ruberval Silva" />
@@ -11,7 +10,7 @@
   <meta name="geo.region" content="BR-SC" />
   <meta name="keywords" content="psicanálise, psicanalista, Florianópolis, atendimento online, Ruberval Silva, sessão de psicanálise, sintoma, ansiedade, separação, tristeza, depressão, fim de relacionamento, angústia, inibição, luto, melancolia, stress, pressão, performance, raiva, ódio, vício, excesso, orientação lacanina, lacan, freud, freudiano, lacaniano, EBP, AMP, ICPOL, CPOL, atendimento, sessão, online, on-line" />
   <title>Ruberval Silva — Psicanalista</title>
-  
+
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@300;400&family=IBM+Plex+Serif:ital,wght@0,300;0,400;1,300;1,400&display=swap" rel="stylesheet" />
@@ -119,8 +118,7 @@
     .wsv { width: 13px; height: 13px; fill: currentColor; flex-shrink: 0; }
     .spinner {
       display: inline-block;
-      width: 20px;
-      height: 20px;
+      width: 20px; height: 20px;
       border: 2px solid var(--line);
       border-top-color: var(--text);
       border-radius: 50%;
@@ -131,10 +129,12 @@
     @keyframes spin { to { transform: rotate(360deg); } }
     .loading-placeholder { display: flex; align-items: center; gap: 0.5rem; padding: 2rem 0; color: var(--muted); font-size: 0.7rem; }
   </style>
+
 </head>
 <body>
 
 <div class="stage">
+
   <main class="panel" id="panel-cartao">
     <div class="panel-inner">
       <div class="sigil">$ ̶</div>
@@ -169,7 +169,7 @@
     </div>
   </main>
 
-  <main class="panel" id="panel-agendar">
+  <div class="panel" id="panel-agendar">
     <div class="panel-inner">
       <button class="back-btn" id="back-age">‹ voltar</button>
       <div class="sigil">$ ̶</div>
@@ -190,9 +190,9 @@
       </div>
       <div class="pfooter">Ruberval Silva · Psicanalista</div>
     </div>
-  </main>
+  </div>
 
-  <main class="panel" id="panel-blog">
+  <div class="panel" id="panel-blog">
     <div class="panel-inner">
       <button class="back-btn" id="back-blog">‹ voltar</button>
       <div class="sigil">$ ̶</div>
@@ -209,18 +209,21 @@
       <div id="lista"><div class="loading-placeholder"><span class="spinner"></span> carregando textos…</div></div>
       <div class="pfooter">Ruberval Silva · Psicanalista</div>
     </div>
-  </main>
-</div>
+  </div>
+
+</div><!-- .stage -->
 
 <script>
-(function(){
+(function () {
   const CONFIG = {
-    WA_BASE: "https://wa.me/5548988717486",
-    WA_MSG: "Gostaria de marcar uma sessão, qual sua disponibilidade?",
+    WA_BASE:      "https://wa.me/5548988717486",
+    WA_MSG:       "Gostaria de marcar uma sessão, qual sua disponibilidade?",
     FORMSPREE_ID: "mwvaeogg",
-    MAX_CHARS: 216,
-    TIMEOUT_MS: 8000
+    MAX_CHARS:    216,
+    TIMEOUT_MS:   8000
   };
+
+  /* ── Utilitários ── */
 
   function esc(str) {
     const div = document.createElement('div');
@@ -244,37 +247,57 @@
   function parseTxt(raw) {
     const lines = raw.split("\n");
     return {
-      titulo: (lines[0] || "Sem título").trim(),
+      titulo:    (lines[0] || "Sem título").trim(),
       categoria: (lines[1] || "geral").trim().toLowerCase(),
-      data: (lines[2] || "1970-01-01").trim(),
+      data:      (lines[2] || "1970-01-01").trim(),
       dataLabel: (lines[3] || "data desconhecida").trim(),
-      resumo: (lines[4] || "").trim(),
-      corpo: lines.slice(5).join("\n").trim() || "Conteúdo não disponível."
+      resumo:    (lines[4] || "").trim(),
+      corpo:     lines.slice(5).join("\n").trim() || "Conteúdo não disponível."
     };
   }
 
-  let textos = [];
+  /* ── Estado ── */
+
+  let textos     = [];
   let currentTag = "todos";
-  const listaDiv = document.getElementById("lista");
+
+  const listaDiv     = document.getElementById("lista");
   const tagsContainer = document.getElementById("tags");
 
+  /* ── Render ── */
+
   function render() {
-    const filtro = currentTag === "todos" ? textos : textos.filter(t => t.categoria === currentTag);
+    const filtro = currentTag === "todos"
+      ? textos
+      : textos.filter(t => t.categoria === currentTag);
+
     if (!filtro.length) {
       listaDiv.innerHTML = '<div style="font-size:0.7rem;color:var(--muted);padding:2rem 0;border-top:1px solid var(--line)">Nenhum texto encontrado nesta categoria.</div>';
       return;
     }
+
     listaDiv.innerHTML = filtro.map((t, idx) => {
-      const paragraphs = t.corpo.split(/\n\n+/).map(p => `<p>${esc(p.replace(/\n/g, " "))}</p>`).join("");
+      const paragraphs = t.corpo
+        .split(/\n\n+/)
+        .map(p => `<p>${esc(p.replace(/\n/g, " "))}</p>`)
+        .join("");
+
       return `
         <article class="texto" id="artigo-${idx}" data-categoria="${esc(t.categoria)}">
-          <div class="tmeta"><span class="tdata">${esc(t.dataLabel)}</span><span class="tcat">${esc(t.categoria)}</span></div>
+          <div class="tmeta">
+            <span class="tdata">${esc(t.dataLabel)}</span>
+            <span class="tcat">${esc(t.categoria)}</span>
+          </div>
           <h2 class="ttitulo">${esc(t.titulo)}</h2>
           <p class="tresumo">${esc(t.resumo)}</p>
-          <button class="ler-btn" data-idx="${idx}" aria-label="Ler texto completo"><span class="arr" id="arr-${idx}">›</span> <span id="lbl-${idx}">ler</span></button>
+          <button class="ler-btn" data-idx="${idx}" aria-label="Ler texto completo">
+            <span class="arr" id="arr-${idx}">›</span> <span id="lbl-${idx}">ler</span>
+          </button>
           <div class="tcorpo" id="corpo-${idx}">
             ${paragraphs}
-            <button class="ler-btn close-btn" data-idx="${idx}" aria-label="Fechar texto"><span class="arr" style="transform: rotate(270deg);">›</span> fechar texto</button>
+            <button class="ler-btn close-btn" data-idx="${idx}" aria-label="Fechar texto">
+              <span class="arr" style="transform:rotate(270deg)">›</span> fechar texto
+            </button>
             <div class="csec">
               <button class="cbtn" data-idx="${idx}" aria-label="Abrir formulário de comentário">comentar</button>
               <div class="cform" id="cform-${idx}">
@@ -288,96 +311,98 @@
           </div>
         </article>`;
     }).join("");
+
     attachEvents();
   }
 
+  /* ── Delegação de eventos ── */
+
   function attachEvents() {
-    document.querySelectorAll('.ler-btn').forEach(btn => {
-      btn.removeEventListener('click', handleLerClick);
-      btn.addEventListener('click', handleLerClick);
-    });
-    document.querySelectorAll('.cbtn').forEach(btn => {
-      btn.removeEventListener('click', handleComentarClick);
-      btn.addEventListener('click', handleComentarClick);
-    });
-    document.querySelectorAll('.fenv').forEach(btn => {
-      btn.removeEventListener('click', handleEnviarClick);
-      btn.addEventListener('click', handleEnviarClick);
-    });
-    document.querySelectorAll('.ftxt').forEach(txt => {
-      txt.removeEventListener('input', handleContarInput);
-      txt.addEventListener('input', handleContarInput);
-      const idx = txt.closest('.cform')?.id?.split('-')[1];
-      if (idx !== undefined) {
-        const contInput = document.getElementById(`cont-${idx}`);
-        if (contInput) {
-          contInput.removeEventListener('input', () => validateFields(idx));
-          contInput.addEventListener('input', () => validateFields(idx));
-        }
-        txt.removeEventListener('input', () => validateFields(idx));
-        txt.addEventListener('input', () => validateFields(idx));
-        validateFields(idx);
+    listaDiv.removeEventListener("click", onListaClick);
+    listaDiv.removeEventListener("input", onListaInput);
+    listaDiv.addEventListener("click", onListaClick);
+    listaDiv.addEventListener("input", onListaInput);
+  }
+
+  function onListaClick(e) {
+    /* Botões ler/fechar */
+    const lerBtn = e.target.closest(".ler-btn");
+    if (lerBtn) {
+      const idx = lerBtn.dataset.idx;
+      if (idx === undefined) return;
+      const corpo   = document.getElementById(`corpo-${idx}`);
+      const arrSpan = document.getElementById(`arr-${idx}`);
+      const lblSpan = document.getElementById(`lbl-${idx}`);
+      const isOpen  = corpo.style.display === "block";
+      corpo.style.display      = isOpen ? "none" : "block";
+      if (arrSpan) arrSpan.style.transform = isOpen ? "" : "rotate(90deg)";
+      if (lblSpan) lblSpan.textContent     = isOpen ? "ler" : "fechar";
+      return;
+    }
+
+    /* Botão comentar */
+    const cbtn = e.target.closest(".cbtn");
+    if (cbtn) {
+      const idx  = cbtn.dataset.idx;
+      const form = document.getElementById(`cform-${idx}`);
+      if (form) {
+        form.classList.toggle("aberto");
+        cbtn.textContent = form.classList.contains("aberto") ? "fechar" : "comentar";
       }
-    });
-  }
+      return;
+    }
 
-  function handleLerClick(e) {
-    const btn = e.currentTarget;
-    const idx = btn.dataset.idx;
-    if (idx === undefined) return;
-    const corpo = document.getElementById(`corpo-${idx}`);
-    const arrSpan = document.getElementById(`arr-${idx}`);
-    const lblSpan = document.getElementById(`lbl-${idx}`);
-    const isOpen = corpo.style.display === "block";
-    corpo.style.display = isOpen ? "none" : "block";
-    if (arrSpan) arrSpan.style.transform = isOpen ? "" : "rotate(90deg)";
-    if (lblSpan) lblSpan.textContent = isOpen ? "ler" : "fechar";
-  }
-
-  function handleComentarClick(e) {
-    const btn = e.currentTarget;
-    const idx = btn.dataset.idx;
-    const form = document.getElementById(`cform-${idx}`);
-    if (form) {
-      form.classList.toggle("aberto");
-      btn.textContent = form.classList.contains("aberto") ? "fechar" : "comentar";
+    /* Botão enviar */
+    const fenv = e.target.closest(".fenv");
+    if (fenv && !fenv.disabled) {
+      handleEnviar(fenv);
     }
   }
 
-  function handleContarInput(e) {
-    const txt = e.currentTarget;
-    const idx = txt.closest('.cform')?.id?.split('-')[1];
-    if (idx !== undefined) contar(idx);
+  function onListaInput(e) {
+    /* Contador de caracteres */
+    if (e.target.classList.contains("ftxt")) {
+      const idx = e.target.closest(".cform")?.id?.split("-")[1];
+      if (idx !== undefined) contar(idx);
+    }
+
+    /* Validação de campos */
+    const isFinp = e.target.classList.contains("finp");
+    const isFtxt = e.target.classList.contains("ftxt");
+    if (isFinp || isFtxt) {
+      const idx = e.target.closest(".cform")?.id?.split("-")[1];
+      if (idx !== undefined) validateFields(idx);
+    }
   }
 
   function contar(idx) {
     const msgField = document.getElementById(`msg-${idx}`);
     if (!msgField) return;
-    const len = msgField.value.length;
+    const len     = msgField.value.length;
     const counter = document.getElementById(`fct-${idx}`);
     if (counter) {
       counter.textContent = `${len} / ${CONFIG.MAX_CHARS}`;
-      if (len >= CONFIG.MAX_CHARS) counter.classList.add("over");
-      else counter.classList.remove("over");
+      len >= CONFIG.MAX_CHARS
+        ? counter.classList.add("over")
+        : counter.classList.remove("over");
     }
   }
 
   function validateFields(idx) {
     const cont = document.getElementById(`cont-${idx}`);
-    const msg = document.getElementById(`msg-${idx}`);
-    const btn = document.querySelector(`.fenv[data-idx="${idx}"]`);
+    const msg  = document.getElementById(`msg-${idx}`);
+    const btn  = document.querySelector(`.fenv[data-idx="${idx}"]`);
     if (btn && cont && msg) {
       btn.disabled = !(cont.value.trim() && msg.value.trim());
     }
   }
 
-  async function handleEnviarClick(e) {
-    const btn = e.currentTarget;
-    const idx = btn.dataset.idx;
-    const titulo = btn.dataset.titulo;
-    const cont = document.getElementById(`cont-${idx}`);
-    const msg = document.getElementById(`msg-${idx}`);
-    const respDiv = document.getElementById(`resp-${idx}`);
+  async function handleEnviar(btn) {
+    const idx      = btn.dataset.idx;
+    const titulo   = btn.dataset.titulo;
+    const cont     = document.getElementById(`cont-${idx}`);
+    const msg      = document.getElementById(`msg-${idx}`);
+    const respDiv  = document.getElementById(`resp-${idx}`);
     if (!cont || !msg || !respDiv) return;
     if (!cont.value.trim() || !msg.value.trim()) return;
 
@@ -387,58 +412,66 @@
 
     try {
       const response = await fetch(`https://formspree.io/f/${CONFIG.FORMSPREE_ID}`, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+        method:  "POST",
+        headers: { "Content-Type": "application/json", "Accept": "application/json" },
         body: JSON.stringify({ contato: cont.value, mensagem: msg.value, texto: titulo })
       });
+
       if (response.ok) {
-        respDiv.textContent = "Enviado com sucesso.";
+        respDiv.textContent  = "Enviado com sucesso.";
         respDiv.style.display = "block";
         cont.value = "";
-        msg.value = "";
+        msg.value  = "";
         contar(idx);
         validateFields(idx);
         btn.textContent = "enviado";
         setTimeout(() => {
           respDiv.style.display = "none";
-          btn.disabled = false;
+          btn.disabled    = false;
           btn.textContent = originalText;
           validateFields(idx);
         }, 3000);
       } else {
         throw new Error();
       }
-    } catch (err) {
-      respDiv.textContent = "Erro ao enviar. Tente novamente.";
+    } catch {
+      respDiv.textContent  = "Erro ao enviar. Tente novamente.";
       respDiv.style.display = "block";
-      btn.disabled = false;
+      btn.disabled    = false;
       btn.textContent = originalText;
     }
   }
+
+  /* ── Carregar textos ── */
 
   async function carregarTextos() {
     listaDiv.innerHTML = '<div class="loading-placeholder"><span class="spinner"></span> carregando textos…</div>';
     try {
       const resLista = await fetchWithTimeout("lista.json");
       if (!resLista.ok) throw new Error("Falha ao carregar índice");
-      const data = await resLista.json();
+
+      const data     = await resLista.json();
       const arquivos = data.arquivos || [];
+
       const promises = arquivos.map(async (nome) => {
         try {
           const res = await fetchWithTimeout(nome);
           if (!res.ok) return null;
-          const raw = await res.text();
+          const raw    = await res.text();
           const parsed = parseTxt(raw);
           return parsed.titulo ? parsed : null;
         } catch {
           return null;
         }
       });
+
       const results = await Promise.allSettled(promises);
       textos = results
         .filter(r => r.status === "fulfilled" && r.value !== null)
         .map(r => r.value);
+
       textos.sort((a, b) => b.data.localeCompare(a.data));
+
       if (textos.length === 0) throw new Error("Nenhum texto válido encontrado");
       render();
     } catch (err) {
@@ -446,6 +479,8 @@
       listaDiv.innerHTML = '<div style="font-size:0.7rem;color:var(--muted);padding:2rem 0;border-top:1px solid var(--line)">Erro ao carregar textos. Tente novamente mais tarde.</div>';
     }
   }
+
+  /* ── Filtros ── */
 
   function initFiltros() {
     tagsContainer.addEventListener("click", (e) => {
@@ -460,33 +495,45 @@
     });
   }
 
+  /* ── Navegação ── */
+
   function initNavegacao() {
     const panels = document.querySelectorAll(".panel");
+
     function ir(id) {
       panels.forEach(p => p.style.transform = "translateX(100%)");
       const target = document.getElementById(id);
-      if (target) target.style.transform = "translateX(0)";
+      if (target) {
+        target.style.transform = "translateX(0)";
+        target.scrollTop = 0;
+      }
     }
-    document.getElementById("nav-age")?.addEventListener("click", () => ir("panel-agendar"));
+
+    document.getElementById("nav-age")?.addEventListener("click",  () => ir("panel-agendar"));
     document.getElementById("nav-blog")?.addEventListener("click", () => ir("panel-blog"));
     document.getElementById("back-age")?.addEventListener("click", () => ir("panel-cartao"));
-    document.getElementById("back-blog")?.addEventListener("click", () => ir("panel-cartao"));
+    document.getElementById("back-blog")?.addEventListener("click",() => ir("panel-cartao"));
   }
+
+  /* ── QR Codes ── */
 
   function initQRCodes() {
     const qrCfg = { width: 80, height: 80, colorDark: "#f0ece4", colorLight: "#0a0a0a", correctLevel: QRCode.CorrectLevel.M };
     const qr1 = document.getElementById("qr1");
     const qr2 = document.getElementById("qr2");
+
     if (qr1) new QRCode(qr1, { ...qrCfg, text: CONFIG.WA_BASE });
     if (qr2) {
       const waAge = `${CONFIG.WA_BASE}?text=${encodeURIComponent(CONFIG.WA_MSG)}`;
       new QRCode(qr2, { ...qrCfg, text: waAge });
       const linkAge = document.getElementById("link-age");
-      const btnAge = document.getElementById("btn-age");
+      const btnAge  = document.getElementById("btn-age");
       if (linkAge) linkAge.href = waAge;
-      if (btnAge) btnAge.href = waAge;
+      if (btnAge)  btnAge.href  = waAge;
     }
   }
+
+  /* ── Init ── */
 
   window.addEventListener("DOMContentLoaded", () => {
     initQRCodes();
@@ -494,7 +541,9 @@
     initFiltros();
     carregarTextos();
   });
+
 })();
 </script>
+
 </body>
 </html>
