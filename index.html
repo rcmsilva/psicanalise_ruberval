@@ -9,7 +9,42 @@
   <meta name="geo.placename" content="Florianópolis, SC" />
   <meta name="geo.region" content="BR-SC" />
   <meta name="keywords" content="psicanálise, psicanalista, Florianópolis, atendimento online, Ruberval Silva, sessão de psicanálise, sintoma, ansiedade, separação, tristeza, depressão, fim de relacionamento, angústia, inibição, luto, melancolia, stress, pressão, performance, raiva, ódio, vício, excesso, orientação lacanina, lacan, freud, freudiano, lacaniano, EBP, AMP, ICPOL, CPOL, atendimento, sessão, online, on-line" />
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="website" />
+  <meta property="og:locale" content="pt_BR" />
+  <meta property="og:title" content="Ruberval Silva — Psicanalista" />
+  <meta property="og:description" content="Psicanálise em Florianópolis, SC. Atendimento presencial e online." />
+  <meta property="og:url" content="https://rcmsilva.github.io/psicanalise_ruberval/" />
+
   <title>Ruberval Silva — Psicanalista</title>
+
+  <!-- Schema.org -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Person",
+    "name": "Ruberval Silva",
+    "jobTitle": "Psicanalista",
+    "description": "Psicanálise em Florianópolis, SC. Atendimento presencial e online para adultos.",
+    "url": "https://rcmsilva.github.io/psicanalise_ruberval/",
+    "telephone": "+5548988717486",
+    "address": {
+      "@type": "PostalAddress",
+      "streetAddress": "Rua Santa Luzia, 100",
+      "addressLocality": "Florianópolis",
+      "addressRegion": "SC",
+      "postalCode": "88036-240",
+      "addressCountry": "BR"
+    },
+    "areaServed": {
+      "@type": "City",
+      "name": "Florianópolis"
+    },
+    "availableLanguage": "Portuguese",
+    "knowsAbout": ["Psicanálise", "Teoria Lacaniana", "Clínica Psicanalítica"]
+  }
+  </script>
 
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -17,48 +52,58 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
 
   <style>
+    /* ===== RESET & VARIÁVEIS ===== */
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
     :root {
       --bg:    #f0ece4;
       --text:  #0a0a0a;
       --muted: #6a6a60;
       --line:  #d0ccc4;
+      --focus: #0a0a0a;
       --mono:  'IBM Plex Mono', monospace;
       --serif: 'IBM Plex Serif', serif;
     }
+
+    /* ===== ACESSIBILIDADE ===== */
+    .skip-link {
+      position: absolute; top: -100%; left: 1rem; background: var(--text); color: var(--bg);
+      font-family: var(--mono); font-size: 0.72rem; text-transform: uppercase; padding: 0.6rem 1rem;
+      z-index: 9999; transition: top 0.2s; text-decoration: none;
+    }
+    .skip-link:focus { top: 1rem; }
+    :focus-visible { outline: 2px solid var(--focus); outline-offset: 3px; border-radius: 2px; }
+
+    /* ===== BASE ===== */
     html, body {
-      height: 100%;
-      overflow: hidden;
-      background: var(--bg);
-      font-family: var(--mono);
-      font-weight: 300;
-      color: var(--text);
+      height: 100%; overflow: hidden; background: var(--bg);
+      font-family: var(--mono); font-weight: 300; color: var(--text);
       -webkit-font-smoothing: antialiased;
     }
     .stage { position: relative; width: 100%; height: 100vh; overflow: hidden; }
     .panel {
-      position: absolute;
-      top: 0; left: 0;
-      width: 100%;
-      height: 100%;
-      background: var(--bg);
-      overflow-y: auto;
-      -webkit-overflow-scrolling: touch;
-      transition: transform 0.38s cubic-bezier(0.65,0,0.35,1);
-      will-change: transform;
+      position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+      background: var(--bg); overflow-y: auto; -webkit-overflow-scrolling: touch;
+      transition: transform 0.38s cubic-bezier(0.65,0,0.35,1); will-change: transform;
     }
+    .panel[aria-hidden="true"] { visibility: hidden; }
     #panel-cartao  { transform: translateX(0); }
     #panel-agendar { transform: translateX(100%); }
     #panel-blog    { transform: translateX(100%); }
+
     .panel-inner { max-width: 480px; margin: 0 auto; padding: 3.5rem 2rem 5rem; }
     .sigil { font-size: 1rem; color: var(--muted); letter-spacing: 0.15em; margin-bottom: 2.8rem; user-select: none; }
     h1 { font-size: clamp(1.35rem, 4vw, 1.7rem); font-weight: 400; letter-spacing: 0.04em; margin-bottom: 0.45rem; }
     .role { font-size: 0.7rem; letter-spacing: 0.22em; text-transform: uppercase; color: var(--muted); margin-bottom: 3rem; }
     .divider { width: 2rem; height: 1px; background: var(--line); margin-bottom: 3rem; }
+
+    /* ===== CONTACT ===== */
     .contact { display: flex; flex-direction: column; gap: 1.2rem; margin-bottom: 3rem; }
     .ci { display: flex; align-items: baseline; gap: 1.2rem; }
     .cl { font-size: 0.62rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--muted); min-width: 4.8rem; flex-shrink: 0; }
     .cv { font-size: 0.88rem; color: var(--text); text-decoration: none; }
+    .cv:hover { text-decoration: underline; }
+
+    /* ===== WHATSAPP ===== */
     .wa-block { display: flex; flex-direction: column; gap: 0.9rem; margin-bottom: 3rem; }
     .wa-lbl { font-size: 0.62rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--muted); }
     .wa-row { display: flex; align-items: center; gap: 1.4rem; }
@@ -66,16 +111,24 @@
     .qr-box canvas, .qr-box img { display: block; }
     .wa-col { display: flex; flex-direction: column; gap: 0.7rem; }
     .btn {
-      display: inline-flex; align-items: center; gap: 0.5rem;
-      font-family: var(--mono); font-weight: 400; letter-spacing: 0.1em;
-      text-transform: uppercase; text-decoration: none; border-radius: 2px;
+      display: inline-flex; align-items: center; gap: 0.5rem; font-family: var(--mono); font-weight: 400;
+      letter-spacing: 0.1em; text-transform: uppercase; text-decoration: none; border-radius: 2px;
       transition: background 0.2s, color 0.2s; cursor: pointer;
     }
-    .solid   { font-size: 0.72rem; color: var(--bg); background: var(--text); border: none; padding: 0.6rem 1rem; }
-    .outline { font-size: 0.72rem; color: var(--text); background: transparent; border: 1px solid var(--line); padding: 0.6rem 1rem; }
-    .solid:hover   { background: var(--muted); }
+    .solid {
+      font-size: 0.72rem; color: var(--bg); background: var(--text);
+      border: none; padding: 0.6rem 1rem;
+    }
+    .solid:hover { background: var(--muted); }
+    .outline {
+      font-size: 0.72rem; color: var(--text); background: transparent;
+      border: 1px solid var(--line); padding: 0.6rem 1rem;
+    }
     .outline:hover { border-color: var(--muted); color: var(--muted); }
     .hint { font-size: 0.58rem; letter-spacing: 0.12em; color: var(--muted); }
+    .wsv { width: 13px; height: 13px; fill: currentColor; flex-shrink: 0; }
+
+    /* ===== NAVEGAÇÃO ===== */
     .nav-row { display: flex; gap: 0.8rem; }
     .nav-btn {
       flex: 1; font-family: var(--mono); font-size: 0.7rem; letter-spacing: 0.18em;
@@ -83,74 +136,125 @@
       color: var(--text); padding: 0.9rem 1rem; cursor: pointer; transition: 0.2s;
     }
     .nav-btn.prim { background: var(--text); color: var(--bg); }
-    .back-btn { background: none; border: none; font-family: var(--mono); font-size: 0.62rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--muted); cursor: pointer; margin-bottom: 3rem; display: block; }
+    .back-btn {
+      background: none; border: none; font-family: var(--mono); font-size: 0.62rem;
+      letter-spacing: 0.2em; text-transform: uppercase; color: var(--muted); cursor: pointer;
+      margin-bottom: 3rem; display: inline-flex; align-items: center; gap: 0.3rem;
+    }
+
+    /* ===== AGENDAMENTO ===== */
     .ag-bloco { margin-bottom: 2.8rem; }
-    .ag-titulo { font-size: 0.62rem; letter-spacing: 0.22em; text-transform: uppercase; color: var(--muted); display: block; margin-bottom: 1rem; }
-    .msg-box { background: var(--line); border-left: 2px solid var(--muted); padding: 1rem 1.2rem; font-size: 0.82rem; line-height: 1.65; margin-bottom: 1.2rem; }
-    .sep { height: 1px; background: var(--line); margin: 2.5rem 0; }
-    .ftitulo { font-size: 0.62rem; letter-spacing: 0.22em; text-transform: uppercase; color: var(--muted); margin-bottom: 1.2rem; }
+    .ag-titulo {
+      font-size: 0.62rem; letter-spacing: 0.22em; text-transform: uppercase;
+      color: var(--muted); display: block; margin-bottom: 1rem;
+    }
+    .msg-box {
+      background: var(--line); border-left: 2px solid var(--muted); padding: 1rem 1.2rem;
+      font-size: 0.82rem; line-height: 1.65; margin-bottom: 1.2rem;
+    }
+
+    /* ===== BLOG ===== */
+    .ftitulo {
+      font-size: 0.62rem; letter-spacing: 0.22em; text-transform: uppercase;
+      color: var(--muted); margin-bottom: 1.2rem;
+    }
     .tags { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-bottom: 2.5rem; }
-    .tag { font-family: var(--mono); font-size: 0.6rem; letter-spacing: 0.18em; text-transform: uppercase; background: none; border: 1px solid var(--line); color: var(--muted); padding: 0.25rem 0.7rem; cursor: pointer; border-radius: 1px; }
-    .tag.on { background: var(--text); border-color: var(--text); color: var(--bg); }
+    .tag {
+      font-family: var(--mono); font-size: 0.6rem; letter-spacing: 0.18em; text-transform: uppercase;
+      background: none; border: 1px solid var(--line); color: var(--muted);
+      padding: 0.25rem 0.7rem; cursor: pointer; border-radius: 1px;
+    }
+    .tag[aria-selected="true"] { background: var(--text); border-color: var(--text); color: var(--bg); }
     .texto { border-top: 1px solid var(--line); padding: 2rem 0; }
     .tmeta { display: flex; align-items: baseline; gap: 1rem; margin-bottom: 0.8rem; }
     .tdata { font-size: 0.6rem; letter-spacing: 0.16em; color: var(--muted); }
-    .tcat  { font-size: 0.58rem; letter-spacing: 0.18em; text-transform: uppercase; color: var(--muted); border: 1px solid var(--line); padding: 0.12rem 0.45rem; border-radius: 1px; }
+    .tcat {
+      font-size: 0.58rem; letter-spacing: 0.18em; text-transform: uppercase;
+      color: var(--muted); border: 1px solid var(--line); padding: 0.12rem 0.45rem; border-radius: 1px;
+    }
     .ttitulo { font-family: var(--serif); font-size: 1.05rem; font-weight: 400; margin-bottom: 0.8rem; line-height: 1.4; }
-    .tresumo { font-family: var(--serif); font-size: 0.86rem; font-weight: 300; color: var(--muted); line-height: 1.75; margin-bottom: 1rem; }
-    .ler-btn { background: none; border: none; font-family: var(--mono); font-size: 0.6rem; letter-spacing: 0.18em; text-transform: uppercase; color: var(--muted); cursor: pointer; display: flex; align-items: center; gap: 0.4rem; padding: 0; }
+    .tresumo {
+      font-family: var(--serif); font-size: 0.86rem; font-weight: 300; color: var(--muted);
+      line-height: 1.75; margin-bottom: 1rem;
+    }
+    .ler-btn {
+      background: none; border: none; font-family: var(--mono); font-size: 0.6rem;
+      letter-spacing: 0.18em; text-transform: uppercase; color: var(--muted);
+      cursor: pointer; display: inline-flex; align-items: center; gap: 0.4rem; padding: 0;
+    }
     .close-btn { margin: 1.5rem 0; opacity: 0.8; }
     .arr { display: inline-block; transition: transform 0.3s; }
     .tcorpo { display: none; margin-top: 1.6rem; padding-top: 1.6rem; border-top: 1px solid var(--line); }
     .tcorpo p { font-family: var(--serif); font-size: 0.93rem; line-height: 1.85; margin-bottom: 1.3rem; }
+
+    /* ===== COMENTÁRIOS ===== */
     .csec { margin-top: 2rem; padding-top: 1.8rem; border-top: 1px solid var(--line); }
-    .cbtn { background: none; border: 1px solid var(--line); font-family: var(--mono); font-size: 0.62rem; text-transform: uppercase; color: var(--muted); cursor: pointer; padding: 0.5rem 0.9rem; border-radius: 2px; }
+    .cbtn {
+      background: none; border: 1px solid var(--line); font-family: var(--mono);
+      font-size: 0.62rem; text-transform: uppercase; color: var(--muted); cursor: pointer;
+      padding: 0.5rem 0.9rem; border-radius: 2px;
+    }
     .cform { display: none; flex-direction: column; gap: 1rem; margin-top: 1.4rem; }
     .cform.aberto { display: flex; }
-    .finp, .ftxt { font-family: var(--mono); font-size: 0.82rem; background: transparent; border: 1px solid var(--line); padding: 0.65rem 0.8rem; width: 100%; outline: none; color: var(--text); border-radius: 2px; }
+    .finp, .ftxt {
+      font-family: var(--mono); font-size: 0.82rem; background: transparent;
+      border: 1px solid var(--line); padding: 0.65rem 0.8rem; width: 100%;
+      outline: none; color: var(--text); border-radius: 2px;
+    }
     .ftxt { resize: none; height: 90px; line-height: 1.6; }
     .fct { font-size: 0.58rem; color: var(--muted); text-align: right; margin-top: 0.3rem; }
     .fct.over { color: #c0392b; }
-    .fenv { font-family: var(--mono); font-size: 0.68rem; text-transform: uppercase; color: var(--bg); background: var(--text); border: none; padding: 0.7rem 1.2rem; cursor: pointer; align-self: flex-start; border-radius: 2px; transition: opacity 0.2s; }
+    .fenv {
+      font-family: var(--mono); font-size: 0.68rem; text-transform: uppercase;
+      color: var(--bg); background: var(--text); border: none; padding: 0.7rem 1.2rem;
+      cursor: pointer; align-self: flex-start; border-radius: 2px; transition: opacity 0.2s;
+    }
     .fenv:disabled { background: var(--line); cursor: not-allowed; opacity: 0.6; }
     .fmsg { font-size: 0.68rem; color: var(--muted); display: none; margin-top: 0.5rem; }
-    .pfooter { font-size: 0.58rem; letter-spacing: 0.16em; color: var(--line); text-transform: uppercase; margin-top: 3rem; }
-    .wsv { width: 13px; height: 13px; fill: currentColor; flex-shrink: 0; }
+
+    /* ===== FOOTER & UTILS ===== */
+    .pfooter {
+      font-size: 0.58rem; letter-spacing: 0.16em; color: var(--muted);
+      text-transform: uppercase; margin-top: 3rem;
+    }
     .spinner {
-      display: inline-block;
-      width: 20px; height: 20px;
-      border: 2px solid var(--line);
-      border-top-color: var(--text);
-      border-radius: 50%;
-      animation: spin 0.6s linear infinite;
-      margin-right: 0.5rem;
-      vertical-align: middle;
+      display: inline-block; width: 20px; height: 20px; border: 2px solid var(--line);
+      border-top-color: var(--text); border-radius: 50%; animation: spin 0.6s linear infinite;
+      margin-right: 0.5rem; vertical-align: middle;
     }
     @keyframes spin { to { transform: rotate(360deg); } }
-    .loading-placeholder { display: flex; align-items: center; gap: 0.5rem; padding: 2rem 0; color: var(--muted); font-size: 0.7rem; }
+    .loading-placeholder {
+      display: flex; align-items: center; gap: 0.5rem; padding: 2rem 0;
+      color: var(--muted); font-size: 0.7rem;
+    }
+    .sep { height: 1px; background: var(--line); margin: 2.5rem 0; }
   </style>
-
 </head>
 <body>
 
-<div class="stage">
+<a class="skip-link" href="#panel-cartao">ir para o conteúdo</a>
 
-  <main class="panel" id="panel-cartao">
+<div class="stage" role="main">
+
+  <!-- PAINEL CARTÃO -->
+  <section class="panel" id="panel-cartao" aria-label="Cartão de visita" aria-hidden="false">
     <div class="panel-inner">
-      <div class="sigil">$ ̶</div>
+      <div class="sigil" aria-hidden="true">$ ̶</div>
       <h1>Ruberval Silva</h1>
       <p class="role">Psicanalista</p>
-      <div class="divider"></div>
+      <div class="divider" aria-hidden="true"></div>
+      
       <div class="contact">
         <div class="ci"><span class="cl">local</span><span class="cv">Florianópolis, SC</span></div>
         <div class="ci"><span class="cl">atendimento</span><span class="cv">presencial e online</span></div>
         <div class="ci"><span class="cl">contato</span><a class="cv" href="tel:+5548988717486">(48) 98871-7486</a></div>
       </div>
+
       <div class="wa-block">
         <span class="wa-lbl">WhatsApp</span>
         <div class="wa-row">
-          <a href="https://wa.me/5548988717486" target="_blank" rel="noopener" aria-label="Abrir WhatsApp do psicanalista">
-            <div class="qr-box" role="img" aria-label="QR code para WhatsApp do psicanalista"><div id="qr1"></div></div>
+          <a href="https://wa.me/5548988717486" target="_blank" rel="noopener" aria-label="Abrir WhatsApp">
+            <div class="qr-box" id="qr1" role="img" aria-label="QR code para WhatsApp"></div>
           </a>
           <div class="wa-col">
             <a class="btn solid" href="https://wa.me/5548988717486" target="_blank" rel="noopener">
@@ -161,18 +265,20 @@
           </div>
         </div>
       </div>
+
       <nav class="nav-row">
         <button class="nav-btn prim" id="nav-age">Agendar</button>
         <button class="nav-btn" id="nav-blog">Blog</button>
       </nav>
-      <div class="pfooter">Florianópolis · SC · Brasil</div>
+      <p class="pfooter">Florianópolis · SC · Brasil</p>
     </div>
-  </main>
+  </section>
 
-  <div class="panel" id="panel-agendar">
+  <!-- PAINEL AGENDAR -->
+  <section class="panel" id="panel-agendar" aria-label="Agendamento" aria-hidden="true">
     <div class="panel-inner">
       <button class="back-btn" id="back-age">‹ voltar</button>
-      <div class="sigil">$ ̶</div>
+      <div class="sigil" aria-hidden="true">$ ̶</div>
       <h1>Agendar</h1>
       <p class="role">Sessão</p>
       <div class="divider"></div>
@@ -180,41 +286,44 @@
         <span class="ag-titulo">mensagem pronta</span>
         <div class="msg-box">Gostaria de marcar uma sessão, qual sua disponibilidade?</div>
         <div class="wa-row">
-          <a id="link-age" href="#" target="_blank" rel="noopener" aria-label="Enviar mensagem pronta para agendamento">
-            <div class="qr-box" role="img" aria-label="QR code para enviar mensagem de agendamento"><div id="qr2"></div></div>
+          <a id="link-age" href="#" target="_blank" rel="noopener" aria-label="Enviar mensagem de agendamento">
+            <div class="qr-box" id="qr2" role="img" aria-label="QR code para agendamento"></div>
           </a>
           <div class="wa-col">
             <a class="btn solid" id="btn-age" href="#" target="_blank" rel="noopener">enviar mensagem</a>
           </div>
         </div>
       </div>
-      <div class="pfooter">Ruberval Silva · Psicanalista</div>
+      <p class="pfooter">Ruberval Silva · Psicanalista</p>
     </div>
-  </div>
+  </section>
 
-  <div class="panel" id="panel-blog">
+  <!-- PAINEL BLOG -->
+  <section class="panel" id="panel-blog" aria-label="Blog" aria-hidden="true">
     <div class="panel-inner">
       <button class="back-btn" id="back-blog">‹ voltar</button>
-      <div class="sigil">$ ̶</div>
+      <div class="sigil" aria-hidden="true">$ ̶</div>
       <h1>Textos</h1>
       <p class="role">Psicanálise · clínica · teoria</p>
       <div class="divider"></div>
       <div class="ftitulo">filtrar por</div>
       <div class="tags" id="tags" role="tablist" aria-label="Filtros de categorias">
-        <button class="tag on" data-tag="todos" role="tab">todos</button>
-        <button class="tag" data-tag="clínica" role="tab">clínica</button>
-        <button class="tag" data-tag="teoria" role="tab">teoria</button>
-        <button class="tag" data-tag="ensaio" role="tab">ensaio</button>
+        <button class="tag" data-tag="todos" role="tab" aria-selected="true">todos</button>
+        <button class="tag" data-tag="clínica" role="tab" aria-selected="false">clínica</button>
+        <button class="tag" data-tag="teoria" role="tab" aria-selected="false">teoria</button>
+        <button class="tag" data-tag="ensaio" role="tab" aria-selected="false">ensaio</button>
       </div>
-      <div id="lista"><div class="loading-placeholder"><span class="spinner"></span> carregando textos…</div></div>
-      <div class="pfooter">Ruberval Silva · Psicanalista</div>
+      <div id="lista">
+        <div class="loading-placeholder"><span class="spinner"></span> carregando textos…</div>
+      </div>
+      <p class="pfooter">Ruberval Silva · Psicanalista</p>
     </div>
-  </div>
-
-</div><!-- .stage -->
+  </section>
+</div>
 
 <script>
 (function () {
+  'use strict';
   const CONFIG = {
     WA_BASE:      "https://wa.me/5548988717486",
     WA_MSG:       "Gostaria de marcar uma sessão, qual sua disponibilidade?",
@@ -223,8 +332,12 @@
     TIMEOUT_MS:   8000
   };
 
-  /* ── Utilitários ── */
+  // Estado
+  let textos = [];
+  let currentTag = "todos";
+  const listaDiv = document.getElementById("lista");
 
+  // Utilitários
   function esc(str) {
     const div = document.createElement('div');
     div.textContent = str;
@@ -256,32 +369,26 @@
     };
   }
 
-  /* ── Estado ── */
+  // Navegação entre painéis
+  function ir(id) {
+    document.querySelectorAll('.panel').forEach(p => {
+      const active = p.id === id;
+      p.style.transform = active ? 'translateX(0)' : 'translateX(100%)';
+      p.setAttribute('aria-hidden', !active);
+      if (active) p.scrollTop = 0;
+    });
+  }
 
-  let textos     = [];
-  let currentTag = "todos";
-
-  const listaDiv     = document.getElementById("lista");
-  const tagsContainer = document.getElementById("tags");
-
-  /* ── Render ── */
-
+  // Renderização do blog
   function render() {
-    const filtro = currentTag === "todos"
-      ? textos
-      : textos.filter(t => t.categoria === currentTag);
-
+    const filtro = currentTag === "todos" ? textos : textos.filter(t => t.categoria === currentTag);
     if (!filtro.length) {
-      listaDiv.innerHTML = '<div style="font-size:0.7rem;color:var(--muted);padding:2rem 0;border-top:1px solid var(--line)">Nenhum texto encontrado nesta categoria.</div>';
+      listaDiv.innerHTML = '<div style="font-size:0.7rem;color:var(--muted);padding:2rem 0;border-top:1px solid var(--line)">Nenhum texto encontrado.</div>';
       return;
     }
 
     listaDiv.innerHTML = filtro.map((t, idx) => {
-      const paragraphs = t.corpo
-        .split(/\n\n+/)
-        .map(p => `<p>${esc(p.replace(/\n/g, " "))}</p>`)
-        .join("");
-
+      const paragraphs = t.corpo.split(/\n\n+/).map(p => `<p>${esc(p.replace(/\n/g, " "))}</p>`).join("");
       return `
         <article class="texto" id="artigo-${idx}" data-categoria="${esc(t.categoria)}">
           <div class="tmeta">
@@ -309,100 +416,90 @@
               </div>
             </div>
           </div>
-        </article>`;
+        </article>
+      `;
     }).join("");
 
     attachEvents();
   }
 
-  /* ── Delegação de eventos ── */
-
+  // Delegação de eventos no blog
+  let onListaClick, onListaInput;
   function attachEvents() {
-    listaDiv.removeEventListener("click", onListaClick);
-    listaDiv.removeEventListener("input", onListaInput);
+    if (onListaClick) listaDiv.removeEventListener("click", onListaClick);
+    if (onListaInput) listaDiv.removeEventListener("input", onListaInput);
+    
+    onListaClick = (e) => {
+      const lerBtn = e.target.closest(".ler-btn");
+      if (lerBtn) {
+        const idx = lerBtn.dataset.idx;
+        if (idx === undefined) return;
+        const corpo = document.getElementById(`corpo-${idx}`);
+        const arrSpan = document.getElementById(`arr-${idx}`);
+        const lblSpan = document.getElementById(`lbl-${idx}`);
+        const isOpen = corpo.style.display === "block";
+        corpo.style.display = isOpen ? "none" : "block";
+        if (arrSpan) arrSpan.style.transform = isOpen ? "" : "rotate(90deg)";
+        if (lblSpan) lblSpan.textContent = isOpen ? "ler" : "fechar";
+        return;
+      }
+      
+      const cbtn = e.target.closest(".cbtn");
+      if (cbtn) {
+        const idx = cbtn.dataset.idx;
+        const form = document.getElementById(`cform-${idx}`);
+        if (form) {
+          form.classList.toggle("aberto");
+          cbtn.textContent = form.classList.contains("aberto") ? "fechar" : "comentar";
+        }
+        return;
+      }
+      
+      const fenv = e.target.closest(".fenv");
+      if (fenv && !fenv.disabled) handleEnviar(fenv);
+    };
+
+    onListaInput = (e) => {
+      if (e.target.classList.contains("ftxt")) {
+        const idx = e.target.closest(".cform")?.id?.split("-")[1];
+        if (idx !== undefined) contar(idx);
+      }
+      if (e.target.classList.contains("finp") || e.target.classList.contains("ftxt")) {
+        const idx = e.target.closest(".cform")?.id?.split("-")[1];
+        if (idx !== undefined) validateFields(idx);
+      }
+    };
+
     listaDiv.addEventListener("click", onListaClick);
     listaDiv.addEventListener("input", onListaInput);
-  }
-
-  function onListaClick(e) {
-    /* Botões ler/fechar */
-    const lerBtn = e.target.closest(".ler-btn");
-    if (lerBtn) {
-      const idx = lerBtn.dataset.idx;
-      if (idx === undefined) return;
-      const corpo   = document.getElementById(`corpo-${idx}`);
-      const arrSpan = document.getElementById(`arr-${idx}`);
-      const lblSpan = document.getElementById(`lbl-${idx}`);
-      const isOpen  = corpo.style.display === "block";
-      corpo.style.display      = isOpen ? "none" : "block";
-      if (arrSpan) arrSpan.style.transform = isOpen ? "" : "rotate(90deg)";
-      if (lblSpan) lblSpan.textContent     = isOpen ? "ler" : "fechar";
-      return;
-    }
-
-    /* Botão comentar */
-    const cbtn = e.target.closest(".cbtn");
-    if (cbtn) {
-      const idx  = cbtn.dataset.idx;
-      const form = document.getElementById(`cform-${idx}`);
-      if (form) {
-        form.classList.toggle("aberto");
-        cbtn.textContent = form.classList.contains("aberto") ? "fechar" : "comentar";
-      }
-      return;
-    }
-
-    /* Botão enviar */
-    const fenv = e.target.closest(".fenv");
-    if (fenv && !fenv.disabled) {
-      handleEnviar(fenv);
-    }
-  }
-
-  function onListaInput(e) {
-    /* Contador de caracteres */
-    if (e.target.classList.contains("ftxt")) {
-      const idx = e.target.closest(".cform")?.id?.split("-")[1];
-      if (idx !== undefined) contar(idx);
-    }
-
-    /* Validação de campos */
-    const isFinp = e.target.classList.contains("finp");
-    const isFtxt = e.target.classList.contains("ftxt");
-    if (isFinp || isFtxt) {
-      const idx = e.target.closest(".cform")?.id?.split("-")[1];
-      if (idx !== undefined) validateFields(idx);
-    }
   }
 
   function contar(idx) {
     const msgField = document.getElementById(`msg-${idx}`);
     if (!msgField) return;
-    const len     = msgField.value.length;
+    const len = msgField.value.length;
     const counter = document.getElementById(`fct-${idx}`);
     if (counter) {
       counter.textContent = `${len} / ${CONFIG.MAX_CHARS}`;
-      len >= CONFIG.MAX_CHARS
-        ? counter.classList.add("over")
-        : counter.classList.remove("over");
+      counter.classList.toggle("over", len >= CONFIG.MAX_CHARS);
     }
   }
 
   function validateFields(idx) {
     const cont = document.getElementById(`cont-${idx}`);
-    const msg  = document.getElementById(`msg-${idx}`);
-    const btn  = document.querySelector(`.fenv[data-idx="${idx}"]`);
+    const msg = document.getElementById(`msg-${idx}`);
+    const btn = document.querySelector(`.fenv[data-idx="${idx}"]`);
     if (btn && cont && msg) {
       btn.disabled = !(cont.value.trim() && msg.value.trim());
     }
   }
 
   async function handleEnviar(btn) {
-    const idx      = btn.dataset.idx;
-    const titulo   = btn.dataset.titulo;
-    const cont     = document.getElementById(`cont-${idx}`);
-    const msg      = document.getElementById(`msg-${idx}`);
-    const respDiv  = document.getElementById(`resp-${idx}`);
+    const idx = btn.dataset.idx;
+    const titulo = btn.dataset.titulo;
+    const cont = document.getElementById(`cont-${idx}`);
+    const msg = document.getElementById(`msg-${idx}`);
+    const respDiv = document.getElementById(`resp-${idx}`);
     if (!cont || !msg || !respDiv) return;
     if (!cont.value.trim() || !msg.value.trim()) return;
 
@@ -412,67 +509,58 @@
 
     try {
       const response = await fetch(`https://formspree.io/f/${CONFIG.FORMSPREE_ID}`, {
-        method:  "POST",
+        method: "POST",
         headers: { "Content-Type": "application/json", "Accept": "application/json" },
         body: JSON.stringify({ contato: cont.value, mensagem: msg.value, texto: titulo })
       });
 
       if (response.ok) {
-        respDiv.textContent  = "Enviado com sucesso.";
+        respDiv.textContent = "Enviado com sucesso.";
         respDiv.style.display = "block";
         cont.value = "";
-        msg.value  = "";
+        msg.value = "";
         contar(idx);
         validateFields(idx);
         btn.textContent = "enviado";
         setTimeout(() => {
           respDiv.style.display = "none";
-          btn.disabled    = false;
+          btn.disabled = false;
           btn.textContent = originalText;
           validateFields(idx);
         }, 3000);
-      } else {
-        throw new Error();
-      }
+      } else throw new Error();
     } catch {
-      respDiv.textContent  = "Erro ao enviar. Tente novamente.";
+      respDiv.textContent = "Erro ao enviar. Tente novamente.";
       respDiv.style.display = "block";
-      btn.disabled    = false;
+      btn.disabled = false;
       btn.textContent = originalText;
     }
   }
 
-  /* ── Carregar textos ── */
-
+  // Carregar textos
   async function carregarTextos() {
     listaDiv.innerHTML = '<div class="loading-placeholder"><span class="spinner"></span> carregando textos…</div>';
     try {
       const resLista = await fetchWithTimeout("lista.json");
       if (!resLista.ok) throw new Error("Falha ao carregar índice");
-
-      const data     = await resLista.json();
+      const data = await resLista.json();
       const arquivos = data.arquivos || [];
 
       const promises = arquivos.map(async (nome) => {
         try {
           const res = await fetchWithTimeout(nome);
           if (!res.ok) return null;
-          const raw    = await res.text();
+          const raw = await res.text();
           const parsed = parseTxt(raw);
           return parsed.titulo ? parsed : null;
-        } catch {
-          return null;
-        }
+        } catch { return null; }
       });
 
       const results = await Promise.allSettled(promises);
-      textos = results
-        .filter(r => r.status === "fulfilled" && r.value !== null)
-        .map(r => r.value);
-
+      textos = results.filter(r => r.status === "fulfilled" && r.value).map(r => r.value);
       textos.sort((a, b) => b.data.localeCompare(a.data));
-
-      if (textos.length === 0) throw new Error("Nenhum texto válido encontrado");
+      
+      if (textos.length === 0) throw new Error("Nenhum texto válido");
       render();
     } catch (err) {
       console.error(err);
@@ -480,70 +568,45 @@
     }
   }
 
-  /* ── Filtros ── */
-
+  // Filtros
   function initFiltros() {
-    tagsContainer.addEventListener("click", (e) => {
+    document.getElementById("tags").addEventListener("click", (e) => {
       const tagBtn = e.target.closest(".tag");
       if (!tagBtn) return;
-      const tag = tagBtn.dataset.tag;
-      if (!tag) return;
-      document.querySelectorAll(".tag").forEach(t => t.classList.remove("on"));
-      tagBtn.classList.add("on");
-      currentTag = tag;
+      document.querySelectorAll(".tag").forEach(t => t.setAttribute("aria-selected", "false"));
+      tagBtn.setAttribute("aria-selected", "true");
+      currentTag = tagBtn.dataset.tag;
       render();
     });
   }
 
-  /* ── Navegação ── */
-
-  function initNavegacao() {
-    const panels = document.querySelectorAll(".panel");
-
-    function ir(id) {
-      panels.forEach(p => p.style.transform = "translateX(100%)");
-      const target = document.getElementById(id);
-      if (target) {
-        target.style.transform = "translateX(0)";
-        target.scrollTop = 0;
-      }
-    }
-
-    document.getElementById("nav-age")?.addEventListener("click",  () => ir("panel-agendar"));
-    document.getElementById("nav-blog")?.addEventListener("click", () => ir("panel-blog"));
-    document.getElementById("back-age")?.addEventListener("click", () => ir("panel-cartao"));
-    document.getElementById("back-blog")?.addEventListener("click",() => ir("panel-cartao"));
-  }
-
-  /* ── QR Codes ── */
-
+  // QR Codes
   function initQRCodes() {
-    const qrCfg = { width: 80, height: 80, colorDark: "#f0ece4", colorLight: "#0a0a0a", correctLevel: QRCode.CorrectLevel.M };
+    const qrCfg = { width: 80, height: 80, colorDark: "#0a0a0a", colorLight: "#f0ece4", correctLevel: QRCode.CorrectLevel.M };
     const qr1 = document.getElementById("qr1");
     const qr2 = document.getElementById("qr2");
-
     if (qr1) new QRCode(qr1, { ...qrCfg, text: CONFIG.WA_BASE });
     if (qr2) {
       const waAge = `${CONFIG.WA_BASE}?text=${encodeURIComponent(CONFIG.WA_MSG)}`;
       new QRCode(qr2, { ...qrCfg, text: waAge });
-      const linkAge = document.getElementById("link-age");
-      const btnAge  = document.getElementById("btn-age");
-      if (linkAge) linkAge.href = waAge;
-      if (btnAge)  btnAge.href  = waAge;
+      document.getElementById("link-age").href = waAge;
+      document.getElementById("btn-age").href = waAge;
     }
   }
 
-  /* ── Init ── */
-
+  // Inicialização
   window.addEventListener("DOMContentLoaded", () => {
+    // Navegação
+    document.getElementById("nav-age").addEventListener("click", () => ir("panel-agendar"));
+    document.getElementById("nav-blog").addEventListener("click", () => ir("panel-blog"));
+    document.getElementById("back-age").addEventListener("click", () => ir("panel-cartao"));
+    document.getElementById("back-blog").addEventListener("click", () => ir("panel-cartao"));
+    
     initQRCodes();
-    initNavegacao();
     initFiltros();
     carregarTextos();
   });
-
 })();
 </script>
-
 </body>
 </html>
